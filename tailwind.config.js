@@ -10,12 +10,27 @@ export default {
     ],
 
     theme: {
+
         extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+
+            colors: {
+
+                primary: "#2E3192",
+
+                secondary: "#F6D21A",
+
+                accent: "#ED1C24",
+
+                surface: "#F8FAFC",
+
+                text: "#1E293B",
+
             },
+
         },
+
     },
 
-    plugins: [forms],
-};
+    plugins: [],
+
+}

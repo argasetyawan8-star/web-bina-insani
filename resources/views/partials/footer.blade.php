@@ -1,280 +1,416 @@
-<footer class="bg-slate-900 text-white">
+{{-- FOOTER BACKGROUND --}}
+<footer class="relative overflow-hidden bg-[#0F172A] text-white">
 
 
-    <div class="mx-auto max-w-7xl px-6 py-16">
+{{-- Decoration --}}
+<div class="absolute -left-40 top-0 h-96 w-96 rounded-full bg-[#2E3192]/40 blur-3xl"></div>
 
+<div class="absolute right-0 bottom-0 h-[450px] w-[450px] rounded-full bg-[#F6D21A]/20 blur-3xl"></div>
 
-        <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
 
 
+<div class="relative mx-auto max-w-7xl px-6 pt-20 pb-10 lg:px-8">
 
 
+<div class="grid gap-12 lg:grid-cols-4">
 
-            {{-- Brand --}}
-            <div class="lg:col-span-2">
 
 
-                <h3 class="text-2xl font-bold">
+{{-- BRAND --}}
+<div>
 
-                    Bina Insani
 
-                </h3>
+<div class="flex items-center gap-4">
 
 
+<div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2 shadow-lg">
 
 
-                <p class="mt-4 max-w-md leading-relaxed text-slate-400">
+<img
+src="{{ asset('storage/'.setting('logo')) }}"
+alt="Logo"
+class="h-full w-full object-contain">
 
 
-                    Lembaga pembelajaran bahasa Korea
-                    yang membantu peserta mempersiapkan
-                    kemampuan dan perjalanan menuju Korea Selatan.
+</div>
 
 
-                </p>
 
+<div>
 
 
+<h3 class="text-2xl font-extrabold">
 
+{{ setting('website_name','Bina Insani') }}
 
-                <div class="mt-6 flex gap-3">
+</h3>
 
 
-                    <a href="#"
-                       class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 transition hover:bg-blue-600">
+<p class="text-sm text-slate-400">
 
+Korea Training Center
 
-                        <i class="bi bi-facebook"></i>
+</p>
 
 
-                    </a>
+</div>
 
 
+</div>
 
 
 
-                    <a href="#"
-                       class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 transition hover:bg-blue-600">
 
+<p class="mt-6 leading-8 text-slate-300">
 
-                        <i class="bi bi-instagram"></i>
 
+Lembaga pelatihan Bahasa Korea dan persiapan EPS-TOPIK
+untuk membantu calon pekerja Indonesia meraih peluang
+karier internasional.
 
-                    </a>
 
+</p>
 
 
 
 
-                    <a href="#"
-                       class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 transition hover:bg-blue-600">
+{{-- SOCIAL --}}
+<div class="mt-8 flex gap-3">
 
 
-                        <i class="bi bi-whatsapp"></i>
+<a
+href="{{ setting('facebook') }}"
+class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-[#2E3192]">
 
 
-                    </a>
+<i class="bi bi-facebook text-xl"></i>
 
 
-                </div>
+</a>
 
 
-            </div>
 
+<a
+href="{{ setting('instagram') }}"
+class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-pink-600">
 
 
+<i class="bi bi-instagram text-xl"></i>
 
 
+</a>
 
 
 
+<a
+href="{{ setting('youtube') }}"
+class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-red-600">
 
-            {{-- Navigation --}}
-            <div>
 
+<i class="bi bi-youtube text-xl"></i>
 
-                <h4 class="text-lg font-semibold">
 
-                    Menu
+</a>
 
-                </h4>
 
 
+<a
+href="{{ setting('tiktok') }}"
+class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-black">
 
 
-                <ul class="mt-5 space-y-3 text-slate-400">
+<i class="bi bi-tiktok text-xl"></i>
 
 
-                    <li>
+</a>
 
-                        <a href="#"
-                           class="transition hover:text-white">
 
-                            Home
+</div>
 
-                        </a>
 
-                    </li>
+</div>
 
 
 
 
-                    <li>
 
-                        <a href="#about"
-                           class="transition hover:text-white">
 
-                            Tentang Kami
+{{-- MENU --}}
+<div>
 
-                        </a>
 
-                    </li>
+<h4 class="mb-6 text-xl font-bold">
 
+Menu
 
+</h4>
 
 
-                    <li>
+<ul class="space-y-4 text-slate-300">
 
-                        <a href="#programs"
-                           class="transition hover:text-white">
 
-                            Program
+<li>
+<a href="#home"
+class="transition hover:text-[#F6D21A]">
 
-                        </a>
+Beranda
 
-                    </li>
+</a>
+</li>
 
 
+<li>
+<a href="#about"
+class="transition hover:text-[#F6D21A]">
 
+Tentang Kami
 
-                    <li>
+</a>
+</li>
 
-                        <a href="#"
-                           class="transition hover:text-white">
 
-                            Kontak
+<li>
+<a href="#programs"
+class="transition hover:text-[#F6D21A]">
 
-                        </a>
+Program
 
-                    </li>
+</a>
+</li>
 
 
-                </ul>
+<li>
+<a href="#process"
+class="transition hover:text-[#F6D21A]">
 
+Alur Pendaftaran
 
-            </div>
+</a>
+</li>
 
 
+<li>
+<a href="#faq"
+class="transition hover:text-[#F6D21A]">
 
+FAQ
 
+</a>
+</li>
 
 
+<li>
+<a href="#contact"
+class="transition hover:text-[#F6D21A]">
 
+Kontak
 
+</a>
+</li>
 
-            {{-- Contact --}}
-            <div>
 
+</ul>
 
-                <h4 class="text-lg font-semibold">
 
-                    Hubungi
+</div>
 
-                </h4>
 
 
 
 
 
-                <ul class="mt-5 space-y-4 text-slate-400">
+{{-- PROGRAM --}}
+<div>
 
 
-                    <li class="flex gap-3">
+<h4 class="mb-6 text-xl font-bold">
 
+Program
 
-                        <i class="bi bi-geo-alt-fill text-blue-500"></i>
+</h4>
 
 
-                        <span>
+<ul class="space-y-4 text-slate-300">
 
-                            Bina Insani
 
-                        </span>
+<li>Diklat Intensif</li>
 
+<li>Diklat Reguler</li>
 
-                    </li>
+<li>Persiapan EPS-TOPIK</li>
 
+<li>Konsultasi Keberangkatan</li>
 
+<li>Pendampingan Administrasi</li>
 
 
+</ul>
 
-                    <li class="flex gap-3">
 
+</div>
 
-                        <i class="bi bi-whatsapp text-green-500"></i>
 
 
-                        <span>
 
-                            +62 xxx xxxx xxxx
 
-                        </span>
 
+{{-- CONTACT --}}
+<div>
 
-                    </li>
 
+<h4 class="mb-6 text-xl font-bold">
 
+Hubungi Kami
 
+</h4>
 
 
-                    <li class="flex gap-3">
+<div class="space-y-5 text-slate-300">
 
 
-                        <i class="bi bi-envelope-fill text-blue-500"></i>
 
+<div class="flex gap-3">
 
-                        <span>
 
-                            info@binainsani.com
+<i class="bi bi-geo-alt-fill text-[#F6D21A]"></i>
 
-                        </span>
 
+<span>
 
-                    </li>
+{{ setting('address') }}
 
+</span>
 
-                </ul>
 
+</div>
 
-            </div>
 
 
+<div class="flex gap-3">
 
 
+<i class="bi bi-envelope-fill text-[#F6D21A]"></i>
 
 
-        </div>
+<span>
 
+{{ setting('email') }}
 
+</span>
 
 
+</div>
 
 
-        {{-- Bottom --}}
-        <div class="mt-12 border-t border-white/10 pt-8 text-center text-sm text-slate-500">
 
 
-            © {{ date('Y') }} Bina Insani.
-            All rights reserved.
+<div class="flex gap-3">
 
 
-        </div>
+<i class="bi bi-whatsapp text-[#F6D21A]"></i>
 
 
+<span>
 
+{{ setting('phone') }}
 
+</span>
 
-    </div>
+
+</div>
+
+
+
+
+<div class="flex gap-3">
+
+
+<i class="bi bi-clock-fill text-[#F6D21A]"></i>
+
+
+<span>
+
+Senin - Sabtu
+<br>
+08.00 - 17.00 WIB
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+{{-- CTA --}}
+<div
+class="mt-16 rounded-3xl bg-[#2E3192] p-8 text-center">
+
+
+<h3 class="text-2xl font-bold">
+
+Siap Memulai Perjalanan ke Korea?
+
+</h3>
+
+
+<p class="mt-3 text-blue-100">
+
+Daftar sekarang dan persiapkan masa depanmu bersama Bina Insani.
+
+</p>
+
+
+<a
+href="#programs"
+class="mt-5 inline-flex rounded-xl bg-[#F6D21A] px-7 py-3 font-bold text-[#1E293B] transition hover:scale-105">
+
+
+Mulai Daftar
+
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+{{-- Divider --}}
+<div class="my-10 h-px bg-white/10"></div>
+
+
+
+
+
+{{-- Copyright --}}
+<div class="text-center text-sm text-slate-400">
+
+
+{{ setting('copyright','© '.date('Y').' Bina Insani. All Rights Reserved.') }}
+
+
+</div>
+
+
+
+</div>
 
 
 </footer>

@@ -47,9 +47,15 @@ Paid
 </option>
 
 
-<option value="unpaid"
-{{ request('payment_status')=='unpaid'?'selected':'' }}>
-Unpaid
+<option value="waiting_verification"
+{{ request('payment_status')=='waiting_verification'?'selected':'' }}>
+Menunggu Verifikasi
+</option>
+
+
+<option value="rejected"
+{{ request('payment_status')=='rejected'?'selected':'' }}>
+Ditolak
 </option>
 
 
@@ -115,7 +121,7 @@ Semua Program
 
 
 <button
-class="bg-purple-700 text-white rounded-lg px-4">
+class="bg-blue-700 hover:bg-blue-800 text-white rounded-lg px-5 py-2 transition">
 
 Filter
 
@@ -203,21 +209,29 @@ Aksi
 
 @if($item->payment_status == 'paid')
 
-
 <span class="px-3 py-1 rounded-full text-xs bg-green-100 text-green-700">
+Lunas
+</span>
 
-Paid
 
+@elseif($item->payment_status == 'waiting_verification')
+
+<span class="px-3 py-1 rounded-full text-xs bg-orange-100 text-orange-700">
+Menunggu Verifikasi
+</span>
+
+
+@elseif($item->payment_status == 'rejected')
+
+<span class="px-3 py-1 rounded-full text-xs bg-red-100 text-red-700">
+Ditolak
 </span>
 
 
 @else
 
-
-<span class="px-3 py-1 rounded-full text-xs bg-yellow-100 text-yellow-700">
-
-Unpaid
-
+<span class="px-3 py-1 rounded-full text-xs bg-gray-100 text-gray-700">
+Belum Upload
 </span>
 
 
@@ -234,23 +248,15 @@ Unpaid
 
 @if($item->status == 'verified')
 
-
 <span class="px-3 py-1 rounded-full text-xs bg-blue-100 text-blue-700">
-
-Verified
-
+Terverifikasi
 </span>
-
 
 @else
 
-
 <span class="px-3 py-1 rounded-full text-xs bg-gray-100 text-gray-700">
-
 {{ ucfirst($item->status) }}
-
 </span>
-
 
 @endif
 
@@ -265,7 +271,7 @@ Verified
 
 
 <a href="{{ route('admin.registrations.show',$item->id) }}"
-class="px-4 py-2 bg-purple-700 text-white rounded-lg text-xs">
+class="px-4 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-xs transition">
 
 
 Detail

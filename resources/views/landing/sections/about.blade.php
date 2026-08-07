@@ -1,248 +1,408 @@
-<section id="about" class="py-24 bg-white">
+<section id="about" class="bg-[#F8FAFC] py-24">
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="mx-auto max-w-7xl px-6 lg:px-8">
 
-            {{-- Left --}}
-            <div data-aos="fade-right">
 
-                <span
-                    class="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-700">
+<div class="grid items-center gap-20 lg:grid-cols-2">
 
-                    Tentang Bina Insani
 
-                </span>
 
-                <h2 class="mt-6 text-4xl font-bold leading-tight text-slate-900">
+{{-- IMAGE --}}
 
-                    Tempat Terbaik untuk Mempersiapkan Karier di Korea Selatan
+<div
+class="relative"
+data-aos="fade-right">
 
-                </h2>
 
-                <p class="mt-6 text-lg leading-8 text-slate-600">
+<div class="absolute -left-8 -top-8 h-32 w-32 rounded-full bg-[#F6D21A]/40 blur-3xl"></div>
 
-                    Bina Insani merupakan lembaga pelatihan yang berfokus pada
-                    pembelajaran Bahasa Korea dan persiapan peserta untuk menghadapi
-                    ujian EPS-TOPIK sebagai salah satu syarat bekerja di Korea Selatan.
 
-                </p>
+<div class="absolute -bottom-10 right-0 h-40 w-40 rounded-full bg-[#2E3192]/20 blur-3xl"></div>
 
-                <p class="mt-4 text-lg leading-8 text-slate-600">
 
-                    Melalui metode pembelajaran yang terstruktur, instruktur
-                    berpengalaman, serta sistem pendaftaran online yang mudah,
-                    kami membantu peserta mempersiapkan diri secara maksimal
-                    sebelum mengikuti proses seleksi resmi.
 
-                </p>
+<div class="relative overflow-hidden rounded-[32px] shadow-2xl">
 
-                <div class="mt-10 grid grid-cols-2 gap-6">
 
-                    <div class="rounded-2xl border border-slate-200 p-6">
+<img
+src="{{ $about && $about->image
+    ? asset('storage/'.$about->image)
+    : asset('images/about-default.jpg') }}"
+alt="About Bina Insani"
+class="w-full rounded-3xl object-cover">
 
-                        <i class="bi bi-mortarboard-fill text-4xl text-blue-600"></i>
 
-                        <h3 class="mt-4 font-bold text-xl">
 
-                            Instruktur Berpengalaman
+</div>
 
-                        </h3>
 
-                        <p class="mt-2 text-slate-600">
 
-                            Dibimbing oleh pengajar yang berpengalaman dalam
-                            pelatihan Bahasa Korea dan persiapan EPS-TOPIK.
 
-                        </p>
+{{-- Floating Card --}}
 
-                    </div>
+<div
+class="absolute bottom-8 -right-8 w-64 rounded-3xl bg-white p-6 shadow-2xl">
 
-                    <div class="rounded-2xl border border-slate-200 p-6">
 
-                        <i class="bi bi-patch-check-fill text-4xl text-emerald-600"></i>
+<div class="flex items-center gap-4">
 
-                        <h3 class="mt-4 font-bold text-xl">
 
-                            Program Terstruktur
+<div
+class="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#2E3192] text-white">
 
-                        </h3>
 
-                        <p class="mt-2 text-slate-600">
+<i class="bi bi-award-fill text-2xl"></i>
 
-                            Kurikulum dirancang agar peserta siap mengikuti
-                            ujian hingga proses penempatan kerja.
 
-                        </p>
+</div>
 
-                    </div>
 
-                </div>
 
-            </div>
+<div>
 
-            {{-- Right --}}
-            <div
-                class="relative"
-                data-aos="fade-left">
 
-                <div
-                    class="rounded-3xl bg-gradient-to-br from-blue-600 to-indigo-600 p-8 text-white shadow-2xl">
+<h4 class="text-lg font-bold text-[#1E293B]">
 
-                    <h3 class="text-3xl font-bold">
+Terakreditasi
 
-                        Mengapa Memilih Bina Insani?
+</h4>
 
-                    </h3>
 
-                    <div class="mt-8 space-y-6">
+<p class="text-sm text-slate-500">
 
-                        <div class="flex gap-4">
+Lembaga Pelatihan Resmi
 
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20">
+</p>
 
-                                <i class="bi bi-check2-circle text-xl"></i>
 
-                            </div>
+</div>
 
-                            <div>
 
-                                <h4 class="font-semibold text-lg">
+</div>
 
-                                    Materi Lengkap
 
-                                </h4>
+</div>
 
-                                <p class="text-blue-100">
 
-                                    Materi disusun sesuai standar ujian EPS-TOPIK.
+</div>
 
-                                </p>
 
-                            </div>
 
-                        </div>
 
-                        <div class="flex gap-4">
 
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20">
 
-                                <i class="bi bi-check2-circle text-xl"></i>
 
-                            </div>
+{{-- CONTENT --}}
 
-                            <div>
+<div data-aos="fade-left">
 
-                                <h4 class="font-semibold text-lg">
 
-                                    Jadwal Fleksibel
 
-                                </h4>
+<span
+class="inline-flex items-center gap-2 rounded-full bg-[#2E3192]/10 px-4 py-2 font-semibold text-[#2E3192]">
 
-                                <p class="text-blue-100">
 
-                                    Tersedia kelas reguler maupun intensif sesuai kebutuhan.
+Tentang Kami
 
-                                </p>
 
-                            </div>
+</span>
 
-                        </div>
 
-                        <div class="flex gap-4">
 
-                            <div
-                                class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/20">
 
-                                <i class="bi bi-check2-circle text-xl"></i>
 
-                            </div>
+<h2
+class="mt-8 text-5xl font-extrabold leading-tight text-[#1E293B]">
 
-                            <div>
 
-                                <h4 class="font-semibold text-lg">
+Persiapkan Masa Depanmu
 
-                                    Pendaftaran Online
 
-                                </h4>
+<span
+class="bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent">
 
-                                <p class="text-blue-100">
 
-                                    Seluruh proses pendaftaran dilakukan secara online,
-                                    mulai dari pengisian data hingga pembayaran.
+Bersama Bina Insani
 
-                                </p>
 
-                            </div>
+</span>
 
-                        </div>
 
-                    </div>
+</h2>
 
-                    <div class="mt-10 rounded-2xl bg-white/10 p-6">
 
-                        <div class="grid grid-cols-3 text-center">
 
-                            <div>
 
-                                <h3 class="text-3xl font-bold">
 
-                                    5K+
+<p
+class="mt-8 text-lg leading-9 text-slate-600">
 
-                                </h3>
 
-                                <p class="text-sm text-blue-100">
+Bina Insani merupakan lembaga pelatihan Bahasa Korea
+yang membantu calon pekerja Indonesia agar siap
+mengikuti seleksi EPS-TOPIK hingga proses
+penempatan kerja ke Korea Selatan.
 
-                                    Alumni
 
-                                </p>
+</p>
 
-                            </div>
 
-                            <div>
 
-                                <h3 class="text-3xl font-bold">
 
-                                    95%
 
-                                </h3>
+<p
+class="mt-6 text-lg leading-9 text-slate-600">
 
-                                <p class="text-sm text-blue-100">
 
-                                    Lulus
+Kami menghadirkan sistem pelatihan yang modern,
+pengajar berpengalaman, simulasi ujian,
+serta pendampingan penuh mulai dari pendaftaran,
+pelatihan, hingga keberangkatan.
 
-                                </p>
 
-                            </div>
+</p>
 
-                            <div>
 
-                                <h3 class="text-3xl font-bold">
 
-                                    10+
 
-                                </h3>
 
-                                <p class="text-sm text-blue-100">
 
-                                    Tahun
 
-                                </p>
+{{-- FEATURES --}}
 
-                            </div>
+<div class="mt-10 space-y-5">
 
-                        </div>
 
-                    </div>
 
-                </div>
 
-            </div>
 
-        </div>
+<div class="flex items-start gap-4">
 
-    </div>
+
+<div
+class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2E3192]/10 text-[#2E3192]">
+
+
+<i class="bi bi-check-circle-fill"></i>
+
+
+</div>
+
+
+
+<div>
+
+
+<h4 class="font-bold text-[#1E293B]">
+
+Pengajar Berpengalaman
+
+</h4>
+
+
+<p class="text-slate-500">
+
+Dibimbing instruktur profesional dan alumni Korea.
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="flex items-start gap-4">
+
+
+<div
+class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#ED1C24]/10 text-[#ED1C24]">
+
+
+<i class="bi bi-translate"></i>
+
+
+</div>
+
+
+
+
+<div>
+
+
+<h4 class="font-bold text-[#1E293B]">
+
+Fokus Persiapan EPS-TOPIK
+
+</h4>
+
+
+<p class="text-slate-500">
+
+Materi disusun sesuai standar ujian resmi Korea.
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="flex items-start gap-4">
+
+
+<div
+class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#F6D21A]/30 text-[#2E3192]">
+
+
+<i class="bi bi-globe2"></i>
+
+
+</div>
+
+
+
+<div>
+
+
+<h4 class="font-bold text-[#1E293B]">
+
+Pendampingan Sampai Berangkat
+
+</h4>
+
+
+<p class="text-slate-500">
+
+Mulai registrasi hingga proses penempatan kerja.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{{-- STATS --}}
+
+<div class="mt-12 grid grid-cols-3 gap-6">
+
+
+
+<div
+class="rounded-3xl bg-[#2E3192]/10 p-6 text-center">
+
+
+<h3 class="text-4xl font-bold text-[#2E3192]">
+
+10+
+
+</h3>
+
+
+<p class="mt-2 text-slate-600">
+
+Tahun
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div
+class="rounded-3xl bg-[#F6D21A]/30 p-6 text-center">
+
+
+<h3 class="text-4xl font-bold text-[#2E3192]">
+
+5000+
+
+</h3>
+
+
+<p class="mt-2 text-slate-600">
+
+Alumni
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div
+class="rounded-3xl bg-[#ED1C24]/10 p-6 text-center">
+
+
+<h3 class="text-4xl font-bold text-[#ED1C24]">
+
+95%
+
+</h3>
+
+
+<p class="mt-2 text-slate-600">
+
+Lulus
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
 
 </section>

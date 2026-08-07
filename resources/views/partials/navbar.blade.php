@@ -1,144 +1,376 @@
-<header
-    x-data="{ open: false, scrolled: false }"
-    @scroll.window="scrolled = window.pageYOffset > 20"
-    class="fixed top-0 left-0 right-0 z-50"
->
+<nav
+    x-data="{ 
+        open:false,
+        scrolled:false
+    }"
 
-    <nav
-        :class="scrolled
-            ? 'bg-white/80 backdrop-blur-xl shadow-lg border border-slate-200/70'
-            : 'bg-white/60 backdrop-blur-lg border border-white/30'"
-        class="mx-auto mt-4 flex max-w-7xl items-center justify-between rounded-2xl px-6 py-4 transition-all duration-300">
+    x-init="
+        window.addEventListener('scroll',()=>{
+            scrolled = window.scrollY > 20
+        })
+    "
 
-        {{-- Logo --}}
-        <a href="/" class="flex items-center gap-3">
+    :class="scrolled
+        ? 'bg-white/95 backdrop-blur-xl shadow-lg py-3'
+        : 'bg-white/80 backdrop-blur-lg py-5'"
 
-            <div
-                class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg">
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100">
 
-                <i class="bi bi-mortarboard-fill text-lg"></i>
+
+    <div class="max-w-7xl mx-auto px-6">
+
+
+        <div class="flex items-center justify-between">
+
+
+            {{-- LOGO --}}
+            <a href="#home"
+               class="flex items-center gap-4">
+
+
+                @if(setting('logo'))
+
+                    <img
+                        src="{{ asset('storage/'.setting('logo')) }}"
+                        class="h-12 w-12 object-contain">
+
+                @endif
+
+
+
+                <div>
+
+
+                    <h2 class="text-xl font-extrabold text-primary">
+
+                        {{ setting('website_name','Bina Insani') }}
+
+                    </h2>
+
+
+                    <p class="text-xs text-slate-500">
+
+                        Korea Training Center
+
+                    </p>
+
+
+                </div>
+
+
+            </a>
+
+
+
+
+
+            {{-- DESKTOP MENU --}}
+            <ul
+                class="hidden lg:flex items-center gap-7 text-sm font-semibold">
+
+
+                <li>
+                    <a href="#home"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        Home
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#about"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        Tentang
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#programs"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        Program
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#why-us"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        Keunggulan
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#process"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        Alur
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#gallery"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        Galeri
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#faq"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        FAQ
+
+                    </a>
+                </li>
+
+
+
+                <li>
+                    <a href="#contact"
+                       class="text-slate-700 hover:text-primary transition">
+
+                        Kontak
+
+                    </a>
+                </li>
+
+
+            </ul>
+
+
+
+
+
+
+
+            {{-- BUTTON --}}
+            <div class="hidden lg:flex items-center gap-3">
+
+
+                <a
+                    href="{{ route('login') }}"
+
+                    class="rounded-xl border-2 border-primary px-5 py-3 font-semibold text-primary transition hover:bg-indigo-50">
+
+
+                    Login
+
+
+                </a>
+
+
+
+
+
+                <a
+                    href="#programs"
+
+                    class="rounded-xl bg-gradient-to-r from-primary to-blue-800 px-6 py-3 font-bold text-white shadow-lg transition hover:-translate-y-1 hover:shadow-primary/40">
+
+
+                    Daftar Sekarang
+
+
+                </a>
+
 
             </div>
 
-            <div>
 
-                <h1 class="text-lg font-bold text-slate-800">
 
-                    Bina Insani
 
-                </h1>
 
-                <p class="text-xs text-slate-500">
 
-                    Korea Training Center
+            {{-- MOBILE BUTTON --}}
+            <button
 
-                </p>
+                @click="open=!open"
 
-            </div>
+                class="lg:hidden flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200">
 
-        </a>
 
-        {{-- Desktop Menu --}}
-        <ul class="hidden items-center gap-8 lg:flex">
+                <i class="bi bi-list text-2xl text-primary"></i>
 
-            <li>
-                <a href="#programs"
-                    class="font-medium text-slate-600 transition hover:text-blue-600">
-                    Program
-                </a>
-            </li>
 
-            <li>
-                <a href="#process"
-                    class="font-medium text-slate-600 transition hover:text-blue-600">
-                    Alur
-                </a>
-            </li>
+            </button>
 
-            <li>
-                <a href="#galery"
-                    class="font-medium text-slate-600 transition hover:text-blue-600">
-                    Gallery
-                </a>
-            </li>
 
-            <li>
-                <a href="#faq"
-                    class="font-medium text-slate-600 transition hover:text-blue-600">
-                    FAQ
-                </a>
-            </li>
-
-            <li>
-                <a href="#contact"
-                    class="font-medium text-slate-600 transition hover:text-blue-600">
-                    Kontak
-                </a>
-            </li>
-
-        </ul>
-
-        {{-- Desktop Button --}}
-        <div class="hidden lg:block">
-
-            <a href="#programs"
-                class="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-
-                Daftar Sekarang
-
-            </a>
 
         </div>
 
-        {{-- Mobile Button --}}
-        <button
-            @click="open=!open"
-            class="rounded-xl border border-slate-200 p-2 lg:hidden">
-
-            <i class="bi bi-list text-2xl"></i>
-
-        </button>
-
-    </nav>
-
-    {{-- Mobile Menu --}}
-    <div
-        x-show="open"
-        x-transition
-        @click.outside="open=false"
-        class="mx-4 mt-3 rounded-2xl bg-white/90 p-5 shadow-xl backdrop-blur-xl lg:hidden">
-
-        <div class="space-y-5">
-
-            <a href="#programs" @click="open=false" class="block font-medium text-slate-700">
-                Program
-            </a>
-
-            <a href="#process" @click="open=false" class="block font-medium text-slate-700">
-                Alur
-            </a>
-
-            <a href="#galery" @click="open=false" class="block font-medium text-slate-700">
-                Gallery
-            </a>
-
-            <a href="#faq" @click="open=false" class="block font-medium text-slate-700">
-                FAQ
-            </a>
-
-            <a href="#contact" @click="open=false" class="block font-medium text-slate-700">
-                Kontak
-            </a>
-
-            <a href="#programs"
-                class="mt-3 block rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-3 text-center font-semibold text-white">
-
-                Daftar Sekarang
-
-            </a>
-
-        </div>
 
     </div>
 
-</header>
+
+
+</nav>
+
+
+
+
+
+
+
+{{-- MOBILE MENU --}}
+
+<div
+
+    x-show="open"
+
+    x-transition
+
+    @click.outside="open=false"
+
+    class="fixed top-20 left-0 right-0 z-40 lg:hidden">
+
+
+    <div class="mx-5 overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-2xl">
+
+
+        <div class="flex flex-col py-4">
+
+
+            <a href="#home"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                Home
+
+            </a>
+
+
+
+            <a href="#about"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                Tentang
+
+            </a>
+
+
+
+            <a href="#programs"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                Program
+
+            </a>
+
+
+
+            <a href="#why-us"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                Keunggulan
+
+            </a>
+
+
+
+            <a href="#process"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                Alur
+
+            </a>
+
+
+
+            <a href="#gallery"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                Galeri
+
+            </a>
+
+
+
+            <a href="#faq"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                FAQ
+
+            </a>
+
+
+
+            <a href="#contact"
+               @click="open=false"
+               class="px-6 py-4 text-slate-700 hover:bg-indigo-50 hover:text-primary">
+
+                Kontak
+
+            </a>
+
+
+
+
+
+            <div class="px-6 pt-4 space-y-3">
+
+
+                <a
+                    href="{{ route('login') }}"
+
+                    class="block rounded-xl border-2 border-primary py-3 text-center font-semibold text-primary">
+
+
+                    Login
+
+
+                </a>
+
+
+
+
+
+                <a
+                    href="#programs"
+
+                    class="block rounded-xl bg-gradient-to-r from-primary to-blue-800 py-3 text-center font-bold text-white">
+
+
+                    Daftar Sekarang
+
+
+                </a>
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+</div>

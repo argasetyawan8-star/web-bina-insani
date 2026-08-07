@@ -5,12 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'Bina Insani')</title>
+   <title>
+
+@yield('title')
+
+| {{ setting('website_name','Bina Insani Platform') }}
+
+</title>
 
     <meta name="description"
         content="Platform Pendaftaran Pelatihan Bahasa Korea dan Persiapan Kerja ke Korea Selatan.">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- favicon --}}
+   <link rel="icon" href="{{ asset('storage/'.setting('favicon')) }}">
 
     {{-- Google Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

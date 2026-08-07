@@ -91,8 +91,8 @@ class RegistrationController extends Controller
     {
 
         $registration = Registration::with([
-            'program',
-            'payment'
+            'program'
+            
         ])
         ->findOrFail($id);
 
@@ -123,5 +123,51 @@ class RegistrationController extends Controller
     );
 
 }
+
+public function verifyPayment(Registration $registration)
+{
+    $registration->update([
+
+        'payment_status' => 'paid',
+
+        'paid_at' => now(),
+
+    ]);
+
+    return back()->with(
+        'success',
+        'Pembayaran berhasil diverifikasi.'
+    );
+}
+
+public function approvePayment($id)
+{
+    $registration = Registration::findOrFail($id);
+
+    $registration->update([
+        'payment_status' => 'paid',
+    ]);
+
+    return back()->with(
+        'success',
+        'Pembayaran berhasil diverifikasi.'
+    );
+}
+
+public function rejectPayment($id)
+{
+    $registration = Registration::findOrFail($id);
+
+    $registration->update([
+        'payment_status' => 'rejected',
+    ]);
+
+    return back()->with(
+        'success',
+        'Pembayaran ditolak.'
+    );
+}
+
+
 
 }

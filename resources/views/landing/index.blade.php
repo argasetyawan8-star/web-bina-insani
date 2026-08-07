@@ -14,7 +14,7 @@
 
 @include('landing.sections.process')
 
-@include('landing.sections.galery')
+@include('landing.sections.gallery')
 
 @include('landing.sections.faq')
 

@@ -1,76 +1,145 @@
-<section id="home" class="relative overflow-hidden pt-36 pb-24">
+{{-- HERO SECTION --}}
 
-    {{-- Background --}}
+<section id="home" class="relative overflow-hidden bg-white py-24">
+
+
+    {{-- Background Decoration --}}
     <div class="absolute inset-0 -z-10">
-        <div class="absolute -top-40 -left-32 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl"></div>
-        <div class="absolute top-40 right-0 w-[450px] h-[450px] bg-indigo-300/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-1/3 w-80 h-80 bg-sky-200/30 rounded-full blur-3xl"></div>
+
+
+        <div class="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-[#2E3192]/20 blur-3xl"></div>
+
+
+        <div class="absolute right-0 top-40 h-[450px] w-[450px] rounded-full bg-[#F6D21A]/20 blur-3xl"></div>
+
+
+        <div class="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-[#ED1C24]/10 blur-3xl"></div>
+
+
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-            {{-- LEFT --}}
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+
+        <div class="grid items-center gap-16 lg:grid-cols-2">
+
+
+
+            {{-- LEFT CONTENT --}}
+
             <div data-aos="fade-right">
 
-                <span class="inline-flex items-center gap-2 rounded-full bg-blue-100 text-blue-700 px-4 py-2 text-sm font-semibold">
+
+                <span
+                    class="inline-flex items-center gap-2 rounded-full bg-[#F6D21A]/30 px-4 py-2 text-sm font-semibold text-[#2E3192]">
+
 
                     🇰🇷 Program Resmi Penempatan Korea Selatan
 
+
                 </span>
 
-                <h1 class="mt-8 text-5xl lg:text-7xl font-extrabold leading-tight text-slate-900">
 
-                    Wujudkan
 
-                    <span class="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
 
-                        Kariermu
+                <h1 class="mt-8 text-5xl font-extrabold leading-tight text-[#1E293B] lg:text-7xl">
+
+
+                    {{ $hero->title }}
+
+
+                    <span
+                        class="bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent">
+
+
+                        {{ $hero->highlight }}
+
 
                     </span>
 
-                    di Korea Selatan
 
                 </h1>
 
+
+
+
                 <p class="mt-8 text-lg leading-8 text-slate-600">
 
-                    Bina Insani membantu calon pekerja mempersiapkan diri
-                    melalui pelatihan Bahasa Korea, persiapan EPS-TOPIK,
-                    hingga proses pendaftaran yang seluruhnya dilakukan
-                    secara online.
+
+                    {{ $hero->subtitle }}
+
 
                 </p>
 
+
+
+
+                {{-- BUTTON --}}
+
                 <div class="mt-10 flex flex-wrap gap-4">
 
-                    <a href="#programs"
-                        class="rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-4 font-semibold text-white shadow-xl transition hover:-translate-y-1">
 
-                        Daftar Sekarang
+                    @if($hero->button_text)
+
+
+                    <a
+                        href="{{ $hero->button_link }}"
+                        class="rounded-2xl bg-[#2E3192] px-8 py-4 font-semibold text-white shadow-lg transition hover:bg-[#252879] hover:-translate-y-1">
+
+
+                        {{ $hero->button_text }}
+
 
                     </a>
 
-                    <a href="#about"
-                        class="rounded-2xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 transition hover:bg-slate-100">
 
-                        Pelajari Lebih Lanjut
+                    @endif
+
+
+
+
+
+                    @if($hero->button2_text)
+
+
+                    <a
+                        href="{{ $hero->button2_link }}"
+                        class="rounded-2xl border border-slate-300 bg-white px-8 py-4 font-semibold text-[#1E293B] transition hover:border-[#2E3192] hover:bg-[#F8FAFC]">
+
+
+                        {{ $hero->button2_text }}
+
 
                     </a>
+
+
+                    @endif
+
 
                 </div>
 
-                {{-- Statistik --}}
+
+
+
+
+
+                {{-- STATISTIC --}}
+
                 <div class="mt-14 grid grid-cols-3 gap-8">
+
+
 
                     <div>
 
-                        <h2 class="text-4xl font-bold text-blue-600">
+                        <h2 class="text-4xl font-bold text-[#2E3192]">
 
                             5000+
 
                         </h2>
+
 
                         <p class="mt-2 text-slate-600">
 
@@ -78,15 +147,21 @@
 
                         </p>
 
+
                     </div>
+
+
+
+
 
                     <div>
 
-                        <h2 class="text-4xl font-bold text-blue-600">
+                        <h2 class="text-4xl font-bold text-[#2E3192]">
 
                             95%
 
                         </h2>
+
 
                         <p class="mt-2 text-slate-600">
 
@@ -94,15 +169,21 @@
 
                         </p>
 
+
                     </div>
+
+
+
+
 
                     <div>
 
-                        <h2 class="text-4xl font-bold text-blue-600">
+                        <h2 class="text-4xl font-bold text-[#2E3192]">
 
                             10+
 
                         </h2>
+
 
                         <p class="mt-2 text-slate-600">
 
@@ -110,30 +191,50 @@
 
                         </p>
 
+
                     </div>
+
 
                 </div>
 
+
             </div>
 
-            {{-- RIGHT --}}
+
+
+
+
+
+
+            {{-- RIGHT DASHBOARD MOCKUP --}}
+
             <div
                 class="relative"
                 data-aos="fade-left">
 
-                <div
-                    class="rounded-[32px] border border-white/60 bg-white/90 backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.12)] overflow-hidden">
 
-                    {{-- Header Dashboard --}}
+
+                <div
+                    class="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_30px_80px_rgba(46,49,146,0.15)]">
+
+
+
+
+
+                    {{-- Header --}}
+
                     <div class="flex items-center justify-between border-b px-8 py-6">
+
 
                         <div>
 
-                            <h3 class="text-xl font-bold">
+
+                            <h3 class="text-xl font-bold text-[#1E293B]">
 
                                 Dashboard Pendaftaran
 
                             </h3>
+
 
                             <p class="text-sm text-slate-500">
 
@@ -141,50 +242,86 @@
 
                             </p>
 
+
                         </div>
 
+
+
+
                         <span
-                            class="rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+                            class="rounded-full bg-[#2E3192]/10 px-4 py-2 text-sm font-semibold text-[#2E3192]">
+
 
                             Online
 
+
                         </span>
+
 
                     </div>
 
-                    <div class="p-8 space-y-6">
 
-                        <div class="rounded-2xl bg-slate-50 p-5">
+
+
+
+
+                    <div class="space-y-6 p-8">
+
+
+
+
+
+                        {{-- Program --}}
+
+                        <div class="rounded-2xl bg-[#F8FAFC] p-5">
+
 
                             <div class="flex justify-between">
 
+
                                 <div>
 
-                                    <p class="text-slate-500 text-sm">
+
+                                    <p class="text-sm text-slate-500">
 
                                         Program
 
                                     </p>
 
-                                    <h3 class="font-bold mt-1">
+
+                                    <h3 class="mt-1 font-bold text-[#1E293B]">
 
                                         Diklat Intensif
 
                                     </h3>
 
+
                                 </div>
 
-                                <span class="text-blue-600 font-bold">
+
+
+                                <span class="font-bold text-[#2E3192]">
 
                                     Aktif
 
                                 </span>
 
+
                             </div>
+
 
                         </div>
 
-                        <div class="rounded-2xl bg-slate-50 p-5">
+
+
+
+
+
+
+                        {{-- Progress --}}
+
+                        <div class="rounded-2xl bg-[#F8FAFC] p-5">
+
 
                             <p class="text-sm text-slate-500">
 
@@ -192,26 +329,41 @@
 
                             </p>
 
-                            <div class="mt-4 h-3 rounded-full bg-slate-200 overflow-hidden">
+
+                            <div class="mt-4 h-3 overflow-hidden rounded-full bg-slate-200">
+
 
                                 <div
-                                    class="h-full w-3/4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600">
+                                    class="h-full w-3/4 rounded-full bg-gradient-to-r from-[#2E3192] to-[#F6D21A]">
+
 
                                 </div>
 
+
                             </div>
 
-                            <p class="mt-3 text-sm font-semibold">
+
+                            <p class="mt-3 text-sm font-semibold text-[#1E293B]">
 
                                 75% Selesai
 
                             </p>
 
+
                         </div>
+
+
+
+
+
+
 
                         <div class="grid grid-cols-2 gap-4">
 
-                            <div class="rounded-2xl bg-blue-50 p-5">
+
+
+                            <div class="rounded-2xl bg-[#2E3192]/10 p-5">
+
 
                                 <p class="text-sm text-slate-500">
 
@@ -219,15 +371,22 @@
 
                                 </p>
 
-                                <h3 class="mt-2 text-2xl font-bold">
+
+                                <h3 class="mt-2 text-2xl font-bold text-[#2E3192]">
 
                                     Lengkap
 
                                 </h3>
 
+
                             </div>
 
-                            <div class="rounded-2xl bg-emerald-50 p-5">
+
+
+
+
+                            <div class="rounded-2xl bg-[#F6D21A]/30 p-5">
+
 
                                 <p class="text-sm text-slate-500">
 
@@ -235,31 +394,53 @@
 
                                 </p>
 
-                                <h3 class="mt-2 text-2xl font-bold">
+
+                                <h3 class="mt-2 text-2xl font-bold text-[#1E293B]">
 
                                     Siap
 
                                 </h3>
 
+
                             </div>
+
+
 
                         </div>
 
-                        <button
-                            class="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 py-4 text-lg font-semibold text-white shadow-lg transition hover:scale-[1.02]">
+
+
+
+
+
+
+                        <a
+                            href="#"
+                            class="block w-full rounded-2xl bg-[#2E3192] py-4 text-center text-lg font-semibold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#252879]">
+
 
                             Mulai Pendaftaran
 
-                        </button>
+
+                        </a>
+
+
 
                     </div>
 
+
+
                 </div>
+
 
             </div>
 
+
+
         </div>
 
+
     </div>
+
 
 </section>

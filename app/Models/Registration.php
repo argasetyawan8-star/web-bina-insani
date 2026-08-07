@@ -9,59 +9,82 @@ class Registration extends Model
 {
     use HasFactory;
 
-   protected $fillable = [
-    'registration_code',
+    protected $fillable = [
 
-    'program_id',
+        /*
+        |--------------------------------------------------------------------------
+        | Registration
+        |--------------------------------------------------------------------------
+        */
 
-    'full_name',
-    'nik',
+        'registration_code',
+        'program_id',
 
-    'birth_place',
-    'birth_date',
+        /*
+        |--------------------------------------------------------------------------
+        | Biodata
+        |--------------------------------------------------------------------------
+        */
 
-    'gender',
+        'full_name',
+        'nik',
+        'birth_place',
+        'birth_date',
+        'gender',
+        'phone',
+        'email',
+        'address',
+        'education',
+        'job',
 
-    'phone',
-    'email',
+        /*
+        |--------------------------------------------------------------------------
+        | Dokumen
+        |--------------------------------------------------------------------------
+        */
 
-    'address',
+        'photo',
+        'ktp',
+        'ijazah',
 
-    'education',
-    'job',
+        /*
+        |--------------------------------------------------------------------------
+        | Pembayaran
+        |--------------------------------------------------------------------------
+        */
 
-    'photo',
-    'ktp',
-    'ijazah',
+        'payment_method',
+        'payment_status',
+        'payment_proof',
+        'paid_at',
 
-    'status',
-    'payment_status',
+        /*
+        |--------------------------------------------------------------------------
+        | Status
+        |--------------------------------------------------------------------------
+        */
 
-    'snap_token',
-    'midtrans_order_id',
-    'payment_type',
-    'transaction_id',
-
-    'paid_at',
-
-    'cs_contacted',
-];
+        'status',
+        'cs_contacted',
+    ];
 
     protected $casts = [
-    'birth_date' => 'date',
-    'paid_at' => 'datetime',
-];
+
+        'birth_date' => 'date',
+        'paid_at'    => 'datetime',
+
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship
+    |--------------------------------------------------------------------------
+    */
 
     public function program()
     {
         return $this->belongsTo(Program::class);
     }
 
-   public function payment()
-{
-    return $this->hasOne(
-        Payment::class,
-        'registration_id'
-    );
-}
+    
 }

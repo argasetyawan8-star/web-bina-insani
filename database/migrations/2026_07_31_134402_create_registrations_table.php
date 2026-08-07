@@ -9,68 +9,98 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
-{
-    Schema::create('registrations', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('registrations', function (Blueprint $table) {
 
-        $table->id();
+            $table->id();
 
-        $table->foreignId('program_id')
-            ->constrained()
-            ->cascadeOnDelete();
+            $table->foreignId('program_id')
+                ->constrained()
+                ->cascadeOnDelete();
 
-        // Biodata
-        $table->string('full_name');
-        $table->string('nik', 20)->unique();
+            /*
+            |--------------------------------------------------------------------------
+            | Biodata
+            |--------------------------------------------------------------------------
+            */
 
-        $table->string('birth_place');
-        $table->date('birth_date');
+            $table->string('full_name');
+            $table->string('nik', 20)->unique();
 
-        $table->enum('gender', [
-            'Laki-laki',
-            'Perempuan'
-        ]);
+            $table->string('birth_place');
+            $table->date('birth_date');
 
-        $table->string('phone');
-        $table->string('email')->nullable();
+            $table->enum('gender', [
+                'Laki-laki',
+                'Perempuan'
+            ]);
 
-        $table->text('address');
+            $table->string('phone');
+            $table->string('email')->nullable();
 
-        $table->string('education')->nullable();
-        $table->string('job')->nullable();
+            $table->text('address');
 
-        // Upload
-        $table->string('photo')->nullable();
-        $table->string('ktp')->nullable();
-        $table->string('ijazah')->nullable();
+            $table->string('education')->nullable();
+            $table->string('job')->nullable();
 
-       // Status
-$table->string('registration_code')->unique();
+            /*
+            |--------------------------------------------------------------------------
+            | Dokumen
+            |--------------------------------------------------------------------------
+            */
 
-$table->enum('status', [
-    'pending',
-    'verified',
-    'rejected'
-])->default('pending');
+            $table->string('photo')->nullable();
+            $table->string('ktp')->nullable();
+            $table->string('ijazah')->nullable();
 
-$table->enum('payment_status', [
-    'unpaid',
-    'paid'
-])->default('unpaid');
+            /*
+            |--------------------------------------------------------------------------
+            | Pendaftaran
+            |--------------------------------------------------------------------------
+            */
 
-$table->string('snap_token')->nullable();
-$table->string('midtrans_order_id')->nullable();
-$table->string('payment_type')->nullable();
-$table->string('transaction_id')->nullable();
+            $table->string('registration_code')->unique();
 
-$table->timestamp('paid_at')->nullable();
+            $table->enum('status', [
+                'pending',
+                'verified',
+                'rejected'
+            ])->default('pending');
 
-$table->boolean('cs_contacted')->default(false);
+            /*
+            |--------------------------------------------------------------------------
+            | Pembayaran Manual
+            |--------------------------------------------------------------------------
+            */
 
-$table->timestamps();
-    });
+            $table->enum('payment_method', [
+                'qris',
+                'transfer'
+            ])->nullable();
 
-}
+            $table->enum('payment_status', [
+                'unpaid',
+                'waiting_verification',
+                'paid',
+                'rejected'
+            ])->default('unpaid');
+
+            $table->string('payment_proof')->nullable();
+
+            $table->timestamp('paid_at')->nullable();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Admin
+            |--------------------------------------------------------------------------
+            */
+
+            $table->boolean('cs_contacted')->default(false);
+
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
