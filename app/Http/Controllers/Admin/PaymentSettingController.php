@@ -15,29 +15,24 @@ class PaymentSettingController extends Controller
     }
 
 
-   public function update(Request $request)
+  public function update(Request $request)
 {
-    $setting = Setting::first();
+    $request->validate([
+        'bank_number' => 'required|string',
+        'qris' => 'nullable|image',
+    ]);
 
+    $setting = Setting::firstOrNew([]);
 
-    if($request->hasFile('qris')){
-
-        $qris = $request->file('qris')
-            ->store('payment','public');
-
-        $setting->qris = $qris;
-
+    if ($request->hasFile('qris')) {
+        $setting->qris = $request->file('qris')->store('payment', 'public');
     }
-
 
     $setting->bank_account = $request->bank_number;
 
     $setting->save();
 
-
-    return redirect()
-        ->back()
-        ->with('success','Pengaturan pembayaran berhasil diperbarui.');
+    return back()->with('success', 'Pengaturan pembayaran berhasil diperbarui.');
 }
 
 }
