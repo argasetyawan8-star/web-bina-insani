@@ -193,62 +193,8 @@
 
                 </div>
 
-                                {{-- Upload Gambar --}}
-                <div class="lg:col-span-2">
-
-                    <label class="mb-2 block font-semibold text-slate-700">
-
-                        Gambar Hero
-
-                    </label>
-
-                    <div class="rounded-2xl border-2 border-dashed border-slate-300 bg-slate-50 p-6">
-
-                        @if($hero->image)
-
-                            <div class="mb-6 flex justify-center">
-
-                                <img
-                                    src="{{ asset('storage/'.$hero->image) }}"
-                                    class="h-64 rounded-2xl object-cover shadow-lg">
-
-                            </div>
-
-                        @else
-
-                            <div
-                                class="mb-6 flex h-64 items-center justify-center rounded-2xl bg-white">
-
-                                <div class="text-center">
-
-                                    <i class="bi bi-image text-6xl text-slate-300"></i>
-
-                                    <p class="mt-3 text-slate-500">
-
-                                        Belum ada gambar Hero
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        @endif
-
-                        <input
-                            type="file"
-                            name="image"
-                            class="block w-full rounded-xl border bg-white p-3">
-
-                        <p class="mt-3 text-xs text-slate-500">
-
-                            Format JPG / PNG • Maksimal 2 MB
-
-                        </p>
-
-                    </div>
-
-                </div>
+                    
+                
 
                 {{-- Preview --}}
                 <div class="lg:col-span-2">

@@ -13,6 +13,8 @@
 
 </title>
 
+<link rel="icon" type="image/png" href="{{ asset('gallery/BI.png') }}">
+
     <meta name="description"
         content="Platform Pendaftaran Pelatihan Bahasa Korea dan Persiapan Kerja ke Korea Selatan.">
 

@@ -169,21 +169,6 @@
 
 
                 <a
-                    href="{{ route('login') }}"
-
-                    class="rounded-xl border-2 border-primary px-5 py-3 font-semibold text-primary transition hover:bg-indigo-50">
-
-
-                    Login
-
-
-                </a>
-
-
-
-
-
-                <a
                     href="#programs"
 
                     class="rounded-xl bg-gradient-to-r from-primary to-blue-800 px-6 py-3 font-bold text-white shadow-lg transition hover:-translate-y-1 hover:shadow-primary/40">
@@ -334,23 +319,6 @@
 
 
             <div class="px-6 pt-4 space-y-3">
-
-
-                <a
-                    href="{{ route('login') }}"
-
-                    class="block rounded-xl border-2 border-primary py-3 text-center font-semibold text-primary">
-
-
-                    Login
-
-
-                </a>
-
-
-
-
-
                 <a
                     href="#programs"
 
