@@ -174,7 +174,6 @@
 
 
 
-
         <a
             href="#programs"
             class="mt-8 inline-flex items-center rounded-2xl bg-[#F6D21A] px-8 py-4 font-bold text-[#2E3192] transition hover:scale-105">
