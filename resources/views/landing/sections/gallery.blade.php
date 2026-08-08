@@ -23,13 +23,13 @@
             class="mt-6 text-5xl font-extrabold text-[#1E293B]">
 
 
-            Galeri
+            Alumni Bina Insani
 
 
             <span
                 class="bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent">
 
-                Kegiatan Kami
+                Yang Sudah Berhasil Berangkat ke Korea
 
             </span>
 
@@ -40,8 +40,7 @@
         <p
             class="mt-6 text-lg leading-8 text-slate-600">
 
-            Beberapa dokumentasi kegiatan pelatihan Bahasa Korea,
-            simulasi EPS-TOPIK, serta aktivitas peserta di Bina Insani.
+            Beberapa dokumentasi Alumni Bina Insani yang telah berhasil berangkat ke Korea Selatan untuk bekerja dan meningkatkan kualitas hidup mereka. Semoga menjadi inspirasi bagi calon peserta lainnya.
 
         </p>
 
@@ -98,7 +97,7 @@
                     <h3 class="text-2xl font-bold">
 
 
-                        Dokumentasi Kegiatan
+                        Dokumentasi Alumni
 
 
                     </h3>
