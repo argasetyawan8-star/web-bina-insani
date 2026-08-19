@@ -1,11 +1,21 @@
 @extends('layouts.admin')
 
+@section('title','Payment Website')
 
 @section('content')
 
 
 <div class="max-w-3xl mx-auto">
 
+@if(session('success'))
+
+        <div class="rounded-xl border border-green-200 bg-green-50 px-5 py-4 text-green-700">
+
+            {{ session('success') }}
+
+        </div>
+
+    @endif
 
 <div class="rounded-3xl bg-white p-8 shadow">
 

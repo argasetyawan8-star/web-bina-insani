@@ -50,7 +50,7 @@
 
                     <p class="text-xs text-slate-500">
 
-                        Korea Training Center
+                        Migrant Training Center
 
                     </p>
 

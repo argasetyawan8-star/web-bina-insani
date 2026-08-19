@@ -78,7 +78,7 @@
 
 
                 <input
-                    type="text"
+                    type="number"
                     name="phone"
                     value="{{ old('phone', $contact->phone ?? '') }}"
                     placeholder="08xxxxxxxxxx"
@@ -153,7 +153,7 @@
 
 
         {{-- Social Media --}}
-        <div class="mt-10">
+        {{-- <div class="mt-10">
 
             <h2 class="mb-5 text-xl font-bold text-slate-800">
 
@@ -168,7 +168,7 @@
 
 
                 {{-- Instagram --}}
-                <div>
+                {{-- <div>
 
                     <label class="font-semibold text-slate-700">
                         Instagram
@@ -187,7 +187,7 @@
 
 
                 {{-- Facebook --}}
-                <div>
+                {{-- <div>
 
                     <label class="font-semibold text-slate-700">
                         Facebook
@@ -207,7 +207,7 @@
 
 
                 {{-- TikTok --}}
-                <div>
+                {{-- <div>
 
                     <label class="font-semibold text-slate-700">
                         TikTok
@@ -228,7 +228,7 @@
             </div>
 
 
-        </div>
+        </div> --}}
 
 
 

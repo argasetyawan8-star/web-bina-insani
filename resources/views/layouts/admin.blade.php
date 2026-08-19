@@ -11,6 +11,8 @@
         @yield('title') | Bina Insani Admin
     </title>
 
+    
+
 
     <link
         rel="stylesheet"

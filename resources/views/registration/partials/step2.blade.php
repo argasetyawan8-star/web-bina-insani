@@ -307,9 +307,21 @@
 
                     <option value="SMA/SMK">SMA / SMK</option>
 
+                    <option value="D1">D1</option>
+
+                    <option value="D2">D2</option>
+
                     <option value="D3">D3</option>
 
+                    <option value="D4">D4</option>
+
+                    <option value="D5">D5</option>
+
                     <option value="S1">S1</option>
+
+                    <option value="S2">S2</option>
+
+                    <option value="S3">S3</option>
 
                 </select>
 
@@ -342,10 +354,10 @@
                     x-model="form.job"
                     type="text"
                     name="job"
-                    placeholder="Contoh: Pelajar"
+                    placeholder="Contoh: Pelajar, Mahasiswa, Karyawan Swasta, dll"
                     class="w-full rounded-2xl border bg-white py-4 pl-14 pr-5 outline-none transition-all duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
                     :class="errors.job ? 'border-red-500 ring-4 ring-red-100' : 'border-slate-200'">
-
+                    
             </div>
 
             <p

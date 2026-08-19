@@ -48,7 +48,7 @@ class="h-full w-full object-contain">
 
 <p class="text-sm text-slate-400">
 
-Korea Training Center
+Migrant Training Center
 
 </p>
 

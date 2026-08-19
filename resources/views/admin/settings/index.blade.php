@@ -190,10 +190,10 @@
 
 
 
-                {{-- ===========================
+                {{-- {{-- ===========================
                         NAMA WEBSITE
                 ============================ --}}
-                <div>
+                {{-- <div>
 
                     <label
                         class="mb-2 block font-semibold text-slate-700">
@@ -209,7 +209,7 @@
                         placeholder="Bina Insani Platform"
                         class="w-full rounded-2xl border border-slate-300 px-5 py-4 focus:border-blue-500 focus:ring-4 focus:ring-blue-100">
 
-                </div>
+                </div> --}} 
 
 
 
@@ -233,7 +233,7 @@
                         </i>
 
                         <input
-                            type="text"
+                            type="number"
                             name="phone"
                             value="{{ setting('phone') }}"
                             placeholder="6281234567890"
