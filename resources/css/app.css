@@ -49,3 +49,50 @@ html{
     color:#334155;
 
 }
+
+/* ========================================
+   MOBILE RESPONSIVE FIX
+   ======================================== */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+section {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+html {
+    overflow-x: hidden !important;
+    width: 100% !important;
+}
+
+body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+}
+
+nav {
+    max-width: 100vw !important;
+}

@@ -44,6 +44,12 @@ class SettingController extends Controller
             'logo'          => 'nullable|image|mimes:jpg,jpeg,png,svg|max:2048',
             'favicon'       => 'nullable|image|mimes:jpg,jpeg,png,ico|max:1024',
             'qris'          => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+
+            'facebook'  => 'nullable|string|max:500',
+            'instagram' => 'nullable|string|max:500',
+            'tiktok'    => 'nullable|string|max:500',
+            'youtube'   => 'nullable|string|max:500',
+            'copyright' => 'nullable|string|max:255',
         ]);
 
         /*
@@ -111,6 +117,12 @@ class SettingController extends Controller
         $setting->bank_name = $request->bank_name;
         $setting->bank_account = $request->bank_account;
         $setting->bank_owner = $request->bank_owner;
+
+        $setting->facebook = $request->facebook;
+        $setting->instagram = $request->instagram;
+        $setting->tiktok = $request->tiktok;
+        $setting->youtube = $request->youtube;
+        $setting->copyright = $request->copyright;
 
         $setting->save();
 

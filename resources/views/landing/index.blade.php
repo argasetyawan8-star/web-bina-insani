@@ -18,6 +18,10 @@
 
 @include('landing.sections.faq')
 
+@include('landing.sections.sector')
+
 @include('landing.sections.contact')
+
+
 
 @endsection

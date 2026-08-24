@@ -1,350 +1,337 @@
-{{-- Background --}}
-<div class="absolute inset-0 -z-10">
+{{-- REGISTRATION PROCESS SECTION --}}
 
-    <div class="absolute -top-40 left-0 w-96 h-96 rounded-full bg-[#2E3192]/20 blur-3xl"></div>
+<section
+    id="process"
+    class="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24"
+>
 
-    <div class="absolute bottom-0 right-0 w-[420px] h-[420px] rounded-full bg-[#F6D21A]/20 blur-3xl"></div>
+    {{-- Background --}}
+    <div class="pointer-events-none absolute inset-0 -z-10">
 
-</div>
+        <div
+            class="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#2E3192]/20 blur-3xl sm:-left-32 sm:-top-40 sm:h-96 sm:w-96"
+        ></div>
 
+        <div
+            class="absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-[#F6D21A]/20 blur-3xl sm:-bottom-32 sm:-right-32 sm:h-[420px] sm:w-[420px]"
+        ></div>
 
-<div class="max-w-7xl mx-auto px-6 lg:px-8">
-
-
-    {{-- Heading --}}
-    <div
-        class="max-w-3xl mx-auto text-center"
-        data-aos="fade-up">
-
-
-        <span
-            id="process"
-            class="inline-flex items-center gap-2 rounded-full bg-[#F6D21A]/20 px-4 py-2 font-semibold text-[#2E3192]">
-
-            Alur Pendaftaran
-
-        </span>
+    </div>
 
 
-        <h2
-            class="mt-6 text-5xl font-extrabold text-[#1E293B]">
+    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
 
 
-            Proses Pendaftaran
-
+        {{-- HEADING --}}
+        <div
+            class="mx-auto max-w-3xl text-center"
+            data-aos="fade-up"
+        >
 
             <span
-                class="bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent">
+                class="inline-flex items-center gap-2 rounded-full bg-[#F6D21A]/20 px-3 py-2 text-xs font-semibold text-[#2E3192] sm:px-4 sm:text-sm"
+            >
 
-                Sangat Mudah
+                <i class="bi bi-list-check"></i>
+
+                Alur Pendaftaran
 
             </span>
 
 
-        </h2>
+            <h2
+                class="mt-5 text-3xl font-extrabold leading-tight text-[#1E293B] sm:mt-6 sm:text-4xl lg:text-5xl"
+            >
+
+                Proses Pendaftaran
+
+                <span
+                    class="bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent"
+                >
+                    Sangat Mudah
+                </span>
+
+            </h2>
 
 
-        <p
-            class="mt-6 text-lg leading-8 text-slate-600">
+            <p
+                class="mt-5 text-sm leading-7 text-slate-600 sm:mt-6 sm:text-lg sm:leading-8"
+            >
 
-            Seluruh proses dilakukan secara online sehingga peserta
-            dapat mendaftar kapan saja tanpa harus datang ke kantor.
+                Seluruh proses dilakukan secara online sehingga peserta
+                dapat mendaftar kapan saja tanpa harus datang ke kantor.
 
-        </p>
+            </p>
 
-
-    </div>
-
-
-
-    {{-- Timeline --}}
-    <div class="relative mt-24">
+        </div>
 
 
-        {{-- Line Desktop --}}
+        {{-- TIMELINE --}}
         <div
-            class="absolute top-12 left-0 right-0 hidden lg:block h-1 bg-slate-200 rounded-full">
+            class="relative mt-12 sm:mt-16 lg:mt-24"
+        >
 
+
+            {{-- LINE DESKTOP --}}
             <div
-                class="w-full h-full rounded-full bg-gradient-to-r from-[#2E3192] via-[#F6D21A] to-[#ED1C24]">
+                class="absolute left-0 right-0 top-10 hidden h-1 rounded-full bg-slate-200 lg:top-12 lg:block"
+            >
+
+                <div
+                    class="h-full w-full rounded-full bg-gradient-to-r from-[#2E3192] via-[#F6D21A] to-[#ED1C24]"
+                ></div>
+
+            </div>
+
+
+            {{-- STEPS --}}
+            <div
+                class="grid gap-10 sm:gap-12 lg:grid-cols-5 lg:gap-6"
+            >
+
+
+                {{-- STEP 1 --}}
+                <div
+                    class="relative text-center"
+                    data-aos="fade-up"
+                >
+
+                    <div
+                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#2E3192] text-3xl text-white shadow-xl sm:h-24 sm:w-24 sm:text-4xl"
+                    >
+                        <i class="bi bi-person-plus-fill"></i>
+                    </div>
+
+
+                    <span
+                        class="mt-5 block text-xs font-bold text-[#2E3192] sm:mt-6 sm:text-sm"
+                    >
+                        STEP 01
+                    </span>
+
+
+                    <h3
+                        class="mt-2 text-xl font-bold text-[#1E293B] sm:mt-3 sm:text-2xl"
+                    >
+                        Isi Biodata
+                    </h3>
+
+
+                    <p
+                        class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7"
+                    >
+                        Lengkapi formulir pendaftaran secara online.
+                    </p>
+
+                </div>
+
+
+                {{-- STEP 2 --}}
+                <div
+                    class="relative text-center"
+                    data-aos="fade-up"
+                    data-aos-delay="100"
+                >
+
+                    <div
+                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#2E3192] text-3xl text-white shadow-xl sm:h-24 sm:w-24 sm:text-4xl"
+                    >
+
+                        <i class="bi bi-folder2-open"></i>
+
+                    </div>
+
+
+                    <span
+                        class="mt-5 block text-xs font-bold text-[#2E3192] sm:mt-6 sm:text-sm"
+                    >
+                        STEP 02
+                    </span>
+
+
+                    <h3
+                        class="mt-2 text-xl font-bold text-[#1E293B] sm:mt-3 sm:text-2xl"
+                    >
+                        Upload Dokumen
+                    </h3>
+
+
+                    <p
+                        class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7"
+                    >
+                        Upload foto, KTP, dan ijazah sebagai syarat administrasi.
+                    </p>
+
+                </div>
+
+
+                {{-- STEP 3 --}}
+                <div
+                    class="relative text-center"
+                    data-aos="fade-up"
+                    data-aos-delay="200"
+                >
+
+                    <div
+                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#F6D21A] text-3xl text-[#2E3192] shadow-xl sm:h-24 sm:w-24 sm:text-4xl"
+                    >
+
+                        <i class="bi bi-credit-card-fill"></i>
+
+                    </div>
+
+
+                    <span
+                        class="mt-5 block text-xs font-bold text-[#2E3192] sm:mt-6 sm:text-sm"
+                    >
+                        STEP 03
+                    </span>
+
+
+                    <h3
+                        class="mt-2 text-xl font-bold text-[#1E293B] sm:mt-3 sm:text-2xl"
+                    >
+                        Pembayaran
+                    </h3>
+
+
+                    <p
+                        class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7"
+                    >
+                        Bayar biaya pendaftaran dengan aman.
+                    </p>
+
+                </div>
+
+
+                {{-- STEP 4 --}}
+                <div
+                    class="relative text-center"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+
+                    <div
+                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#ED1C24] text-3xl text-white shadow-xl sm:h-24 sm:w-24 sm:text-4xl"
+                    >
+
+                        <i class="bi bi-patch-check-fill"></i>
+
+                    </div>
+
+
+                    <span
+                        class="mt-5 block text-xs font-bold text-[#ED1C24] sm:mt-6 sm:text-sm"
+                    >
+                        STEP 04
+                    </span>
+
+
+                    <h3
+                        class="mt-2 text-xl font-bold text-[#1E293B] sm:mt-3 sm:text-2xl"
+                    >
+                        Verifikasi
+                    </h3>
+
+
+                    <p
+                        class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7"
+                    >
+                        Tim admin melakukan pengecekan data dan pembayaran.
+                    </p>
+
+                </div>
+
+
+                {{-- STEP 5 --}}
+                <div
+                    class="relative text-center"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
+
+                    <div
+                        class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#2E3192] text-3xl text-white shadow-xl sm:h-24 sm:w-24 sm:text-4xl"
+                    >
+
+                        <i class="bi bi-airplane-fill"></i>
+
+                    </div>
+
+
+                    <span
+                        class="mt-5 block text-xs font-bold text-[#2E3192] sm:mt-6 sm:text-sm"
+                    >
+                        STEP 05
+                    </span>
+
+
+                    <h3
+                        class="mt-2 text-xl font-bold text-[#1E293B] sm:mt-3 sm:text-2xl"
+                    >
+                        Mulai Pelatihan
+                    </h3>
+
+
+                    <p
+                        class="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-600 sm:mt-3 sm:text-base sm:leading-7"
+                    >
+                        Peserta resmi bergabung dan mengikuti pelatihan Bahasa Korea.
+                    </p>
+
+                </div>
+
 
             </div>
 
         </div>
 
 
+        {{-- CTA --}}
+        <div
+            class="mt-12 rounded-[24px] bg-gradient-to-r from-[#2E3192] to-[#ED1C24] p-6 text-white shadow-2xl sm:mt-16 sm:rounded-[32px] sm:p-8 lg:mt-24 lg:p-10"
+            data-aos="fade-up"
+        >
 
-        <div class="grid lg:grid-cols-5 gap-10">
-
-
-
-            {{-- STEP 1 --}}
             <div
-                class="relative text-center"
-                data-aos="fade-up">
+                class="flex flex-col items-center justify-between gap-6 text-center lg:flex-row lg:gap-8 lg:text-left"
+            >
+
+                <div class="min-w-0">
+
+                    <h3
+                        class="text-2xl font-bold leading-tight sm:text-3xl"
+                    >
+                        Semua Proses Dilakukan Secara Online
+                    </h3>
 
 
-                <div
-                    class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#2E3192] text-white text-4xl shadow-xl">
-
-                    <i class="bi bi-person-plus-fill"></i>
+                    <p
+                        class="mt-3 text-sm leading-6 text-white/80 sm:text-base sm:leading-7 lg:text-lg"
+                    >
+                        Daftar, upload dokumen, pembayaran, hingga verifikasi
+                        peserta dapat dilakukan melalui platform ini.
+                    </p>
 
                 </div>
 
 
-                <span class="mt-6 block text-sm font-bold text-[#2E3192]">
+                <a
+                    href="#programs"
+                    class="inline-flex w-full shrink-0 items-center justify-center rounded-2xl bg-white px-6 py-3.5 text-sm font-bold text-[#2E3192] shadow-lg transition hover:scale-105 sm:w-auto sm:px-8 sm:py-4 sm:text-base"
+                >
 
-                    STEP 01
+                    Mulai Sekarang
 
-                </span>
+                    <i class="bi bi-arrow-right ms-2"></i>
 
-
-                <h3 class="mt-3 text-2xl font-bold text-[#1E293B]">
-
-                    Isi Biodata
-
-                </h3>
-
-
-                <p class="mt-3 text-slate-600 leading-7">
-
-                    Lengkapi formulir pendaftaran secara online.
-
-                </p>
-
+                </a>
 
             </div>
-
-
-
-
-
-            {{-- STEP 2 --}}
-            <div
-                class="relative text-center"
-                data-aos="fade-up"
-                data-aos-delay="100">
-
-
-                <div
-                    class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#2E3192] text-white text-4xl shadow-xl">
-
-
-                    <i class="bi bi-folder2-open"></i>
-
-
-                </div>
-
-
-                <span class="mt-6 block text-sm font-bold text-[#2E3192]">
-
-                    STEP 02
-
-                </span>
-
-
-                <h3 class="mt-3 text-2xl font-bold text-[#1E293B]">
-
-                    Upload Dokumen
-
-                </h3>
-
-
-                <p class="mt-3 text-slate-600 leading-7">
-
-                    Upload foto, KTP, dan ijazah sebagai syarat administrasi.
-
-                </p>
-
-
-            </div>
-
-
-
-
-
-            {{-- STEP 3 --}}
-            <div
-                class="relative text-center"
-                data-aos="fade-up"
-                data-aos-delay="200">
-
-
-                <div
-                    class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#F6D21A] text-[#2E3192] text-4xl shadow-xl">
-
-
-                    <i class="bi bi-credit-card-fill"></i>
-
-
-                </div>
-
-
-                <span class="mt-6 block text-sm font-bold text-[#2E3192]">
-
-                    STEP 03
-
-                </span>
-
-
-                <h3 class="mt-3 text-2xl font-bold text-[#1E293B]">
-
-                    Pembayaran
-
-                </h3>
-
-
-                <p class="mt-3 text-slate-600 leading-7">
-
-                    Bayar biaya pendaftaran dengan aman.
-
-                </p>
-
-
-            </div>
-
-
-
-
-
-            {{-- STEP 4 --}}
-            <div
-                class="relative text-center"
-                data-aos="fade-up"
-                data-aos-delay="300">
-
-
-                <div
-                    class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#ED1C24] text-white text-4xl shadow-xl">
-
-
-                    <i class="bi bi-patch-check-fill"></i>
-
-
-                </div>
-
-
-                <span class="mt-6 block text-sm font-bold text-[#ED1C24]">
-
-                    STEP 04
-
-                </span>
-
-
-                <h3 class="mt-3 text-2xl font-bold text-[#1E293B]">
-
-                    Verifikasi
-
-                </h3>
-
-
-                <p class="mt-3 text-slate-600 leading-7">
-
-                    Tim admin melakukan pengecekan data dan pembayaran.
-
-                </p>
-
-
-            </div>
-
-
-
-
-
-            {{-- STEP 5 --}}
-            <div
-                class="relative text-center"
-                data-aos="fade-up"
-                data-aos-delay="400">
-
-
-                <div
-                    class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-[#2E3192] text-white text-4xl shadow-xl">
-
-
-                    <i class="bi bi-airplane-fill"></i>
-
-
-                </div>
-
-
-                <span class="mt-6 block text-sm font-bold text-[#2E3192]">
-
-                    STEP 05
-
-                </span>
-
-
-                <h3 class="mt-3 text-2xl font-bold text-[#1E293B]">
-
-                    Mulai Pelatihan
-
-                </h3>
-
-
-                <p class="mt-3 text-slate-600 leading-7">
-
-                    Peserta resmi bergabung dan mengikuti pelatihan Bahasa Korea.
-
-                </p>
-
-
-            </div>
-
-
-
-        </div>
-
-
-    </div>
-
-
-
-
-
-    {{-- CTA --}}
-    <div
-        class="mt-24 rounded-[32px] bg-gradient-to-r from-[#2E3192] to-[#ED1C24] p-10 text-white shadow-2xl"
-        data-aos="fade-up">
-
-
-        <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
-
-
-            <div>
-
-
-                <h3 class="text-3xl font-bold">
-
-                    Semua Proses Dilakukan Secara Online
-
-                </h3>
-
-
-                <p class="mt-3 text-white/80 text-lg">
-
-                    Daftar, upload dokumen, pembayaran, hingga verifikasi peserta dapat dilakukan melalui platform ini.
-
-                </p>
-
-
-            </div>
-
-
-            <a
-                href="#programs"
-                class="rounded-2xl bg-white px-8 py-4 font-bold text-[#2E3192] shadow-lg transition hover:scale-105">
-
-
-                Mulai Sekarang
-
-            </a>
-
 
         </div>
 
 
     </div>
 
-
-</div>
+</section>

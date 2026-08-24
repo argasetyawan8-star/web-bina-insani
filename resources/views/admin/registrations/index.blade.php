@@ -221,13 +221,6 @@ Menunggu Verifikasi
 </span>
 
 
-@elseif($item->payment_status == 'rejected')
-
-<span class="px-3 py-1 rounded-full text-xs bg-red-100 text-red-700">
-Ditolak
-</span>
-
-
 @else
 
 <span class="px-3 py-1 rounded-full text-xs bg-gray-100 text-gray-700">
@@ -250,6 +243,12 @@ Belum Upload
 
 <span class="px-3 py-1 rounded-full text-xs bg-blue-100 text-blue-700">
 Terverifikasi
+</span>
+
+@elseif ($item->status == 'rejected')
+
+<span class="px-3 py-1 rounded-full text-xs bg-red-100 text-red-700">
+Ditolak
 </span>
 
 @else

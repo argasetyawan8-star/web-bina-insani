@@ -67,6 +67,11 @@
                     {{ request('payment_status')=='waiting_verification'?'selected':'' }}>
                     Menunggu
                 </option>
+                <option
+                    value="rejected"
+                    {{ request('payment_status')=='rejected'?'selected':'' }}>
+                    Ditolak
+                </option>
 
             </select>
 
@@ -154,6 +159,14 @@
 
                             </span>
 
+                            @elseif($item->payment_status=='rejected')
+
+                            <span class="px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs">
+
+                                Ditolak
+
+                            </span>
+
                         @else
 
                             <span class="px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs">
@@ -161,6 +174,10 @@
                                 Menunggu
 
                             </span>
+
+                             
+
+
 
                         @endif
 

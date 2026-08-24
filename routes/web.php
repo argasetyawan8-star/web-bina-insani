@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistrationController;
 use App\Models\Program;
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\ContactController;
 use App\Models\Contact;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\PaymentSettingController;
+use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +121,21 @@ Route::middleware(['auth'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+
+
+     // Profil
+        Route::get('/profile', [ProfileController::class, 'index'])
+            ->name('profile.index');
+
+        Route::put('/profile', [ProfileController::class, 'update'])
+            ->name('profile.update');
+
+        // Password
+        Route::get('/password', [ProfileController::class, 'editPassword'])
+            ->name('password.edit');
+
+        Route::put('/password', [ProfileController::class, 'updatePassword'])
+            ->name('password.update');
 
 
         Route::get('/registrations',

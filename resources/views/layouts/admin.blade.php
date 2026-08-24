@@ -270,6 +270,16 @@
         Pengaturan Pembayaran
 
     </a>
+
+    <a
+            href="{{ route('admin.settings.index') }}"
+            class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-700 transition hover:bg-slate-100">
+
+            <i class="bi bi-bootstrap-fill"></i>
+
+            Footer & Pengaturan Website
+
+        </a>
 </li>
 
     </nav>
@@ -285,40 +295,44 @@
 
     <div class="border-t bg-white p-4">
 
-
-        <a
-            href="{{ route('admin.settings.index') }}"
-            class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-700 transition hover:bg-slate-100">
-
-            <i class="bi bi-gear-fill"></i>
-
-            Pengaturan
-
-        </a>
+    {{-- Profil --}}
+    <a
+        href="{{ route('admin.profile.index') }}"
+        class="mt-3 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-[#2E3192]/10 hover:text-[#2E3192]"
+    >
+        <i class="bi bi-person-circle text-lg"></i>
+        Profil Saya
+    </a>
 
 
+    {{-- Password --}}
+    <a
+        href="{{ route('admin.password.edit') }}"
+        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-[#2E3192]/10 hover:text-[#2E3192]"
+    >
+        <i class="bi bi-key-fill text-lg"></i>
+        Ubah Password
+    </a>
 
 
+    {{-- Logout --}}
+    <form
+        action="{{ route('logout') }}"
+        method="POST"
+        class="mt-1"
+    >
+        @csrf
 
-        <form action="{{ route('logout') }}" method="POST">
+        <button
+            type="submit"
+            class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-red-500 transition hover:bg-red-50"
+        >
+            <i class="bi bi-box-arrow-right text-lg"></i>
+            Keluar
+        </button>
+    </form>
 
-            @csrf
-
-
-            <button
-                class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-600 transition hover:bg-red-50">
-
-                <i class="bi bi-box-arrow-right"></i>
-
-                Logout
-
-            </button>
-
-
-        </form>
-
-
-    </div>
+</div>
 
 
 </aside>
