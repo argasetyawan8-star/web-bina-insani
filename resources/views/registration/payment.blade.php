@@ -692,12 +692,13 @@
                         <button
                             type="button"
                             onclick="copyRekening()"
-                            class="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700 sm:mt-8 sm:text-base">
+                            class="mt-7 flex w-full items-center justify-center gap-2 rounded-2xl bg-blue-600 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700 active:scale-[0.98] sm:mt-8 sm:text-base">
 
-                            <i class="bi bi-copy"></i>
+                            <i id="copyIcon" class="bi bi-copy"></i>
 
-                            Salin Nomor Rekening
-
+                            <span id="copyText">
+                                Salin Nomor Rekening
+                            </span>
                         </button>
 
                     </div>
@@ -992,45 +993,101 @@
 
 {{-- =============================================================
     JAVASCRIPT
-============================================================= --}}
-<script>
+============================================================= --}}<script>
+    function previewPayment(event) {
+        const preview = document.getElementById('preview');
+        const file = event.target.files[0];
 
-function previewPayment(event) {
+        if (!file) {
+            preview.src = '';
+            preview.classList.add('hidden');
+            return;
+        }
 
-    const preview = document.getElementById('preview');
-    const file = event.target.files[0];
-
-    if (!file) {
-        preview.src = '';
-        preview.classList.add('hidden');
-        return;
+        preview.src = URL.createObjectURL(file);
+        preview.classList.remove('hidden');
     }
 
-    preview.src = URL.createObjectURL(file);
-    preview.classList.remove('hidden');
-}
+    function copyRekening() {
+        const rekeningElement = document.getElementById('rekening');
+        const copyText = document.getElementById('copyText');
+        const copyIcon = document.getElementById('copyIcon');
 
+        if (!rekeningElement) {
+            return;
+        }
 
-function copyRekening() {
+        const rekening = rekeningElement.innerText.trim();
 
-    const rekeningElement = document.getElementById('rekening');
+        // Cara utama: Clipboard API
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(rekening)
+                .then(() => {
+                    showCopySuccess();
+                })
+                .catch(() => {
+                    fallbackCopy(rekening);
+                });
 
-    if (!rekeningElement) {
-        return;
+            return;
+        }
+
+        // Fallback untuk browser/mobile
+        fallbackCopy(rekening);
     }
 
-    const rekening = rekeningElement.innerText.trim();
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
 
-    navigator.clipboard.writeText(rekening)
-        .then(() => {
-            alert('Nomor rekening berhasil disalin.');
-        })
-        .catch(() => {
-            alert('Gagal menyalin nomor rekening.');
-        });
+        textarea.value = text;
 
-}
+        // Supaya textarea tidak terlihat
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        textarea.style.top = '0';
+        textarea.style.opacity = '0';
 
+        document.body.appendChild(textarea);
+
+        textarea.focus();
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+
+        try {
+            const successful = document.execCommand('copy');
+
+            if (successful) {
+                showCopySuccess();
+            } else {
+                showCopyError();
+            }
+        } catch (error) {
+            showCopyError();
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    function showCopySuccess() {
+        const copyText = document.getElementById('copyText');
+        const copyIcon = document.getElementById('copyIcon');
+
+        if (!copyText || !copyIcon) {
+            return;
+        }
+
+        copyText.innerText = 'Berhasil Disalin!';
+        copyIcon.className = 'bi bi-check-circle-fill';
+
+        setTimeout(() => {
+            copyText.innerText = 'Salin Nomor Rekening';
+            copyIcon.className = 'bi bi-copy';
+        }, 2000);
+    }
+
+    function showCopyError() {
+        alert('Nomor rekening gagal disalin. Silakan salin secara manual.');
+    }
 </script>
 
 @endsection

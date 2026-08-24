@@ -9,6 +9,8 @@
 
         errors: {},
 
+         uploadError: '',
+
         form:{
 
             full_name:'',

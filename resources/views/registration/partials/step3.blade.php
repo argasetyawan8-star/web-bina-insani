@@ -27,7 +27,6 @@
             </p>
         </div>
 
-
         {{-- STEP --}}
         <div
             class="flex w-fit items-center gap-3 rounded-2xl border border-[#2E3192]/20 bg-[#2E3192]/5 px-5 py-3 sm:px-6 sm:py-4"
@@ -52,6 +51,49 @@
     </div>
 
 
+    {{-- ================================================= --}}
+    {{-- NOTIFICATION --}}
+    {{-- ================================================= --}}
+
+    <div
+        x-show="uploadError"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 -translate-y-3"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="mt-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 sm:p-5"
+    >
+
+        <div
+            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-500"
+        >
+            <i class="bi bi-exclamation-circle-fill"></i>
+        </div>
+
+        <div class="min-w-0 flex-1">
+            <h4 class="font-bold text-red-700">
+                Dokumen belum lengkap
+            </h4>
+
+            <p
+                class="mt-1 text-sm leading-6 text-red-600"
+                x-text="uploadError"
+            ></p>
+        </div>
+
+        <button
+            type="button"
+            @click="uploadError = ''"
+            class="shrink-0 text-red-400 transition hover:text-red-600"
+        >
+            <i class="bi bi-x-lg"></i>
+        </button>
+
+    </div>
+
+
     {{-- DOCUMENT CARDS --}}
     <div class="mt-10 grid gap-6 lg:mt-12 lg:grid-cols-3">
 
@@ -59,6 +101,7 @@
         {{-- ================================================= --}}
         {{-- FOTO PESERTA --}}
         {{-- ================================================= --}}
+
         <div
             x-data="{
                 fileName: '',
@@ -103,6 +146,7 @@
             class="group rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-xl sm:p-7"
         >
 
+            {{-- CARD HEADER --}}
             <div class="flex items-start justify-between gap-4">
 
                 <div
@@ -132,11 +176,13 @@
             {{-- UPLOAD --}}
             <label
                 class="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-5 text-center transition duration-300 sm:mt-6 sm:p-7"
-                :class="selected
-                    ? 'border-green-400 bg-green-50'
-                    : error
-                        ? 'border-red-400 bg-red-50'
-                        : 'border-slate-300 bg-slate-50 hover:border-[#2E3192] hover:bg-[#2E3192]/5'"
+                :class="
+                    selected
+                        ? 'border-green-400 bg-green-50'
+                        : error
+                            ? 'border-red-400 bg-red-50'
+                            : 'border-slate-300 bg-slate-50 hover:border-[#2E3192] hover:bg-[#2E3192]/5'
+                "
             >
 
                 <div
@@ -144,16 +190,17 @@
                 >
                     <i
                         class="text-2xl"
-                        :class="selected
-                            ? 'bi bi-check-circle-fill text-green-500'
-                            : 'bi bi-cloud-arrow-up text-[#2E3192]'"
+                        :class="
+                            selected
+                                ? 'bi bi-check-circle-fill text-green-500'
+                                : 'bi bi-cloud-arrow-up text-[#2E3192]'
+                        "
                     ></i>
                 </div>
 
 
                 {{-- BELUM ADA FILE --}}
                 <template x-if="!selected">
-
                     <div>
 
                         <span class="mt-4 block font-semibold text-slate-700">
@@ -165,13 +212,11 @@
                         </span>
 
                     </div>
-
                 </template>
 
 
                 {{-- SUDAH ADA FILE --}}
                 <template x-if="selected">
-
                     <div class="w-full">
 
                         <span class="mt-4 block text-sm font-bold text-green-600">
@@ -189,7 +234,6 @@
                         </span>
 
                     </div>
-
                 </template>
 
 
@@ -206,15 +250,10 @@
 
             {{-- ERROR --}}
             <template x-if="error">
-
                 <p class="mt-3 flex items-start gap-2 text-xs font-medium text-red-500">
-
                     <i class="bi bi-exclamation-circle-fill mt-0.5 shrink-0"></i>
-
                     <span x-text="error"></span>
-
                 </p>
-
             </template>
 
         </div>
@@ -224,6 +263,7 @@
         {{-- ================================================= --}}
         {{-- KTP --}}
         {{-- ================================================= --}}
+
         <div
             x-data="{
                 fileName: '',
@@ -297,11 +337,13 @@
             {{-- UPLOAD --}}
             <label
                 class="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-5 text-center transition duration-300 sm:mt-6 sm:p-7"
-                :class="selected
-                    ? 'border-green-400 bg-green-50'
-                    : error
-                        ? 'border-red-400 bg-red-50'
-                        : 'border-slate-300 bg-slate-50 hover:border-[#ED1C24] hover:bg-[#ED1C24]/5'"
+                :class="
+                    selected
+                        ? 'border-green-400 bg-green-50'
+                        : error
+                            ? 'border-red-400 bg-red-50'
+                            : 'border-slate-300 bg-slate-50 hover:border-[#ED1C24] hover:bg-[#ED1C24]/5'
+                "
             >
 
                 <div
@@ -309,15 +351,16 @@
                 >
                     <i
                         class="text-2xl"
-                        :class="selected
-                            ? 'bi bi-check-circle-fill text-green-500'
-                            : 'bi bi-cloud-arrow-up text-[#ED1C24]'"
+                        :class="
+                            selected
+                                ? 'bi bi-check-circle-fill text-green-500'
+                                : 'bi bi-cloud-arrow-up text-[#ED1C24]'
+                        "
                     ></i>
                 </div>
 
 
                 <template x-if="!selected">
-
                     <div>
 
                         <span class="mt-4 block font-semibold text-slate-700">
@@ -329,12 +372,10 @@
                         </span>
 
                     </div>
-
                 </template>
 
 
                 <template x-if="selected">
-
                     <div class="w-full">
 
                         <span class="mt-4 block text-sm font-bold text-green-600">
@@ -352,7 +393,6 @@
                         </span>
 
                     </div>
-
                 </template>
 
 
@@ -368,15 +408,10 @@
 
 
             <template x-if="error">
-
                 <p class="mt-3 flex items-start gap-2 text-xs font-medium text-red-500">
-
                     <i class="bi bi-exclamation-circle-fill mt-0.5 shrink-0"></i>
-
                     <span x-text="error"></span>
-
                 </p>
-
             </template>
 
         </div>
@@ -386,6 +421,7 @@
         {{-- ================================================= --}}
         {{-- IJAZAH --}}
         {{-- ================================================= --}}
+
         <div
             x-data="{
                 fileName: '',
@@ -460,11 +496,13 @@
             {{-- UPLOAD --}}
             <label
                 class="mt-5 flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed p-5 text-center transition duration-300 sm:mt-6 sm:p-7"
-                :class="selected
-                    ? 'border-green-400 bg-green-50'
-                    : error
-                        ? 'border-red-400 bg-red-50'
-                        : 'border-slate-300 bg-slate-50 hover:border-[#2E3192] hover:bg-[#2E3192]/5'"
+                :class="
+                    selected
+                        ? 'border-green-400 bg-green-50'
+                        : error
+                            ? 'border-red-400 bg-red-50'
+                            : 'border-slate-300 bg-slate-50 hover:border-[#2E3192] hover:bg-[#2E3192]/5'
+                "
             >
 
                 <div
@@ -472,15 +510,16 @@
                 >
                     <i
                         class="text-2xl"
-                        :class="selected
-                            ? 'bi bi-check-circle-fill text-green-500'
-                            : 'bi bi-cloud-arrow-up text-[#2E3192]'"
+                        :class="
+                            selected
+                                ? 'bi bi-check-circle-fill text-green-500'
+                                : 'bi bi-cloud-arrow-up text-[#2E3192]'
+                        "
                     ></i>
                 </div>
 
 
                 <template x-if="!selected">
-
                     <div>
 
                         <span class="mt-4 block font-semibold text-slate-700">
@@ -492,12 +531,10 @@
                         </span>
 
                     </div>
-
                 </template>
 
 
                 <template x-if="selected">
-
                     <div class="w-full">
 
                         <span class="mt-4 block text-sm font-bold text-green-600">
@@ -515,7 +552,6 @@
                         </span>
 
                     </div>
-
                 </template>
 
 
@@ -531,15 +567,10 @@
 
 
             <template x-if="error">
-
                 <p class="mt-3 flex items-start gap-2 text-xs font-medium text-red-500">
-
                     <i class="bi bi-exclamation-circle-fill mt-0.5 shrink-0"></i>
-
                     <span x-text="error"></span>
-
                 </p>
-
             </template>
 
         </div>
@@ -548,12 +579,17 @@
 
 
 
+    {{-- ================================================= --}}
     {{-- INFORMATION --}}
+    {{-- ================================================= --}}
+
     <div
         class="mt-8 overflow-hidden rounded-[28px] border border-[#2E3192]/10 bg-[#2E3192]/5 sm:mt-10"
     >
 
-        <div class="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:gap-5 sm:p-6">
+        <div
+            class="flex flex-col gap-4 p-5 sm:flex-row sm:items-start sm:gap-5 sm:p-6"
+        >
 
             <div
                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#2E3192] text-white sm:h-12 sm:w-12"
@@ -601,11 +637,15 @@
 
 
 
+    {{-- ================================================= --}}
     {{-- NAVIGATION --}}
+    {{-- ================================================= --}}
+
     <div
         class="mt-10 flex flex-col-reverse gap-3 border-t border-slate-200 pt-7 sm:mt-12 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pt-8"
     >
 
+        {{-- BACK --}}
         <button
             type="button"
             @click="step = 2"
@@ -616,35 +656,68 @@
         </button>
 
 
-        {{-- REVIEW BUTTON --}}
+        {{-- REVIEW --}}
         <button
             type="button"
             @click="
-                const inputs = $el.closest('[x-show]').querySelectorAll('input[type=file]');
-                let valid = true;
+                uploadError = '';
+
+                const container = $el.closest('[x-show]');
+                const inputs = container.querySelectorAll('input[type=file]');
+
+                let missing = [];
 
                 inputs.forEach(input => {
-                    if (!input.files.length) {
-                        valid = false;
-                        input.dispatchEvent(new Event('change', { bubbles: true }));
+
+                    if (!input.files || !input.files.length) {
+
+                        if (input.name === 'photo') {
+                            missing.push('Foto peserta');
+                        }
+
+                        if (input.name === 'ktp') {
+                            missing.push('KTP');
+                        }
+
+                        if (input.name === 'ijazah') {
+                            missing.push('Ijazah');
+                        }
+
                     }
+
                 });
 
-                if (valid) {
-                    step = 4;
+                if (missing.length > 0) {
+
+                    uploadError =
+                        missing.length === 1
+                            ? missing[0] + ' belum diinput.'
+                            : missing.join(', ') + ' belum diinput.';
+
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
+
+                    return;
                 }
+
+                step = 4;
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             "
             class="group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#2E3192] px-8 py-4 font-bold text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-blue-900 hover:shadow-xl sm:w-auto"
         >
+
             Review Data
 
             <i
                 class="bi bi-arrow-right transition duration-300 group-hover:translate-x-1"
             ></i>
+
         </button>
 
     </div>
