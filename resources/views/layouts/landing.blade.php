@@ -74,7 +74,7 @@
     </main>
 
     {{-- Footer --}}
-   
+    @include('partials.footer')
 
     {{-- Back To Top --}}
     <button
