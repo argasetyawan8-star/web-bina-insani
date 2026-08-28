@@ -46,7 +46,7 @@
                 @endif
 
                 <div class="min-w-0">
-                    <h2 class="truncate text-base font-extrabold text-primary sm:text-xl">
+                    <h2 class="truncate text-base font-extrabold text-accent sm:text-xl">
                         {{ setting('website_name', 'Bina Insani') }}
                     </h2>
 

@@ -21,23 +21,55 @@ class RegistrationController extends Controller
      */
     public function create(Program $program)
     {
-        return view('registration.index', compact('program'));
+        return view(
+            'registration.index',
+            compact('program')
+        );
     }
 
     /**
      * Simpan Pendaftaran
      */
     public function store(RegistrationRequest $request)
-{
-    $registration = $this->registrationService->store(
-        $request->validated()
-    );
+    {
+        /*
+        |--------------------------------------------------------------------------
+        | Ambil data yang sudah divalidasi
+        |--------------------------------------------------------------------------
+        |
+        | Karena kita sudah menggunakan RegistrationRequest,
+        | tidak perlu melakukan validate() kedua kali di sini.
+        |
+        */
 
-    return redirect()->route(
-        'payment.index',
-        $registration
-    );
-}
+        $validated = $request->validated();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Simpan Registration + Dokumen
+        |--------------------------------------------------------------------------
+        */
+
+        $registration = $this->registrationService->store(
+            $validated
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect ke Halaman Pembayaran
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect()
+            ->route(
+                'payment.index',
+                ['registration' => $registration->id]
+            )
+            ->with(
+                'success',
+                'Pendaftaran berhasil disimpan. Silakan lanjutkan ke pembayaran.'
+            );
+    }
 
     /**
      * Halaman Pembayaran
@@ -45,7 +77,7 @@ class RegistrationController extends Controller
     public function payment($id)
     {
         $registration = $this->registrationService
-            ->findById($id);
+            ->findById((int) $id);
 
         return view(
             'registration.payment',
@@ -54,12 +86,12 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Success
+     * Halaman Success
      */
     public function success($id)
     {
         $registration = $this->registrationService
-            ->findById($id);
+            ->findById((int) $id);
 
         return view(
             'registration.success',

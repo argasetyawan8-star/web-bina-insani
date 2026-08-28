@@ -2,30 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Registration extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-
-        /*
-        |--------------------------------------------------------------------------
-        | Registration
-        |--------------------------------------------------------------------------
-        */
-
-        'registration_code',
         'program_id',
 
-        /*
-        |--------------------------------------------------------------------------
-        | Biodata
-        |--------------------------------------------------------------------------
-        */
-
+        // Biodata
         'full_name',
         'nik',
         'birth_place',
@@ -37,54 +26,42 @@ class Registration extends Model
         'education',
         'job',
 
-        /*
-        |--------------------------------------------------------------------------
-        | Dokumen
-        |--------------------------------------------------------------------------
-        */
+        // Data pendaftaran
+        'registration_code',
+        'status',
 
-        'photo',
-        'ktp',
-        'ijazah',
-
-        /*
-        |--------------------------------------------------------------------------
-        | Pembayaran
-        |--------------------------------------------------------------------------
-        */
-
+        // Pembayaran
         'payment_method',
         'payment_status',
         'payment_proof',
         'paid_at',
 
-        /*
-        |--------------------------------------------------------------------------
-        | Status
-        |--------------------------------------------------------------------------
-        */
-
-        'status',
+        // Lainnya
         'cs_contacted',
     ];
 
     protected $casts = [
-
         'birth_date' => 'date',
-        'paid_at'    => 'datetime',
-
+        'paid_at' => 'datetime',
+        'cs_contacted' => 'boolean',
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | Relationship
-    |--------------------------------------------------------------------------
-    */
-
-    public function program()
+    /**
+     * Relasi ke Program
+     */
+    public function program(): BelongsTo
     {
         return $this->belongsTo(Program::class);
     }
 
-    
+    /**
+     * Relasi ke Dokumen Pendaftaran
+     */
+    public function documents(): HasMany
+    {
+        return $this->hasMany(
+            RegistrationDocument::class,
+            'registration_id'
+        );
+    }
 }

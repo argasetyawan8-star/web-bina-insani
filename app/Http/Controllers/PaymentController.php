@@ -22,27 +22,105 @@ class PaymentController extends Controller
     /**
      * Simpan pembayaran manual
      */
-    public function store(Request $request, Registration $registration)
-{
-    $request->validate([
-        'payment_method' => 'required|in:qris,transfer',
-        'payment_proof'  => 'required|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+    public function store(
+        Request $request,
+        Registration $registration
+    ) {
+        /*
+        |--------------------------------------------------------------------------
+        | Validasi
+        |--------------------------------------------------------------------------
+        */
 
-    $paymentProof = $request->file('payment_proof')
-        ->store('payment-proofs', 'public');
+        $validated = $request->validate([
+            'payment_method' => [
+                'required',
+                'in:qris,transfer',
+            ],
 
-    $registration->update([
-        'payment_method' => $request->payment_method,
-        'payment_proof' => $paymentProof,
-        'payment_status' => 'waiting_verification',
-        'paid_at' => now(),
-    ]);
+            'payment_proof' => [
+                'required',
+                'image',
+                'mimes:jpg,jpeg,png',
+                'max:2048',
+            ],
+        ], [
+            'payment_method.required' =>
+                'Silakan pilih metode pembayaran.',
 
-    return redirect()
-        ->route('payment.success', $registration)
-        ->with('success', 'Bukti pembayaran berhasil dikirim.');
-}
+            'payment_method.in' =>
+                'Metode pembayaran tidak valid.',
+
+            'payment_proof.required' =>
+                'Bukti pembayaran wajib diupload.',
+
+            'payment_proof.image' =>
+                'File bukti pembayaran harus berupa gambar.',
+
+            'payment_proof.mimes' =>
+                'Bukti pembayaran harus berformat JPG, JPEG, atau PNG.',
+
+            'payment_proof.max' =>
+                'Ukuran bukti pembayaran maksimal 2 MB.',
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Hapus Bukti Pembayaran Lama
+        |--------------------------------------------------------------------------
+        */
+
+        if (!empty($registration->payment_proof)) {
+
+            Storage::disk('public')->delete(
+                $registration->payment_proof
+            );
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Upload Bukti Pembayaran Baru
+        |--------------------------------------------------------------------------
+        */
+
+        $paymentProof = $request
+            ->file('payment_proof')
+            ->store(
+                'payment-proofs',
+                'public'
+            );
+
+        /*
+        |--------------------------------------------------------------------------
+        | Simpan Data Pembayaran
+        |--------------------------------------------------------------------------
+        */
+
+        $registration->update([
+            'payment_method' => $validated['payment_method'],
+            'payment_proof' => $paymentProof,
+            'payment_status' => 'waiting_verification',
+            'paid_at' => null,
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        */
+
+        return redirect()
+            ->route(
+                'payment.success',
+                [
+                    'registration' => $registration->id,
+                ]
+            )
+            ->with(
+                'success',
+                'Bukti pembayaran berhasil dikirim dan sedang menunggu verifikasi admin.'
+            );
+    }
 
     /**
      * Halaman sukses

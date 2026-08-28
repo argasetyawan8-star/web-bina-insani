@@ -105,7 +105,7 @@
 
                 <input
                     x-model="form.nik"
-                    type="text"
+                    type="number"
                     inputmode="numeric"
                     maxlength="16"
                     name="nik"
@@ -249,7 +249,7 @@
 
                 <input
                     x-model="form.phone"
-                    type="tel"
+                    type="number"
                     inputmode="numeric"
                     name="phone"
                     placeholder="08xxxxxxxxxx"

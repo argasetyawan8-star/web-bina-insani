@@ -2,116 +2,166 @@
 
 namespace App\Services;
 
-use App\Interfaces\RegistrationRepositoryInterface;
+use App\Models\Registration;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class RegistrationService
 {
-    protected RegistrationRepositoryInterface $registrationRepository;
-
-    public function __construct(
-        RegistrationRepositoryInterface $registrationRepository
-    ) {
-        $this->registrationRepository = $registrationRepository;
-    }
-
     /**
-     * Simpan pendaftaran baru
+     * Simpan pendaftaran beserta dokumen.
      */
-    public function store(array $data)
+    public function store(array $data): Registration
     {
-        DB::beginTransaction();
-
-        try {
+        return DB::transaction(function () use ($data) {
 
             /*
             |--------------------------------------------------------------------------
-            | Upload File
+            | Generate kode pendaftaran
             |--------------------------------------------------------------------------
             */
 
-            if (isset($data['photo'])) {
-                $data['photo'] = $data['photo']
-                    ->store('registrations/photo', 'public');
+            $lastId = Registration::max('id') ?? 0;
+
+            $registrationCode =
+                'BI-' . now()->format('Ymd') . '-' .
+                str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Simpan data pendaftaran
+            |--------------------------------------------------------------------------
+            */
+
+            $registration = Registration::create([
+                'program_id' => $data['program_id'],
+
+                'full_name' => $data['full_name'],
+                'nik' => $data['nik'],
+                'birth_place' => $data['birth_place'],
+                'birth_date' => $data['birth_date'],
+                'gender' => $data['gender'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'address' => $data['address'],
+                'education' => $data['education'],
+                'job' => $data['job'],
+
+                'registration_code' => $registrationCode,
+
+                'status' => 'pending',
+                'payment_status' => 'unpaid',
+                'cs_contacted' => false,
+            ]);
+
+
+            /*
+            |--------------------------------------------------------------------------
+            | Upload dokumen
+            |--------------------------------------------------------------------------
+            */
+
+            if (!empty($data['documents'])) {
+
+                foreach ($data['documents'] as $document) {
+
+                    if (!$document instanceof UploadedFile) {
+                        continue;
+                    }
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Nama file asli
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $originalName = $document->getClientOriginalName();
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Nama file unik
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $fileName = $document->hashName();
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Jenis file
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $mimeType = $document->getMimeType();
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Tentukan tipe dokumen
+                    |--------------------------------------------------------------------------
+                    |
+                    | Untuk sekarang semua dokumen yang dikirim dari form
+                    | akan masuk sebagai "lainnya".
+                    |
+                    */
+
+                    $documentType = 'lainnya';
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Simpan file
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $path = $document->store(
+                        'registrations/' . $registration->id,
+                        'public'
+                    );
+
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Simpan data dokumen ke database
+                    |--------------------------------------------------------------------------
+                    */
+
+                    $registration->documents()->create([
+                        'document_name' => $originalName,
+
+                        'file_name' => $fileName,
+
+                        'document_type' => $documentType,
+
+                        'original_name' => $originalName,
+
+                        'file_path' => $path,
+
+                        'file_disk' => 'public',
+
+                        'mime_type' => $mimeType,
+
+                        'file_size' => $document->getSize(),
+                    ]);
+                }
             }
-
-            if (isset($data['ktp'])) {
-                $data['ktp'] = $data['ktp']
-                    ->store('registrations/ktp', 'public');
-            }
-
-            if (isset($data['ijazah'])) {
-                $data['ijazah'] = $data['ijazah']
-                    ->store('registrations/ijazah', 'public');
-            }
-
-            /*
-            |--------------------------------------------------------------------------
-            | Registration Code
-            |--------------------------------------------------------------------------
-            */
-
-            $lastId = DB::table('registrations')->count() + 1;
-
-            $data['registration_code'] =
-                'BI-' .
-                now()->format('Ymd') .
-                '-' .
-                str_pad($lastId, 4, '0', STR_PAD_LEFT);
-
-            /*
-            |--------------------------------------------------------------------------
-            | Default Status
-            |--------------------------------------------------------------------------
-            */
-
-            $data['status'] = 'pending';
-
-            $data['payment_status'] = 'unpaid';
-
-            $data['cs_contacted'] = false;
-
-            /*
-            |--------------------------------------------------------------------------
-            | Simpan
-            |--------------------------------------------------------------------------
-            */
-
-            $registration = $this->registrationRepository
-                ->store($data);
-
-            DB::commit();
 
             return $registration;
-
-        } catch (\Exception $e) {
-
-            DB::rollBack();
-
-            if (!empty($data['photo'])) {
-                Storage::disk('public')->delete($data['photo']);
-            }
-
-            if (!empty($data['ktp'])) {
-                Storage::disk('public')->delete($data['ktp']);
-            }
-
-            if (!empty($data['ijazah'])) {
-                Storage::disk('public')->delete($data['ijazah']);
-            }
-
-            throw $e;
-        }
+        });
     }
 
-    /**
- * Detail Registration
- */
-public function findById(int $id)
-{
-    return $this->registrationRepository
-        ->findById($id);
-}
 
+    /**
+     * Cari pendaftaran berdasarkan ID.
+     */
+    public function findById(int|string $id): Registration
+    {
+        return Registration::with([
+            'program',
+            'documents',
+        ])->findOrFail($id);
+    }
 }

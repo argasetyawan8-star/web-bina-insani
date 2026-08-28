@@ -39,7 +39,7 @@ class="h-full w-full object-contain">
 <div>
 
 
-<h3 class="text-2xl font-extrabold">
+<h3 class="text-2xl text-accent font-extrabold">
 
 {{ setting('website_name','Bina Insani') }}
 

@@ -21,34 +21,102 @@ class RegistrationRequest extends FormRequest
     {
         return [
 
-            'program_id' => 'required|exists:programs,id',
+            /*
+            |--------------------------------------------------------------------------
+            | Program
+            |--------------------------------------------------------------------------
+            */
 
-            'full_name' => 'required|string|max:255',
+            'program_id' => [
+                'required',
+                'exists:programs,id',
+            ],
 
-            'nik' => 'required|string|max:20|unique:registrations,nik',
+            /*
+            |--------------------------------------------------------------------------
+            | Biodata
+            |--------------------------------------------------------------------------
+            */
 
-            'birth_place' => 'required|string|max:100',
+            'full_name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
 
-            'birth_date' => 'required|date',
+            'nik' => [
+                'required',
+                'string',
+                'max:20',
+                'unique:registrations,nik',
+            ],
 
-            'gender' => 'required|in:Laki-laki,Perempuan',
+            'birth_place' => [
+                'required',
+                'string',
+                'max:100',
+            ],
 
-            'phone' => 'required|string|max:20',
+            'birth_date' => [
+                'required',
+                'date',
+            ],
 
-            'email' => 'nullable|email|max:255',
+            'gender' => [
+                'required',
+                'in:Laki-laki,Perempuan',
+            ],
 
-            'address' => 'required|string',
+            'phone' => [
+                'required',
+                'string',
+                'max:20',
+            ],
 
-            'education' => 'nullable|string|max:100',
+            'email' => [
+                'nullable',
+                'email',
+                'max:255',
+            ],
 
-            'job' => 'nullable|string|max:100',
+            'address' => [
+                'required',
+                'string',
+            ],
 
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'education' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
 
-            'ktp' => 'required|mimes:jpg,jpeg,png,pdf|max:4096',
+            'job' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
 
-            'ijazah' => 'required|mimes:jpg,jpeg,png,pdf|max:4096',
+            /*
+            |--------------------------------------------------------------------------
+            | Dokumen
+            |--------------------------------------------------------------------------
+            |
+            | Peserta dapat memilih banyak file.
+            |
+            */
 
+            'documents' => [
+                'required',
+                'array',
+                'min:2',
+            ],
+
+            'documents.*' => [
+                'required',
+                'file',
+                'mimes:jpg,jpeg,png,pdf',
+                'max:5120',
+            ],
         ];
     }
 
@@ -59,42 +127,97 @@ class RegistrationRequest extends FormRequest
     {
         return [
 
-            'program_id.required' => 'Program wajib dipilih.',
+            /*
+            |--------------------------------------------------------------------------
+            | Program
+            |--------------------------------------------------------------------------
+            */
 
-            'program_id.exists' => 'Program tidak ditemukan.',
+            'program_id.required' =>
+                'Program wajib dipilih.',
 
-            'full_name.required' => 'Nama lengkap wajib diisi.',
+            'program_id.exists' =>
+                'Program tidak ditemukan.',
 
-            'nik.required' => 'NIK wajib diisi.',
+            /*
+            |--------------------------------------------------------------------------
+            | Biodata
+            |--------------------------------------------------------------------------
+            */
 
-            'nik.unique' => 'NIK sudah pernah digunakan.',
+            'full_name.required' =>
+                'Nama lengkap wajib diisi.',
 
-            'birth_place.required' => 'Tempat lahir wajib diisi.',
+            'nik.required' =>
+                'NIK wajib diisi.',
 
-            'birth_date.required' => 'Tanggal lahir wajib diisi.',
+            'nik.unique' =>
+                'NIK sudah pernah digunakan.',
 
-            'gender.required' => 'Jenis kelamin wajib dipilih.',
+            'birth_place.required' =>
+                'Tempat lahir wajib diisi.',
 
-            'phone.required' => 'Nomor HP wajib diisi.',
+            'birth_date.required' =>
+                'Tanggal lahir wajib diisi.',
 
-            'email.email' => 'Format email tidak valid.',
+            'gender.required' =>
+                'Jenis kelamin wajib dipilih.',
 
-            'address.required' => 'Alamat wajib diisi.',
+            'phone.required' =>
+                'Nomor HP wajib diisi.',
 
-            'photo.required' => 'Pas foto wajib diupload.',
+            'email.email' =>
+                'Format email tidak valid.',
 
-            'photo.image' => 'Pas foto harus berupa gambar.',
+            'address.required' =>
+                'Alamat wajib diisi.',
 
-            'ktp.required' => 'KTP wajib diupload.',
+            /*
+|--------------------------------------------------------------------------
+| Dokumen
+|--------------------------------------------------------------------------
+*/
 
-            'ijazah.required' => 'Ijazah wajib diupload.',
+'documents' => 'required|array|min:2',
 
+'documents.*' => [
+    'required',
+    'file',
+    'mimes:jpg,jpeg,png,pdf',
+    'max:5120',
+],
+
+
+
+            'documents.required' =>
+                'Dokumen wajib diupload.',
+
+            'documents.array' =>
+                'Format dokumen tidak valid.',
+
+            'documents.min' =>
+                'Minimal upload 2 dokumen, yaitu KTP dan ijazah.',
+
+            'documents.*.required' =>
+                'Dokumen wajib diupload.',
+
+            'documents.*.file' =>
+                'Dokumen harus berupa file.',
+
+            'documents.*.mimes' =>
+                'Format dokumen harus JPG, JPEG, PNG, atau PDF.',
+
+            'documents.*.max' =>
+                'Ukuran setiap dokumen maksimal 5 MB.',
         ];
     }
 
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-{
-    dd($validator->errors()->all());
-}
-
+    /**
+     * Handle failed validation.
+     */
+    protected function failedValidation(
+        \Illuminate\Contracts\Validation\Validator $validator
+    ) {
+        dd($validator->errors()->all());
+    }
 }
