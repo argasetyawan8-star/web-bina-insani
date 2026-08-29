@@ -24,11 +24,64 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Authenticate User
+        |--------------------------------------------------------------------------
+        */
+
         $request->authenticate();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Regenerate Session
+        |--------------------------------------------------------------------------
+        */
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.dashboard', absolute: false));
+        /*
+        |--------------------------------------------------------------------------
+        | Get Authenticated User
+        |--------------------------------------------------------------------------
+        */
+
+        $user = $request->user();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Admin Redirect
+        |--------------------------------------------------------------------------
+        |
+        | Admin selalu diarahkan ke dashboard admin.
+        |
+        */
+
+        if ($user->hasRole('admin')) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Participant Redirect
+        |--------------------------------------------------------------------------
+        |
+        | Untuk peserta, Laravel akan mencoba mengembalikan user
+        | ke halaman yang sebelumnya membutuhkan login.
+        |
+        | Contoh:
+        |
+        | /pendaftaran/1
+        |       ↓
+        | /login
+        |       ↓
+        | login berhasil
+        |       ↓
+        | /pendaftaran/1
+        |
+        */
+
+        return redirect()->intended(route('home'));
     }
 
     /**
@@ -38,10 +91,22 @@ class AuthenticatedSessionController extends Controller
     {
         Auth::guard('web')->logout();
 
+        /*
+        |--------------------------------------------------------------------------
+        | Invalidate Session
+        |--------------------------------------------------------------------------
+        */
+
         $request->session()->invalidate();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Regenerate CSRF Token
+        |--------------------------------------------------------------------------
+        */
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('home');
     }
 }

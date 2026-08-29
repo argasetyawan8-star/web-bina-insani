@@ -1,58 +1,106 @@
-{{-- HERO SECTION --}}
+
+{{-- =========================================================
+     HERO SECTION
+========================================================= --}}
+
 <section
     id="home"
-    class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+    class="relative overflow-hidden bg-white pt-24 sm:pt-28 lg:pt-32"
 >
 
-    {{-- Background Decoration --}}
-    <div class="absolute inset-0 -z-10 overflow-hidden">
+    {{-- =====================================================
+         BACKGROUND DECORATION
+    ====================================================== --}}
 
+    <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+    >
+
+        {{-- Blue Glow --}}
         <div
-            class="absolute -left-32 -top-40 h-72 w-72 rounded-full bg-[#2E3192]/20 blur-3xl sm:h-96 sm:w-96"
+            class="absolute -left-40 -top-32 h-[420px] w-[420px] rounded-full bg-[#2E3192]/10 blur-[110px] sm:h-[520px] sm:w-[520px]"
         ></div>
 
+        {{-- Yellow Glow --}}
         <div
-            class="absolute -right-32 top-40 h-80 w-80 rounded-full bg-[#F6D21A]/20 blur-3xl sm:right-0 sm:h-[450px] sm:w-[450px]"
+            class="absolute -right-32 top-20 h-[360px] w-[360px] rounded-full bg-[#F6D21A]/15 blur-[100px] sm:h-[450px] sm:w-[450px]"
         ></div>
 
+        {{-- Red Glow --}}
         <div
-            class="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-[#ED1C24]/10 blur-3xl sm:h-80 sm:w-80"
+            class="absolute bottom-[-180px] left-1/3 h-[400px] w-[400px] rounded-full bg-[#ED1C24]/7 blur-[110px]"
+        ></div>
+
+        {{-- Subtle Grid --}}
+        <div
+            class="absolute inset-0 opacity-[0.025]"
+            style="
+                background-image:
+                    linear-gradient(rgba(46,49,146,.8) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(46,49,146,.8) 1px, transparent 1px);
+                background-size: 48px 48px;
+            "
         ></div>
 
     </div>
 
 
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    {{-- =====================================================
+         MAIN CONTAINER
+    ====================================================== --}}
+
+    <div
+        class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+    >
+
+        <div
+            class="grid items-center gap-12 py-14 sm:py-16 lg:grid-cols-2 lg:gap-16 lg:py-20 xl:gap-20"
+        >
 
 
-            {{-- LEFT CONTENT --}}
+            {{-- =================================================
+                 LEFT CONTENT
+            ================================================== --}}
+
             <div
+                class="min-w-0 max-w-3xl"
                 data-aos="fade-right"
-                class="min-w-0"
             >
 
-                {{-- BADGE --}}
+                {{-- =================================================
+                     BADGE
+                ================================================== --}}
+
                 <span
-                    class="inline-flex max-w-full items-center gap-2 rounded-full bg-[#F6D21A]/30 px-3 py-2 text-xs font-semibold text-[#2E3192] sm:px-4 sm:text-sm"
+                    class="inline-flex max-w-full items-center gap-2 rounded-full border border-[#2E3192]/10 bg-[#F6D21A]/25 px-4 py-2 text-xs font-bold text-[#2E3192] shadow-sm sm:px-5 sm:py-2.5 sm:text-sm"
                 >
-                    🇰🇷
+
+                    <span
+                        class="flex h-2.5 w-2.5 shrink-0 rounded-full bg-[#2E3192]"
+                    ></span>
+
                     <span>
-                        Program Resmi Penempatan Korea Selatan
+                        {{ $hero->badge ?? 'Pelatihan Bahasa Korea & Persiapan EPS-TOPIK' }}
                     </span>
+
                 </span>
 
 
-                {{-- TITLE --}}
+
+                {{-- =================================================
+                     TITLE
+                ================================================== --}}
+
                 <h1
-                    class="mt-6 text-4xl font-extrabold leading-[1.15] text-[#1E293B] sm:mt-8 sm:text-5xl lg:text-7xl"
+                    class="mt-6 text-4xl font-black leading-[1.08] tracking-tight text-[#1E293B] sm:mt-8 sm:text-5xl lg:text-6xl xl:text-7xl"
                 >
 
                     {{ $hero->title }}
 
                     <span
-                        class="bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent"
+                        class="block bg-gradient-to-r from-[#2E3192] via-[#34389e] to-[#ED1C24] bg-clip-text text-transparent"
                     >
                         {{ $hero->highlight }}
                     </span>
@@ -60,38 +108,70 @@
                 </h1>
 
 
-                {{-- SUBTITLE --}}
+
+                {{-- =================================================
+                     SUBTITLE
+                ================================================== --}}
+
                 <p
-                    class="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:mt-8 sm:text-lg sm:leading-8"
+                    class="mt-6 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base sm:leading-8 lg:text-lg"
                 >
+
                     {{ $hero->subtitle }}
+
                 </p>
 
 
-                {{-- BUTTON --}}
+
+                {{-- =================================================
+                     CTA
+                ================================================== --}}
+
                 <div
                     class="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4"
                 >
 
-                    @if($hero->button_text)
+                    {{-- PRIMARY BUTTON --}}
+                    @if ($hero->button_text)
 
                         <a
-                            href="{{ $hero->button_link }}"
-                            class="w-full rounded-2xl bg-[#2E3192] px-6 py-3.5 text-center font-semibold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#252879] sm:w-auto sm:px-8 sm:py-4"
+                            href="{{ $hero->button_link ?: '#' }}"
+                            class="group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#2E3192] px-7 py-4 text-sm font-bold text-white shadow-lg shadow-[#2E3192]/20 transition duration-300 hover:-translate-y-1 hover:bg-[#252879] hover:shadow-xl sm:w-auto sm:px-8 sm:text-base"
                         >
-                            {{ $hero->button_text }}
+
+                            <i class="bi bi-mortarboard-fill"></i>
+
+                            <span>
+                                {{ $hero->button_text }}
+                            </span>
+
+                            <i
+                                class="bi bi-arrow-right transition duration-300 group-hover:translate-x-1"
+                            ></i>
+
                         </a>
 
                     @endif
 
 
-                    @if($hero->button2_text)
+                    {{-- SECONDARY BUTTON --}}
+                    @if ($hero->button2_text)
 
                         <a
-                            href="{{ $hero->button2_link }}"
-                            class="w-full rounded-2xl border border-slate-300 bg-white px-6 py-3.5 text-center font-semibold text-[#1E293B] transition hover:border-[#2E3192] hover:bg-[#F8FAFC] sm:w-auto sm:px-8 sm:py-4"
+                            href="{{ $hero->button2_link ?: '#about' }}"
+                            class="group inline-flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-7 py-4 text-sm font-bold text-[#1E293B] shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#2E3192]/30 hover:text-[#2E3192] hover:shadow-md sm:w-auto sm:px-8 sm:text-base"
                         >
-                            {{ $hero->button2_text }}
+
+                            <i class="bi bi-info-circle"></i>
+
+                            <span>
+                                {{ $hero->button2_text }}
+                            </span>
+
+                            <i
+                                class="bi bi-arrow-right transition duration-300 group-hover:translate-x-1"
+                            ></i>
+
                         </a>
 
                     @endif
@@ -99,53 +179,136 @@
                 </div>
 
 
-                {{-- STATISTIC --}}
+
+                {{-- =================================================
+                     TRUST POINTS
+                ================================================== --}}
+
                 <div
-                    class="mt-10 grid grid-cols-3 gap-3 sm:mt-14 sm:gap-8"
+                    class="mt-7 grid gap-3 text-xs text-slate-600 sm:grid-cols-3 sm:text-sm"
                 >
 
-                    <div class="min-w-0">
+                    <div class="flex items-center gap-2">
 
-                        <h2
-                            class="text-2xl font-bold text-[#2E3192] sm:text-4xl"
-                        >
-                            5000+
-                        </h2>
+                        <i class="bi bi-check-circle-fill text-green-500"></i>
 
-                        <p class="mt-1 text-xs text-slate-600 sm:mt-2 sm:text-sm">
-                            Alumni
-                        </p>
+                        <span>
+                            Pelatihan Terarah
+                        </span>
 
                     </div>
 
 
-                    <div class="min-w-0">
+                    <div class="flex items-center gap-2">
 
-                        <h2
-                            class="text-2xl font-bold text-[#2E3192] sm:text-4xl"
-                        >
-                            95%
-                        </h2>
+                        <i class="bi bi-check-circle-fill text-green-500"></i>
 
-                        <p class="mt-1 text-xs text-slate-600 sm:mt-2 sm:text-sm">
-                            Lulus EPS
-                        </p>
+                        <span>
+                            Persiapan EPS-TOPIK
+                        </span>
 
                     </div>
 
 
-                    <div class="min-w-0">
+                    <div class="flex items-center gap-2">
 
-                        <h2
-                            class="text-2xl font-bold text-[#2E3192] sm:text-4xl"
-                        >
-                            10+
-                        </h2>
+                        <i class="bi bi-check-circle-fill text-green-500"></i>
 
-                        <p class="mt-1 text-xs leading-5 text-slate-600 sm:mt-2 sm:text-sm"
-                        >
-                            Tahun Pengalaman
-                        </p>
+                        <span>
+                            Pendampingan Peserta
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                {{-- =================================================
+                     MINI INFORMATION
+                ================================================== --}}
+
+                <div
+                    class="mt-9 grid max-w-2xl gap-3 sm:mt-11 sm:grid-cols-2"
+                >
+
+                    {{-- PROGRAM --}}
+                    <div
+                        class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md sm:p-5"
+                        data-aos="fade-up"
+                        data-aos-delay="150"
+                    >
+
+                        <div class="flex items-center gap-3">
+
+                            <div
+                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#2E3192]/10 text-[#2E3192]"
+                            >
+
+                                <i class="bi bi-book-fill"></i>
+
+                            </div>
+
+
+                            <div class="min-w-0">
+
+                                <p
+                                    class="text-[10px] font-bold uppercase tracking-wider text-slate-400"
+                                >
+                                    Program Pelatihan
+                                </p>
+
+                                <p
+                                    class="mt-1 text-sm font-bold text-[#1E293B] sm:text-base"
+                                >
+                                    Bahasa Korea &amp; EPS-TOPIK
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    {{-- DESTINATION --}}
+                    <div
+                        class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md sm:p-5"
+                        data-aos="fade-up"
+                        data-aos-delay="200"
+                    >
+
+                        <div class="flex items-center gap-3">
+
+                            <div
+                                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F6D21A]/25 text-[#2E3192]"
+                            >
+
+                                <span class="text-xl">
+                                    🇰🇷
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <p
+                                    class="text-[10px] font-bold uppercase tracking-wider text-slate-400"
+                                >
+                                    Tujuan
+                                </p>
+
+                                <p
+                                    class="mt-1 text-sm font-bold text-[#1E293B] sm:text-base"
+                                >
+                                    Korea Selatan
+                                </p>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -154,156 +317,320 @@
             </div>
 
 
-            {{-- RIGHT DASHBOARD MOCKUP --}}
+
+            {{-- =================================================
+                 RIGHT VISUAL
+            ================================================== --}}
+
             <div
-                class="relative min-w-0 w-full"
+                class="relative mx-auto w-full max-w-xl lg:mx-0"
                 data-aos="fade-left"
             >
 
+                {{-- Glow --}}
                 <div
-                    class="w-full overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(46,49,146,0.12)] sm:rounded-[32px] sm:shadow-[0_30px_80px_rgba(46,49,146,0.15)]"
+                    class="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2E3192]/10 blur-[100px]"
+                ></div>
+
+
+
+                {{-- Main Card --}}
+                <div
+                    class="relative overflow-hidden rounded-[34px] border border-slate-200 bg-white p-3 shadow-[0_30px_80px_rgba(15,23,42,.12)] sm:rounded-[40px] sm:p-4"
                 >
 
-                    {{-- HEADER --}}
                     <div
-                        class="flex items-center justify-between gap-3 border-b px-4 py-4 sm:px-8 sm:py-6"
+                        class="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#EEF2FF] via-white to-[#FEFCE8] sm:rounded-[32px]"
                     >
 
-                        <div class="min-w-0">
+                        {{-- =================================================
+                             HERO IMAGE
+                        ================================================== --}}
 
-                            <h3
-                                class="truncate text-base font-bold text-[#1E293B] sm:text-xl"
+                        @if ($hero?->image)
+
+                            <img
+                                src="{{ asset('storage/' . $hero->image) }}"
+                                alt="{{ $hero->title }}"
+                                class="aspect-[4/5] w-full object-cover"
                             >
-                                Dashboard Pendaftaran
-                            </h3>
 
-                            <p class="text-xs text-slate-500 sm:text-sm">
-                                Platform Bina Insani
-                            </p>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/65 via-transparent to-transparent"
+                            ></div>
+
+                        @else
+
+                            {{-- =================================================
+                                 FALLBACK VISUAL
+                            ================================================== --}}
+
+                            <div
+                                class="relative flex aspect-[4/5] items-center justify-center overflow-hidden bg-gradient-to-br from-[#EEF2FF] via-white to-[#FEFCE8]"
+                            >
+
+                                {{-- Decorative Circle --}}
+                                <div
+                                    class="absolute -right-20 -top-20 h-72 w-72 rounded-full border-[28px] border-[#2E3192]/10"
+                                ></div>
+
+                                <div
+                                    class="absolute -bottom-24 -left-20 h-80 w-80 rounded-full border-[30px] border-[#F6D21A]/20"
+                                ></div>
+
+
+                                {{-- Decorative Cross --}}
+                                <div
+                                    class="absolute right-12 top-1/3 h-14 w-14 rotate-45 rounded-2xl bg-[#ED1C24]/10"
+                                ></div>
+
+
+                                {{-- Logo --}}
+                                <div
+                                    class="relative text-center"
+                                >
+
+                                    <div
+                                        class="mx-auto flex h-28 w-28 items-center justify-center rounded-[32px] bg-white shadow-2xl ring-1 ring-slate-100"
+                                    >
+
+                                        @if (setting('logo'))
+
+                                            <img
+                                                src="{{ asset('storage/' . setting('logo')) }}"
+                                                alt="Bina Insani"
+                                                class="h-20 w-20 object-contain"
+                                            >
+
+                                        @else
+
+                                            <span
+                                                class="text-4xl font-black text-[#2E3192]"
+                                            >
+                                                BI
+                                            </span>
+
+                                        @endif
+
+                                    </div>
+
+
+                                    <p
+                                        class="mt-6 text-xs font-extrabold uppercase tracking-[0.25em] text-[#2E3192]"
+                                    >
+                                        Bina Insani
+                                    </p>
+
+
+                                    <p
+                                        class="mt-2 text-lg font-bold text-[#1E293B]"
+                                    >
+                                        Migrant Training Center
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        @endif
+
+
+
+                        {{-- =================================================
+                             TOP LEFT BADGE
+                        ================================================== --}}
+
+                        <div
+                            class="absolute left-4 top-4 rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-xl sm:left-5 sm:top-5"
+                        >
+
+                            <div class="flex items-center gap-3">
+
+                                <span class="text-2xl">
+                                    🇰🇷
+                                </span>
+
+
+                                <div>
+
+                                    <p
+                                        class="text-[10px] font-bold uppercase tracking-wider text-slate-400"
+                                    >
+                                        Tujuan
+                                    </p>
+
+                                    <p
+                                        class="text-sm font-bold text-[#1E293B]"
+                                    >
+                                        Korea Selatan
+                                    </p>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
 
-                        <span
-                            class="shrink-0 rounded-full bg-[#2E3192]/10 px-3 py-1.5 text-xs font-semibold text-[#2E3192] sm:px-4 sm:py-2 sm:text-sm"
-                        >
-                            Online
-                        </span>
 
-                    </div>
+                        {{-- =================================================
+                             TOP RIGHT BADGE
+                        ================================================== --}}
 
-
-                    {{-- DASHBOARD CONTENT --}}
-                    <div class="space-y-4 p-4 sm:space-y-6 sm:p-8">
-
-
-                        {{-- PROGRAM --}}
                         <div
-                            class="rounded-2xl bg-[#F8FAFC] p-4 sm:p-5"
+                            class="absolute right-4 top-4 rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-lg backdrop-blur-xl sm:right-5 sm:top-5"
                         >
 
-                            <div class="flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
 
-                                <div class="min-w-0">
+                                <div
+                                    class="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F6D21A] text-[#1E293B]"
+                                >
 
-                                    <p class="text-xs text-slate-500 sm:text-sm">
-                                        Program
-                                    </p>
-
-                                    <h3
-                                        class="mt-1 truncate text-sm font-bold text-[#1E293B] sm:text-base"
-                                    >
-                                        Diklat Intensif
-                                    </h3>
+                                    <i class="bi bi-award-fill"></i>
 
                                 </div>
 
 
-                                <span
-                                    class="shrink-0 text-sm font-bold text-[#2E3192]"
-                                >
-                                    Aktif
-                                </span>
+                                <div>
+
+                                    <p
+                                        class="text-[10px] font-semibold text-slate-400"
+                                    >
+                                        Fokus
+                                    </p>
+
+                                    <p
+                                        class="text-sm font-bold text-[#1E293B]"
+                                    >
+                                        EPS-TOPIK
+                                    </p>
+
+                                </div>
 
                             </div>
 
                         </div>
 
 
-                        {{-- PROGRESS --}}
+
+                        {{-- =================================================
+                             BOTTOM GLASS CARD
+                        ================================================== --}}
+
                         <div
-                            class="rounded-2xl bg-[#F8FAFC] p-4 sm:p-5"
+                            class="absolute inset-x-4 bottom-4 rounded-2xl border border-white/20 bg-[#0F172A]/80 p-5 text-white shadow-xl backdrop-blur-xl sm:inset-x-5 sm:bottom-5 sm:p-6"
                         >
-
-                            <p class="text-xs text-slate-500 sm:text-sm">
-                                Progress Pendaftaran
-                            </p>
-
-                            <div
-                                class="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-200 sm:mt-4 sm:h-3"
-                            >
-
-                                <div
-                                    class="h-full w-3/4 rounded-full bg-gradient-to-r from-[#2E3192] to-[#F6D21A]"
-                                ></div>
-
-                            </div>
 
                             <p
-                                class="mt-2 text-xs font-semibold text-[#1E293B] sm:mt-3 sm:text-sm"
+                                class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#F6D21A]"
                             >
-                                75% Selesai
+                                Bina Insani
+                            </p>
+
+
+                            <h3
+                                class="mt-2 text-xl font-extrabold leading-tight sm:text-2xl"
+                            >
+                                Belajar.
+                                <span class="text-[#F6D21A]">
+                                    Bersiap.
+                                </span>
+                                Berangkat.
+                            </h3>
+
+
+                            <div
+                                class="mt-3 flex items-center gap-2 text-xs text-slate-300 sm:text-sm"
+                            >
+
+                                <span
+                                    class="h-2 w-2 rounded-full bg-green-400"
+                                ></span>
+
+                                Sistem pendaftaran yang mudah dan terarah
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                {{-- =================================================
+                     FLOATING CARD LEFT
+                ================================================== --}}
+
+                <div
+                    class="absolute -bottom-5 -left-3 hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:block lg:-left-7"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                >
+
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-10 w-10 items-center justify-center rounded-xl bg-green-100 text-green-600"
+                        >
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <p class="text-[10px] text-slate-400">
+                                Proses
+                            </p>
+
+                            <p class="text-sm font-bold text-[#1E293B]">
+                                Terstruktur
                             </p>
 
                         </div>
 
+                    </div>
 
-                        {{-- DOCUMENT + PAYMENT --}}
-                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
-
-                            <div
-                                class="rounded-2xl bg-[#2E3192]/10 p-4 sm:p-5"
-                            >
-
-                                <p class="text-xs text-slate-500 sm:text-sm">
-                                    Dokumen
-                                </p>
-
-                                <h3
-                                    class="mt-1 text-lg font-bold text-[#2E3192] sm:mt-2 sm:text-2xl"
-                                >
-                                    Lengkap
-                                </h3>
-
-                            </div>
+                </div>
 
 
-                            <div
-                                class="rounded-2xl bg-[#F6D21A]/30 p-4 sm:p-5"
-                            >
 
-                                <p class="text-xs text-slate-500 sm:text-sm">
-                                    Pembayaran
-                                </p>
+                {{-- =================================================
+                     FLOATING CARD RIGHT
+                ================================================== --}}
 
-                                <h3
-                                    class="mt-1 text-lg font-bold text-[#1E293B] sm:mt-2 sm:text-2xl"
-                                >
-                                    Siap
-                                </h3>
+                <div
+                    class="absolute -right-3 top-[45%] hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-xl sm:block lg:-right-7"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                >
 
-                            </div>
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2E3192]/10 text-[#2E3192]"
+                        >
+
+                            <i class="bi bi-person-check-fill"></i>
 
                         </div>
 
 
-                        {{-- CTA --}}
-                        <a
-                            href="#programs"
-                            class="block w-full rounded-2xl bg-[#2E3192] py-3.5 text-center text-sm font-semibold text-white shadow-lg transition hover:-translate-y-1 hover:bg-[#252879] sm:py-4 sm:text-lg"
-                        >
-                            Mulai Pendaftaran
-                        </a>
+                        <div>
+
+                            <p class="text-[10px] text-slate-400">
+                                Peserta
+                            </p>
+
+                            <p class="text-sm font-bold text-[#1E293B]">
+                                Didampingi
+                            </p>
+
+                        </div>
 
                     </div>
 
@@ -313,6 +640,18 @@
 
         </div>
 
-    </div>
+
+
+        
+
+
+    {{-- =====================================================
+         TRANSITION TO ABOUT
+    ====================================================== --}}
+
+    <div
+        class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-50 to-transparent"
+        aria-hidden="true"
+    ></div>
 
 </section>

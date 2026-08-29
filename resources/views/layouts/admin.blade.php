@@ -1,61 +1,104 @@
 <!DOCTYPE html>
+
 <html lang="id">
 
 <head>
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>
         @yield('title') | Bina Insani Admin
     </title>
 
-    
 
+    {{-- =========================================================
+         BOOTSTRAP ICONS
+    ========================================================== --}}
 
     <link
         rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    >
 
+
+    {{-- =========================================================
+         VITE
+    ========================================================== --}}
 
     @vite([
         'resources/css/app.css',
         'resources/js/app.js'
     ])
 
+    @stack('styles')
+
 </head>
 
 
-<body class="bg-slate-100">
+
+<body class="min-h-screen bg-slate-100 text-slate-800 antialiased">
 
 
-{{-- =========================
-    SIDEBAR
-========================== --}}
+{{-- =============================================================
+     SIDEBAR
+============================================================== --}}
 
-<aside class="fixed left-0 top-0 flex h-screen w-72 flex-col border-r border-slate-200 bg-white shadow-lg">
-
-
-    {{-- LOGO --}}
-
-    <div class="flex h-20 items-center gap-3 border-b px-6">
+<aside
+    class="fixed left-0 top-0 z-40 flex h-screen w-72 flex-col border-r border-slate-200 bg-white shadow-lg"
+>
 
 
-        <div class="flex h-12 w-12 items-center justify-center rounded-xl text-white shadow">
+    {{-- =========================================================
+         LOGO / BRAND
+    ========================================================== --}}
 
-            <img src="{{ asset('storage/'.setting('logo')) }}" class="h-8 w-auto">
+    <div
+        class="flex h-20 shrink-0 items-center gap-3 border-b border-slate-200 px-6"
+    >
+
+        {{-- LOGO --}}
+        <div
+            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-50 shadow-sm"
+        >
+
+            @if(setting('logo'))
+
+                <img
+                    src="{{ asset('storage/'.setting('logo')) }}"
+                    alt="Bina Insani"
+                    class="h-9 w-9 object-contain"
+                >
+
+            @else
+
+                <img
+                    src="{{ asset('gallery/BI.png') }}"
+                    alt="Bina Insani"
+                    class="h-9 w-9 object-contain"
+                >
+
+            @endif
 
         </div>
 
 
-        <div>
+        {{-- BRAND TEXT --}}
+        <div class="min-w-0">
 
-            <h1 class="text-xl font-extrabold text-Red-500">
+            <h1
+                class="truncate text-xl font-extrabold text-[#ED1C24]"
+            >
                 Bina Insani
             </h1>
 
-            <p class="text-xs text-slate-500">
+            <p
+                class="text-xs text-slate-500"
+            >
                 Admin Panel
             </p>
 
@@ -65,378 +108,513 @@
 
 
 
+    {{-- =========================================================
+         SIDEBAR MENU
+    ========================================================== --}}
+
+    <nav
+        class="flex-1 space-y-1 overflow-y-auto px-4 py-5"
+    >
 
 
-    {{-- MENU --}}
+        {{-- =====================================================
+             MAIN
+        ====================================================== --}}
 
-    <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-2">
-
-
-        {{-- MAIN --}}
-
-        <p class="px-3 text-xs font-bold uppercase text-slate-400">
+        <p
+            class="mb-3 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400"
+        >
             Main
         </p>
 
 
-
+        {{-- DASHBOARD --}}
         <a
             href="{{ route('admin.dashboard') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.dashboard')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-grid-fill"></i>
+            <i class="bi bi-grid-fill text-lg"></i>
 
-            Dashboard
+            <span>
+                Dashboard
+            </span>
 
         </a>
 
 
 
+        {{-- =====================================================
+             TRANSAKSI
+        ====================================================== --}}
 
-
-        {{-- TRANSAKSI --}}
-
-        <p class="mt-6 px-3 text-xs font-bold uppercase text-slate-400">
+        <p
+            class="mb-3 mt-7 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400"
+        >
             Transaksi
         </p>
 
 
-
+        {{-- DATA PESERTA --}}
         <a
             href="{{ route('admin.registrations.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.registrations.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-people-fill"></i>
+            <i class="bi bi-people-fill text-lg"></i>
 
-            Data Peserta
+            <span>
+                Data Peserta
+            </span>
 
         </a>
 
 
-
-
+        {{-- PEMBAYARAN --}}
         <a
             href="{{ route('admin.payments.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.payments.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-credit-card-fill"></i>
+            <i class="bi bi-credit-card-fill text-lg"></i>
 
-            Pembayaran
+            <span>
+                Pembayaran
+            </span>
 
         </a>
 
 
-
-
+        {{-- LAPORAN --}}
         <a
             href="{{ route('admin.reports.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.reports.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-file-earmark-bar-graph-fill"></i>
+            <i class="bi bi-file-earmark-bar-graph-fill text-lg"></i>
 
-            Laporan
+            <span>
+                Laporan
+            </span>
 
         </a>
 
 
 
+        {{-- =====================================================
+             WEBSITE
+        ====================================================== --}}
 
-
-
-        {{-- WEBSITE --}}
-
-        <p class="mt-6 px-3 text-xs font-bold uppercase text-slate-400">
+        <p
+            class="mb-3 mt-7 px-3 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-400"
+        >
             Website
         </p>
 
 
-
-
+        {{-- HERO --}}
         <a
             href="{{ route('admin.hero.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.hero.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-stars"></i>
+            <i class="bi bi-stars text-lg"></i>
 
-            Hero Website
+            <span>
+                Hero Website
+            </span>
 
         </a>
 
 
-
-
+        {{-- ABOUT --}}
         <a
             href="{{ route('admin.about.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.about.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-person-badge"></i>
+            <i class="bi bi-person-badge text-lg"></i>
 
-            About Website
+            <span>
+                About Website
+            </span>
 
         </a>
 
 
-
-
-
+        {{-- PROGRAM --}}
         <a
             href="{{ route('admin.programs.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.programs.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-mortarboard-fill"></i>
+            <i class="bi bi-mortarboard-fill text-lg"></i>
 
-            Program Diklat
+            <span>
+                Program Diklat
+            </span>
 
         </a>
 
 
-
-
-
+        {{-- GALLERY --}}
         <a
             href="{{ route('admin.gallery.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.gallery.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-images"></i>
+            <i class="bi bi-images text-lg"></i>
 
-            Gallery Website
+            <span>
+                Gallery Website
+            </span>
 
         </a>
 
 
-
-
-
+        {{-- FAQ --}}
         <a
             href="{{ route('admin.faqs.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.faqs.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-question-circle"></i>
+            <i class="bi bi-question-circle text-lg"></i>
 
-            FAQ Website
+            <span>
+                FAQ Website
+            </span>
 
         </a>
 
 
-
-
-
+        {{-- CONTACT --}}
         <a
             href="{{ route('admin.contact.index') }}"
-            class="flex items-center gap-3 rounded-xl px-4 py-3 transition
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
             {{ request()->routeIs('admin.contact.*')
-                ? 'bg-blue-600 text-white shadow'
-                : 'text-slate-700 hover:bg-slate-100' }}">
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-telephone"></i>
+            <i class="bi bi-telephone text-lg"></i>
 
-            Contact Website
+            <span>
+                Contact Website
+            </span>
 
         </a>
 
-             <li>
-    <a href="{{ route('admin.payment-setting.index') }}"
-       class="flex items-center gap-3 rounded-xl px-4 py-3 text-slate-700 hover:bg-blue-50 hover:text-blue-600">
 
-        <i class="bi bi-credit-card-fill"></i>
+        {{-- PAYMENT SETTING --}}
+        <a
+            href="{{ route('admin.payment-setting.index') }}"
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
+            {{ request()->routeIs('admin.payment-setting.*')
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-        Pengaturan Pembayaran
+            <i class="bi bi-credit-card-fill text-lg"></i>
 
-    </a>
+            <span>
+                Pengaturan Pembayaran
+            </span>
 
-    <a
+        </a>
+
+
+        {{-- WEBSITE SETTINGS --}}
+        <a
             href="{{ route('admin.settings.index') }}"
-            class="mb-2 flex items-center gap-3 rounded-xl px-4 py-3 text-slate-700 transition hover:bg-slate-100">
+            class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition
+            {{ request()->routeIs('admin.settings.*')
+                ? 'bg-[#2E3192] text-white shadow-md'
+                : 'text-slate-700 hover:bg-[#2E3192]/5 hover:text-[#2E3192]' }}"
+        >
 
-            <i class="bi bi-bootstrap-fill"></i>
+            <i class="bi bi-gear-fill text-lg"></i>
 
-            Footer & Pengaturan Website
+            <span>
+                Footer & Pengaturan
+            </span>
 
         </a>
-</li>
 
     </nav>
 
-   
-
-
-
-
-
-
-    {{-- BOTTOM MENU --}}
-
-    <div class="border-t bg-white p-4">
-
-    {{-- Profil --}}
-    <a
-        href="{{ route('admin.profile.index') }}"
-        class="mt-3 flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-[#2E3192]/10 hover:text-[#2E3192]"
-    >
-        <i class="bi bi-person-circle text-lg"></i>
-        Profil Saya
-    </a>
-
-
-    {{-- Password --}}
-    <a
-        href="{{ route('admin.password.edit') }}"
-        class="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition hover:bg-[#2E3192]/10 hover:text-[#2E3192]"
-    >
-        <i class="bi bi-key-fill text-lg"></i>
-        Ubah Password
-    </a>
-
-
-    {{-- Logout --}}
-    <form
-        action="{{ route('logout') }}"
-        method="POST"
-        class="mt-1"
-    >
-        @csrf
-
-        <button
-            type="submit"
-            class="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-red-500 transition hover:bg-red-50"
-        >
-            <i class="bi bi-box-arrow-right text-lg"></i>
-            Keluar
-        </button>
-    </form>
-
-</div>
 
 
 </aside>
 
 
 
+{{-- =============================================================
+     MAIN
+============================================================== --}}
+
+<main
+    class="ml-72 min-h-screen"
+>
 
 
+    {{-- =========================================================
+         TOP NAVBAR
+    ========================================================== --}}
 
-{{-- =========================
-    MAIN
-========================== --}}
-
-<main class="ml-72 min-h-screen">
-
-
-
-    {{-- NAVBAR --}}
-
-    <header class="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-slate-200 bg-white px-8 shadow-sm">
+    <header
+        class="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-slate-200 bg-white/95 px-6 shadow-sm backdrop-blur sm:px-8"
+    >
 
 
+        {{-- PAGE TITLE --}}
+        <div class="min-w-0">
 
-        <div>
-
-            <h2 class="text-2xl font-bold text-slate-800">
-
+            <h2
+                class="truncate text-xl font-extrabold text-slate-800 sm:text-2xl"
+            >
                 @yield('title')
-
             </h2>
 
-
-            <p class="text-sm text-slate-500">
-
+            <p
+                class="mt-0.5 hidden text-sm text-slate-500 sm:block"
+            >
                 Bina Insani Admin Dashboard
-
             </p>
 
-
         </div>
 
 
 
+        {{-- =====================================================
+             PROFILE DROPDOWN
+        ====================================================== --}}
+
+        <div
+            x-data="{ open: false }"
+            class="relative"
+        >
 
 
-        <div class="flex items-center gap-4">
+            {{-- PROFILE BUTTON --}}
+            <button
+                type="button"
+                @click="open = !open"
+                @click.outside="open = false"
+                class="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-2.5 py-2 transition hover:border-[#2E3192]/20 hover:bg-slate-50"
+            >
+
+                {{-- AVATAR --}}
+                <div
+                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#2E3192] to-blue-600 font-bold text-white shadow-sm"
+                >
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                </div>
 
 
-            <div class="text-right">
+                {{-- USER INFO --}}
+                <div class="hidden text-left sm:block">
 
-                <h4 class="font-semibold text-slate-800">
+                    <p
+                        class="max-w-[140px] truncate text-sm font-bold text-slate-800"
+                    >
+                        {{ Auth::user()->name }}
+                    </p>
 
-                    {{ Auth::user()->name }}
+                    <p
+                        class="text-xs text-slate-500"
+                    >
+                        Administrator
+                    </p>
 
-                </h4>
-
-
-                <p class="text-xs text-slate-500">
-
-                    Administrator
-
-                </p>
-
-
-            </div>
-
+                </div>
 
 
+                <i
+                    class="bi bi-chevron-down hidden text-xs text-slate-400 transition sm:block"
+                    :class="open ? 'rotate-180' : ''"
+                ></i>
 
+            </button>
+
+
+
+            {{-- =================================================
+                 DROPDOWN
+            ================================================== --}}
 
             <div
-                class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 to-indigo-500 font-bold text-white shadow">
+                x-show="open"
+                x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                x-cloak
+                class="absolute right-0 mt-3 w-64 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl"
+            >
 
 
-                {{ strtoupper(substr(Auth::user()->name,0,1)) }}
+                {{-- USER HEADER --}}
+                <div
+                    class="border-b border-slate-100 bg-slate-50 px-5 py-4"
+                >
 
+                    <p
+                        class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+                    >
+                        Akun Admin
+                    </p>
+
+                    <p
+                        class="mt-1 truncate font-bold text-slate-800"
+                    >
+                        {{ Auth::user()->name }}
+                    </p>
+
+                    <p
+                        class="mt-0.5 truncate text-xs text-slate-500"
+                    >
+                        {{ Auth::user()->email }}
+                    </p>
+
+                </div>
+
+
+
+                {{-- MENU --}}
+                <div class="p-2">
+
+
+                    {{-- PROFIL --}}
+                    <a
+                        href="{{ route('admin.profile.index') }}"
+                        class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition hover:bg-[#2E3192]/5 hover:text-[#2E3192]"
+                    >
+
+                        <span
+                            class="flex h-9 w-9 items-center justify-center rounded-lg bg-[#2E3192]/10 text-[#2E3192]"
+                        >
+                            <i class="bi bi-person-circle"></i>
+                        </span>
+
+                        <span>
+                            Profil Saya
+                        </span>
+
+                    </a>
+
+
+
+                    {{-- PASSWORD --}}
+                    <a
+                        href="{{ route('admin.password.edit') }}"
+                        class="flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-slate-700 transition hover:bg-[#2E3192]/5 hover:text-[#2E3192]"
+                    >
+
+                        <span
+                            class="flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-100 text-yellow-700"
+                        >
+                            <i class="bi bi-key-fill"></i>
+                        </span>
+
+                        <span>
+                            Ubah Password
+                        </span>
+
+                    </a>
+
+
+
+                    {{-- DIVIDER --}}
+                    <div
+                        class="my-2 border-t border-slate-100"
+                    ></div>
+
+
+
+                    {{-- LOGOUT --}}
+                    <form
+                        action="{{ route('logout') }}"
+                        method="POST"
+                    >
+
+                        @csrf
+
+                        <button
+                            type="submit"
+                            class="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-sm font-semibold text-red-500 transition hover:bg-red-50"
+                        >
+
+                            <span
+                                class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-50 text-red-500"
+                            >
+                                <i class="bi bi-box-arrow-right"></i>
+                            </span>
+
+                            <span>
+                                Keluar
+                            </span>
+
+                        </button>
+
+                    </form>
+
+                </div>
 
             </div>
 
-
         </div>
-
 
     </header>
 
 
 
+    {{-- =========================================================
+         CONTENT
+    ========================================================== --}}
 
-
-    {{-- CONTENT --}}
-
-    <div class="p-8">
-
+    <div
+        class="p-5 sm:p-6 lg:p-8"
+    >
 
         @yield('content')
 
-
     </div>
-
 
 
 </main>
 
 
+
+@stack('scripts')
 
 </body>
 

@@ -1,416 +1,363 @@
-{{-- FOOTER BACKGROUND --}}
+{{-- =========================================================
+     FOOTER
+========================================================= --}}
+
 <footer class="relative overflow-hidden bg-[#0F172A] text-white">
 
+    {{-- =========================================================
+         DECORATION
+    ========================================================== --}}
 
-{{-- Decoration --}}
-<div class="absolute -left-40 top-0 h-96 w-96 rounded-full bg-[#2E3192]/40 blur-3xl"></div>
+    <div
+        class="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-[#2E3192]/40 blur-3xl"
+        aria-hidden="true"
+    ></div>
 
-<div class="absolute right-0 bottom-0 h-[450px] w-[450px] rounded-full bg-[#F6D21A]/20 blur-3xl"></div>
+    <div
+        class="pointer-events-none absolute bottom-0 right-0 h-[450px] w-[450px] rounded-full bg-[#F6D21A]/20 blur-3xl"
+        aria-hidden="true"
+    ></div>
 
 
 
-<div class="relative mx-auto max-w-7xl px-6 pt-20 pb-10 lg:px-8">
+    {{-- =========================================================
+         MAIN FOOTER
+    ========================================================== --}}
 
+    <div class="relative mx-auto max-w-7xl px-6 pb-10 pt-20 lg:px-8">
 
-<div class="grid gap-12 lg:grid-cols-4">
+        <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
 
 
+            {{-- =====================================================
+                 BRAND
+            ====================================================== --}}
 
-{{-- BRAND --}}
-<div>
+            <div>
 
+                <div class="flex items-center gap-4">
 
-<div class="flex items-center gap-4">
+                    <div
+                        class="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white p-2 shadow-lg"
+                    >
 
+                        @if (setting('logo'))
 
-<div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2 shadow-lg">
+                            <img
+                                src="{{ asset('storage/' . setting('logo')) }}"
+                                alt="{{ setting('website_name', 'Bina Insani') }}"
+                                class="h-full w-full object-contain"
+                            >
 
+                        @else
 
-<img
-src="{{ asset('storage/'.setting('logo')) }}"
-alt="Logo"
-class="h-full w-full object-contain">
+                            <img
+                                src="{{ asset('gallery/BI.png') }}"
+                                alt="{{ setting('website_name', 'Bina Insani') }}"
+                                class="h-full w-full object-contain"
+                            >
 
+                        @endif
 
-</div>
+                    </div>
 
 
+                    <div class="min-w-0">
 
-<div>
+                        <h3 class="truncate text-2xl font-extrabold text-accent">
 
+                            {{ setting('website_name', 'Bina Insani') }}
 
-<h3 class="text-2xl text-accent font-extrabold">
+                        </h3>
 
-{{ setting('website_name','Bina Insani') }}
+                        <p class="text-sm text-slate-400">
+                            Migrant Training Center
+                        </p>
 
-</h3>
+                    </div>
 
+                </div>
 
-<p class="text-sm text-slate-400">
 
-Migrant Training Center
 
-</p>
+                {{-- DESCRIPTION --}}
 
+                <p class="mt-6 max-w-xl leading-8 text-slate-300">
 
-</div>
+                    Lembaga pelatihan Bahasa Korea dan persiapan EPS-TOPIK
+                    untuk membantu calon pekerja Indonesia mempersiapkan
+                    diri menuju peluang kerja internasional.
 
+                </p>
 
-</div>
 
 
+                {{-- SOCIAL MEDIA --}}
 
+                <div class="mt-8 flex flex-wrap gap-3">
 
-<p class="mt-6 leading-8 text-slate-300">
 
+                    @if (setting('facebook'))
 
-Lembaga pelatihan Bahasa Korea dan persiapan EPS-TOPIK
-untuk membantu calon pekerja Indonesia meraih peluang
-karier internasional.
+                        <a
+                            href="{{ setting('facebook') }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook"
+                            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition duration-300 hover:-translate-y-1 hover:bg-[#2E3192]"
+                        >
 
+                            <i class="bi bi-facebook text-xl"></i>
 
-</p>
+                        </a>
 
+                    @endif
 
 
 
-{{-- SOCIAL --}}
-<div class="mt-8 flex gap-3">
+                    @if (setting('instagram'))
 
+                        <a
+                            href="{{ setting('instagram') }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram"
+                            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition duration-300 hover:-translate-y-1 hover:bg-pink-600"
+                        >
 
-<a
-href="{{ setting('facebook') }}"
-class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-[#2E3192]">
+                            <i class="bi bi-instagram text-xl"></i>
 
+                        </a>
 
-<i class="bi bi-facebook text-xl"></i>
+                    @endif
 
 
-</a>
 
+                    @if (setting('youtube'))
 
+                        <a
+                            href="{{ setting('youtube') }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="YouTube"
+                            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition duration-300 hover:-translate-y-1 hover:bg-red-600"
+                        >
 
-<a
-href="{{ setting('instagram') }}"
-class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-pink-600">
+                            <i class="bi bi-youtube text-xl"></i>
 
+                        </a>
 
-<i class="bi bi-instagram text-xl"></i>
+                    @endif
 
 
-</a>
 
+                    @if (setting('tiktok'))
 
+                        <a
+                            href="{{ setting('tiktok') }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="TikTok"
+                            class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition duration-300 hover:-translate-y-1 hover:bg-black"
+                        >
 
-<a
-href="{{ setting('youtube') }}"
-class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-red-600">
+                            <i class="bi bi-tiktok text-xl"></i>
 
+                        </a>
 
-<i class="bi bi-youtube text-xl"></i>
+                    @endif
 
+                </div>
 
-</a>
+            </div>
 
 
 
-<a
-href="{{ setting('tiktok') }}"
-class="flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 transition hover:bg-black">
+            {{-- =====================================================
+                 PROGRAM INFORMATION
+            ====================================================== --}}
 
+            <div>
 
-<i class="bi bi-tiktok text-xl"></i>
+                <h4 class="mb-6 text-xl font-bold">
+                    Program Pelatihan
+                </h4>
 
 
-</a>
+                <div class="space-y-4">
 
+                    @php
+                        $footerPrograms = \App\Models\Program::query()
+                            ->where('is_active', true)
+                            ->orderBy('name')
+                            ->get();
+                    @endphp
 
-</div>
 
+                    @forelse ($footerPrograms as $program)
 
-</div>
+                        <a
+                            href="{{ route('programs.show', $program) }}"
+                            class="group flex items-start gap-3 text-slate-300 transition hover:text-[#F6D21A]"
+                        >
 
+                            <i
+                                class="bi bi-mortarboard-fill mt-1 shrink-0 text-[#F6D21A]"
+                            ></i>
 
+                            <span class="group-hover:underline">
+                                {{ $program->name }}
+                            </span>
 
+                        </a>
 
+                    @empty
 
+                        <p class="text-sm leading-6 text-slate-400">
+                            Belum ada program pelatihan aktif.
+                        </p>
 
-{{-- MENU --}}
-<div>
+                    @endforelse
 
 
-<h4 class="mb-6 text-xl font-bold">
+                    <a
+                        href="{{ route('programs.index') }}"
+                        class="inline-flex items-center gap-2 pt-2 text-sm font-semibold text-[#F6D21A] transition hover:translate-x-1"
+                    >
 
-Menu
+                        Lihat Semua Program
 
-</h4>
+                        <i class="bi bi-arrow-right"></i>
 
+                    </a>
 
-<ul class="space-y-4 text-slate-300">
+                </div>
 
+            </div>
 
-<li>
-<a href="#home"
-class="transition hover:text-[#F6D21A]">
 
-Beranda
 
-</a>
-</li>
+            {{-- =====================================================
+                 CONTACT
+            ====================================================== --}}
 
+            <div>
 
-<li>
-<a href="#about"
-class="transition hover:text-[#F6D21A]">
+                <h4 class="mb-6 text-xl font-bold">
+                    Hubungi Kami
+                </h4>
 
-Tentang Kami
 
-</a>
-</li>
+                <div class="space-y-5 text-slate-300">
 
 
-<li>
-<a href="#programs"
-class="transition hover:text-[#F6D21A]">
+                    {{-- ADDRESS --}}
 
-Program
+                    @if (setting('address'))
 
-</a>
-</li>
+                        <div class="flex items-start gap-3">
 
+                            <i
+                                class="bi bi-geo-alt-fill mt-1 shrink-0 text-[#F6D21A]"
+                            ></i>
 
-<li>
-<a href="#process"
-class="transition hover:text-[#F6D21A]">
+                            <span class="leading-6">
+                                {{ setting('address') }}
+                            </span>
 
-Alur Pendaftaran
+                        </div>
 
-</a>
-</li>
+                    @endif
 
 
-<li>
-<a href="#faq"
-class="transition hover:text-[#F6D21A]">
 
-FAQ
+                    {{-- EMAIL --}}
 
-</a>
-</li>
+                    @if (setting('email'))
 
+                        <div class="flex items-start gap-3">
 
-<li>
-<a href="#contact"
-class="transition hover:text-[#F6D21A]">
+                            <i
+                                class="bi bi-envelope-fill mt-1 shrink-0 text-[#F6D21A]"
+                            ></i>
 
-Kontak
+                            <a
+                                href="mailto:{{ setting('email') }}"
+                                class="break-all transition hover:text-[#F6D21A]"
+                            >
+                                {{ setting('email') }}
+                            </a>
 
-</a>
-</li>
+                        </div>
 
+                    @endif
 
-</ul>
 
 
-</div>
+                    {{-- PHONE / WHATSAPP --}}
 
+                    @if (setting('phone'))
 
+                        @php
+                            $whatsappNumber = preg_replace(
+                                '/[^0-9]/',
+                                '',
+                                setting('phone')
+                            );
 
+                            if (str_starts_with($whatsappNumber, '0')) {
+                                $whatsappNumber =
+                                    '62' . substr(
+                                        $whatsappNumber,
+                                        1
+                                    );
+                            }
+                        @endphp
 
 
+                        <div class="flex items-start gap-3">
 
-{{-- PROGRAM --}}
-<div>
+                            <i
+                                class="bi bi-whatsapp mt-1 shrink-0 text-[#F6D21A]"
+                            ></i>
 
+                            <a
+                                href="https://wa.me/{{ $whatsappNumber }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="transition hover:text-[#F6D21A]"
+                            >
+                                {{ setting('phone') }}
+                            </a>
 
-<h4 class="mb-6 text-xl font-bold">
+                        </div>
 
-Program
+                    @endif
 
-</h4>
 
 
-<ul class="space-y-4 text-slate-300">
+                    {{-- OPERATING HOURS --}}
 
+                    <div class="flex items-start gap-3">
 
-<li>Diklat Intensif</li>
+                        <i
+                            class="bi bi-clock-fill mt-1 shrink-0 text-[#F6D21A]"
+                        ></i>
 
-<li>Diklat Reguler</li>
+                        <span class="leading-6">
 
-<li>Persiapan EPS-TOPIK</li>
+                            Senin - Sabtu
+                            <br>
+                            08.00 - 17.00 WIB
 
-<li>Konsultasi Keberangkatan</li>
+                        </span>
 
-<li>Pendampingan Administrasi</li>
+                    </div>
 
+                </div>
 
-</ul>
+            </div>
 
-
-</div>
-
-
-
-
-
-
-{{-- CONTACT --}}
-<div>
-
-
-<h4 class="mb-6 text-xl font-bold">
-
-Hubungi Kami
-
-</h4>
-
-
-<div class="space-y-5 text-slate-300">
-
-
-
-<div class="flex gap-3">
-
-
-<i class="bi bi-geo-alt-fill text-[#F6D21A]"></i>
-
-
-<span>
-
-{{ setting('address') }}
-
-</span>
-
-
-</div>
-
-
-
-<div class="flex gap-3">
-
-
-<i class="bi bi-envelope-fill text-[#F6D21A]"></i>
-
-
-<span>
-
-{{ setting('email') }}
-
-</span>
-
-
-</div>
-
-
-
-
-<div class="flex gap-3">
-
-
-<i class="bi bi-whatsapp text-[#F6D21A]"></i>
-
-
-<span>
-
-{{ setting('phone') }}
-
-</span>
-
-
-</div>
-
-
-
-
-<div class="flex gap-3">
-
-
-<i class="bi bi-clock-fill text-[#F6D21A]"></i>
-
-
-<span>
-
-Senin - Sabtu
-<br>
-08.00 - 17.00 WIB
-
-</span>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-{{-- CTA --}}
-<div
-class="mt-16 rounded-3xl bg-[#2E3192] p-8 text-center">
-
-
-<h3 class="text-2xl font-bold">
-
-Siap Memulai Perjalanan ke Korea?
-
-</h3>
-
-
-<p class="mt-3 text-blue-100">
-
-Daftar sekarang dan persiapkan masa depanmu bersama Bina Insani.
-
-</p>
-
-
-<a
-href="#programs"
-class="mt-5 inline-flex rounded-xl bg-[#F6D21A] px-7 py-3 font-bold text-[#1E293B] transition hover:scale-105">
-
-
-Mulai Daftar
-
-
-</a>
-
-
-</div>
-
-
-
-
-
-
-{{-- Divider --}}
-<div class="my-10 h-px bg-white/10"></div>
-
-
-
-
-
-{{-- Copyright --}}
-<div class="text-center text-sm text-slate-400">
-
-
-{{ setting('copyright','© '.date('Y').' Bina Insani. All Rights Reserved.') }}
-
-
-</div>
-
-
-
-</div>
-
-
+        </div>
+        
 </footer>

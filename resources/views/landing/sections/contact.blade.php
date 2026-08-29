@@ -207,20 +207,7 @@
                 data-aos="fade-left"
             >
 
-                {{-- MAPS HEADER --}}
-                {{-- <div
-                    class="absolute left-4 top-4 z-10 rounded-2xl bg-white/90 px-4 py-2.5 shadow backdrop-blur sm:left-6 sm:top-6 sm:px-5 sm:py-3"
-                >
-
-                    <h3 class="text-sm font-bold text-[#1E293B] sm:text-base">
-                        Lokasi Bina Insani
-                    </h3>
-
-                    <p class="text-xs text-slate-500 sm:text-sm">
-                        Training Center
-                    </p>
-
-                </div> --}}
+                
 
 
                 {{-- MAP --}}

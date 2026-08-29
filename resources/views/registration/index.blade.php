@@ -1,18 +1,19 @@
 @extends('layouts.landing')
 
+@section('title', 'Pendaftaran Program')
+
 @section('content')
 
 {{-- =========================================================
-    REGISTRATION WIZARD
+     REGISTRATION WIZARD
 ========================================================= --}}
-
 <div
     x-data="registrationWizard()"
     class="relative min-h-screen overflow-hidden bg-slate-50 py-20"
 >
 
     {{-- =====================================================
-        BACKGROUND
+         BACKGROUND
     ====================================================== --}}
     <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
 
@@ -33,8 +34,9 @@
 
     <div class="mx-auto max-w-7xl px-4 sm:px-6">
 
+
         {{-- =====================================================
-            HEADER
+             HEADER
         ====================================================== --}}
         <div class="text-center">
 
@@ -60,15 +62,17 @@
         </div>
 
 
+
         {{-- =====================================================
-            MAIN CARD
+             MAIN CARD
         ====================================================== --}}
         <div
             class="mt-12 overflow-hidden rounded-[30px] border border-white/70 bg-white/95 shadow-[0_25px_80px_rgba(0,0,0,.08)] backdrop-blur-xl sm:mt-14 sm:rounded-[36px]"
         >
 
+
             {{-- =================================================
-                PROGRESS
+                 PROGRESS
             ================================================== --}}
             <div
                 class="border-b bg-gradient-to-r from-blue-50 via-white to-orange-50 px-4 py-7 sm:px-10 sm:py-10"
@@ -150,8 +154,9 @@
             </div>
 
 
+
             {{-- =================================================
-                FORM
+                 FORM
             ================================================== --}}
             <div class="p-5 sm:p-8 lg:p-14">
 
@@ -167,7 +172,7 @@
 
 
                     {{-- =================================================
-                        STEP 1
+                         STEP 1
                     ================================================== --}}
                     <div
                         x-show="step === 1"
@@ -184,8 +189,9 @@
                     </div>
 
 
+
                     {{-- =================================================
-                        STEP 2
+                         STEP 2
                     ================================================== --}}
                     <div
                         x-show="step === 2"
@@ -202,8 +208,9 @@
                     </div>
 
 
+
                     {{-- =================================================
-                        STEP 3 - DOKUMEN
+                         STEP 3
                     ================================================== --}}
                     <div
                         x-show="step === 3"
@@ -215,12 +222,8 @@
                         x-transition:leave-end="opacity-0 translate-y-4"
                     >
 
-                        {{-- =================================================
-                            HEADER STEP 3
-                        ================================================== --}}
-                        <div
-                            class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between"
-                        >
+                        {{-- HEADER --}}
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
                             <div>
 
@@ -240,15 +243,14 @@
                                 <p
                                     class="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base"
                                 >
-                                    Upload seluruh dokumen persyaratan
-                                    yang dibutuhkan. Anda dapat memilih
-                                    file beberapa kali dari folder yang berbeda.
+                                    Upload dokumen persyaratan yang dibutuhkan.
+                                    Anda dapat memilih beberapa file sekaligus
+                                    atau menambahkan file secara bertahap.
                                 </p>
 
                             </div>
 
 
-                            {{-- STEP INDICATOR --}}
                             <div
                                 class="flex w-fit items-center gap-3 rounded-2xl border border-[#2E3192]/20 bg-[#2E3192]/5 px-5 py-3"
                             >
@@ -261,15 +263,11 @@
 
                                 <div>
 
-                                    <p
-                                        class="text-xs font-medium text-slate-500"
-                                    >
+                                    <p class="text-xs font-medium text-slate-500">
                                         Langkah
                                     </p>
 
-                                    <h3
-                                        class="text-xl font-extrabold text-[#2E3192]"
-                                    >
+                                    <h3 class="text-xl font-extrabold text-[#2E3192]">
                                         3 / 4
                                     </h3>
 
@@ -280,9 +278,8 @@
                         </div>
 
 
-                        {{-- =================================================
-                            ERROR NOTIFICATION
-                        ================================================== --}}
+
+                        {{-- ERROR --}}
                         <div
                             x-show="uploadError"
                             x-transition
@@ -319,8 +316,9 @@
                         </div>
 
 
+
                         {{-- =================================================
-                            UPLOAD CARD
+                             UPLOAD CARD
                         ================================================== --}}
                         <div class="mt-10">
 
@@ -328,7 +326,7 @@
                                 class="overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition duration-500 hover:shadow-xl"
                             >
 
-                                {{-- CARD HEADER --}}
+                                {{-- HEADER --}}
                                 <div
                                     class="border-b border-slate-100 bg-gradient-to-br from-[#2E3192]/5 via-white to-[#F6D21A]/10 p-6 sm:p-8"
                                 >
@@ -356,9 +354,8 @@
                                                 <p
                                                     class="mt-1 text-sm leading-6 text-slate-500"
                                                 >
-                                                    KTP dan ijazah wajib diunggah.
-                                                    Dokumen tambahan dapat ditambahkan
-                                                    sesuai kebutuhan.
+                                                    Minimal 2 dokumen. Format yang
+                                                    didukung JPG, JPEG, PNG, atau PDF.
                                                 </p>
 
                                             </div>
@@ -375,6 +372,7 @@
                                     </div>
 
                                 </div>
+
 
 
                                 {{-- UPLOAD AREA --}}
@@ -394,7 +392,6 @@
                                             "
                                         >
 
-                                            {{-- ICON --}}
                                             <div
                                                 class="flex h-20 w-20 items-center justify-center rounded-3xl bg-white shadow-md transition duration-300 group-hover:-translate-y-1 group-hover:scale-105"
                                             >
@@ -413,27 +410,20 @@
                                             </div>
 
 
-                                            {{-- NO FILE --}}
                                             <template x-if="!hasFiles">
 
                                                 <div>
 
-                                                    <span
-                                                        class="mt-5 block text-lg font-bold text-slate-700"
-                                                    >
+                                                    <span class="mt-5 block text-lg font-bold text-slate-700">
                                                         Klik untuk memilih dokumen
                                                     </span>
 
-                                                    <span
-                                                        class="mt-2 block text-sm leading-6 text-slate-500"
-                                                    >
+                                                    <span class="mt-2 block text-sm leading-6 text-slate-500">
                                                         Pilih beberapa file sekaligus
                                                         atau tambahkan dokumen secara bertahap.
                                                     </span>
 
-                                                    <span
-                                                        class="mt-3 block text-xs font-medium text-slate-400"
-                                                    >
+                                                    <span class="mt-3 block text-xs font-medium text-slate-400">
                                                         JPG, JPEG, PNG, PDF • Maks. 5 MB per file
                                                     </span>
 
@@ -442,34 +432,24 @@
                                             </template>
 
 
-                                            {{-- HAS FILE --}}
                                             <template x-if="hasFiles">
 
                                                 <div class="w-full max-w-xl">
 
-                                                    <span
-                                                        class="mt-5 block text-lg font-bold text-green-600"
-                                                    >
-                                                        <i
-                                                            class="bi bi-check-circle-fill mr-1"
-                                                        ></i>
+                                                    <span class="mt-5 block text-lg font-bold text-green-600">
+                                                        <i class="bi bi-check-circle-fill mr-1"></i>
                                                         Dokumen berhasil dipilih
                                                     </span>
 
-                                                    <p
-                                                        class="mt-1 text-sm text-slate-500"
-                                                    >
-                                                        <span
-                                                            x-text="files.length"
-                                                        ></span>
+                                                    <p class="mt-1 text-sm text-slate-500">
+
+                                                        <span x-text="files.length"></span>
                                                         file dipilih
+
                                                     </p>
 
-                                                    <span
-                                                        class="mt-3 block text-xs font-medium text-slate-400"
-                                                    >
-                                                        Klik area ini untuk menambahkan
-                                                        file dari lokasi lain.
+                                                    <span class="mt-3 block text-xs font-medium text-slate-400">
+                                                        Klik area ini untuk menambahkan file lain.
                                                     </span>
 
                                                 </div>
@@ -477,30 +457,26 @@
                                             </template>
 
 
-                                            {{-- INPUT UTAMA --}}
                                             <input
-                                            x-ref="fileInput"
-                                            type="file"
-                                            name="documents[]"
-                                            multiple
-                                            accept="image/*,.jpg,.jpeg,.png,.pdf,application/pdf"
-                                            class="hidden"
-                                            @change="handleFiles($event)"
-                                        >
+                                                x-ref="fileInput"
+                                                type="file"
+                                                name="documents[]"
+                                                multiple
+                                                accept="image/jpeg,image/png,.jpg,.jpeg,.png,.pdf,application/pdf"
+                                                class="hidden"
+                                                @change="handleFiles($event)"
+                                            >
 
                                         </label>
 
 
-                                        {{-- =================================================
-                                            ADD MORE
-                                        ================================================== --}}
+
+                                        {{-- ADD MORE --}}
                                         <label
                                             class="flex cursor-pointer items-center justify-center gap-2 rounded-2xl border border-[#2E3192]/20 bg-[#2E3192]/5 px-5 py-3.5 text-sm font-bold text-[#2E3192] transition duration-300 hover:-translate-y-0.5 hover:bg-[#2E3192]/10 hover:shadow-md"
                                         >
 
-                                            <i
-                                                class="bi bi-plus-circle-fill text-lg"
-                                            ></i>
+                                            <i class="bi bi-plus-circle-fill text-lg"></i>
 
                                             <span>
                                                 Tambah Dokumen Lain
@@ -509,7 +485,7 @@
                                             <input
                                                 type="file"
                                                 multiple
-                                                accept="image/*,.jpg,.jpeg,.png,.pdf,application/pdf"
+                                                accept="image/jpeg,image/png,.jpg,.jpeg,.png,.pdf,application/pdf"
                                                 class="hidden"
                                                 @change="handleFiles($event)"
                                             >
@@ -517,9 +493,8 @@
                                         </label>
 
 
-                                        {{-- =================================================
-                                            FILE LIST
-                                        ================================================== --}}
+
+                                        {{-- FILE LIST --}}
                                         <template x-if="hasFiles">
 
                                             <div class="mt-6">
@@ -530,16 +505,12 @@
 
                                                     <div>
 
-                                                        <h4
-                                                            class="font-bold text-[#1E293B]"
-                                                        >
+                                                        <h4 class="font-bold text-[#1E293B]">
                                                             File yang dipilih
                                                         </h4>
 
-                                                        <p
-                                                            class="mt-1 text-xs text-slate-400"
-                                                        >
-                                                            Pastikan KTP dan ijazah sudah termasuk.
+                                                        <p class="mt-1 text-xs text-slate-400">
+                                                            Pastikan dokumen persyaratan yang diperlukan sudah termasuk.
                                                         </p>
 
                                                     </div>
@@ -566,7 +537,7 @@
                                                             class="flex min-w-0 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 transition hover:border-[#2E3192]/30 hover:bg-[#2E3192]/5 sm:p-4"
                                                         >
 
-                                                            {{-- FILE ICON --}}
+                                                            {{-- ICON --}}
                                                             <div
                                                                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[#2E3192] shadow-sm"
                                                             >
@@ -584,7 +555,7 @@
                                                             </div>
 
 
-                                                            {{-- FILE INFO --}}
+                                                            {{-- INFO --}}
                                                             <div class="min-w-0 flex-1">
 
                                                                 <p
@@ -605,11 +576,7 @@
                                                             <div
                                                                 class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-50"
                                                             >
-
-                                                                <i
-                                                                    class="bi bi-check-lg text-green-500"
-                                                                ></i>
-
+                                                                <i class="bi bi-check-lg text-green-500"></i>
                                                             </div>
 
 
@@ -620,11 +587,7 @@
                                                                 class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-slate-400 transition hover:bg-red-50 hover:text-red-500"
                                                                 title="Hapus file"
                                                             >
-
-                                                                <i
-                                                                    class="bi bi-trash3-fill"
-                                                                ></i>
-
+                                                                <i class="bi bi-trash3-fill"></i>
                                                             </button>
 
                                                         </div>
@@ -645,9 +608,7 @@
                                                 class="mt-5 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4"
                                             >
 
-                                                <i
-                                                    class="bi bi-exclamation-circle-fill mt-0.5 shrink-0 text-red-500"
-                                                ></i>
+                                                <i class="bi bi-exclamation-circle-fill mt-0.5 shrink-0 text-red-500"></i>
 
                                                 <p
                                                     class="text-sm font-medium leading-6 text-red-600"
@@ -667,9 +628,8 @@
                         </div>
 
 
-                        {{-- =================================================
-                            INFORMATION
-                        ================================================== --}}
+
+                        {{-- INFO --}}
                         <div
                             class="mt-8 overflow-hidden rounded-[28px] border border-[#2E3192]/10 bg-[#2E3192]/5"
                         >
@@ -696,7 +656,7 @@
 
                                         <p class="flex items-start gap-2">
                                             <i class="bi bi-check-circle-fill mt-1 shrink-0 text-green-500"></i>
-                                            <span>KTP dan ijazah merupakan dokumen wajib.</span>
+                                            <span>Minimal 2 dokumen harus diupload.</span>
                                         </p>
 
                                         <p class="flex items-start gap-2">
@@ -721,10 +681,8 @@
 
                                         <p class="flex items-start gap-2 sm:col-span-2">
                                             <i class="bi bi-check-circle-fill mt-1 shrink-0 text-green-500"></i>
-
                                             <span>
-                                                Semua dokumen akan disimpan sebagai
-                                                dokumen milik pendaftaran peserta.
+                                                Dokumen akan tersimpan sebagai bagian dari pendaftaran peserta.
                                             </span>
                                         </p>
 
@@ -737,14 +695,12 @@
                         </div>
 
 
-                        {{-- =================================================
-                            NAVIGATION
-                        ================================================== --}}
+
+                        {{-- NAVIGATION --}}
                         <div
                             class="mt-10 flex flex-col-reverse gap-3 border-t border-slate-200 pt-7 sm:flex-row sm:items-center sm:justify-between"
                         >
 
-                            {{-- BACK --}}
                             <button
                                 type="button"
                                 @click="goToStep(2)"
@@ -755,19 +711,14 @@
                             </button>
 
 
-                            {{-- REVIEW --}}
                             <button
                                 type="button"
                                 @click="validateStep3()"
                                 class="group inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#2E3192] px-8 py-4 font-bold text-white shadow-lg transition duration-300 hover:-translate-y-1 hover:bg-blue-900 hover:shadow-xl sm:w-auto"
                             >
-
                                 Review Data
 
-                                <i
-                                    class="bi bi-arrow-right transition duration-300 group-hover:translate-x-1"
-                                ></i>
-
+                                <i class="bi bi-arrow-right transition duration-300 group-hover:translate-x-1"></i>
                             </button>
 
                         </div>
@@ -775,8 +726,9 @@
                     </div>
 
 
+
                     {{-- =================================================
-                        STEP 4
+                         STEP 4
                     ================================================== --}}
                     <div
                         x-show="step === 4"
@@ -803,27 +755,43 @@
 </div>
 
 
+
 {{-- =============================================================
-    ALPINE JS
+     ALPINE JS
 ============================================================= --}}
 <script>
     function registrationWizard() {
+
         return {
-            /* =====================================================
-             * STEP
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | STEP
+            |--------------------------------------------------------------------------
+            */
+
             step: 1,
 
-            /* =====================================================
-             * ERROR
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | ERROR
+            |--------------------------------------------------------------------------
+            */
+
             errors: {},
+
             uploadError: '',
+
             error: '',
 
-            /* =====================================================
-             * FILE
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | FILES
+            |--------------------------------------------------------------------------
+            */
+
             files: [],
 
             maxSize: 5 * 1024 * 1024,
@@ -842,38 +810,62 @@
                 'pdf'
             ],
 
-            /* =====================================================
-             * FORM
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | FORM
+            |--------------------------------------------------------------------------
+            */
+
             form: {
+
                 full_name: '',
+
                 nik: '',
+
                 birth_place: '',
+
                 birth_date: '',
+
                 gender: '',
+
                 phone: '',
+
                 email: '',
+
                 education: '',
+
                 job: '',
+
                 address: ''
+
             },
 
-            /* =====================================================
-             * AGREEMENT
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | AGREEMENT
+            |--------------------------------------------------------------------------
+            */
+
             agreement: false,
 
-            /* =====================================================
-             * SUBMIT STATE
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | SUBMIT STATE
+            |--------------------------------------------------------------------------
+            */
+
             submitting: false,
 
-            /* =====================================================
-             * HANDLE FILES
-             *
-             * File langsung dibaca saat dipilih.
-             * Ini penting untuk file dari Google Drive Android.
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | HANDLE FILES
+            |--------------------------------------------------------------------------
+            */
+
             async handleFiles(event) {
 
                 this.error = '';
@@ -896,9 +888,6 @@
 
                 try {
 
-                    /* =================================================
-                     * PROSES SATU PER SATU
-                     * ================================================= */
                     for (const originalFile of selectedFiles) {
 
                         if (
@@ -912,35 +901,44 @@
                             continue;
                         }
 
-                        /* =============================================
-                         * EKSTENSI
-                         * ============================================= */
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Extension
+                        |--------------------------------------------------------------------------
+                        */
+
                         const extension =
                             originalFile.name
                                 .split('.')
                                 .pop()
                                 .toLowerCase();
 
-                        /* =============================================
-                         * VALIDASI MIME
-                         * ============================================= */
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | MIME
+                        |--------------------------------------------------------------------------
+                        */
+
                         const validMime =
                             this.allowedTypes.includes(
                                 originalFile.type
                             );
 
-                        /* =============================================
-                         * VALIDASI EXTENSION
-                         * ============================================= */
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Extension Validation
+                        |--------------------------------------------------------------------------
+                        */
+
                         const validExtension =
                             this.allowedExtensions.includes(
                                 extension
                             );
 
-                        /*
-                         * Google Drive / Android kadang memberikan
-                         * MIME type kosong atau berbeda.
-                         */
+
                         if (
                             !validMime &&
                             !validExtension
@@ -952,9 +950,13 @@
                             continue;
                         }
 
-                        /* =============================================
-                         * VALIDASI UKURAN
-                         * ============================================= */
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Size Validation
+                        |--------------------------------------------------------------------------
+                        */
+
                         if (
                             typeof originalFile.size === 'number' &&
                             originalFile.size > this.maxSize
@@ -966,12 +968,13 @@
                             continue;
                         }
 
+
                         /*
-                         * Jangan izinkan file benar-benar kosong.
-                         *
-                         * Kalau Google Drive memberikan file dengan
-                         * size 0, kita coba baca terlebih dahulu.
-                         */
+                        |--------------------------------------------------------------------------
+                        | Read File
+                        |--------------------------------------------------------------------------
+                        */
+
                         let fileBuffer;
 
                         try {
@@ -992,9 +995,7 @@
                             continue;
                         }
 
-                        /* =============================================
-                         * CEK HASIL PEMBACAAN
-                         * ============================================= */
+
                         if (
                             !fileBuffer ||
                             fileBuffer.byteLength === 0
@@ -1006,9 +1007,13 @@
                             continue;
                         }
 
-                        /* =============================================
-                         * BUAT FILE BARU
-                         * ============================================= */
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Safe MIME
+                        |--------------------------------------------------------------------------
+                        */
+
                         const safeMime =
                             originalFile.type ||
                             (
@@ -1019,21 +1024,27 @@
                                         : 'image/jpeg'
                             );
 
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Recreate File
+                        |--------------------------------------------------------------------------
+                        */
+
                         const safeFile =
                             new File(
                                 [fileBuffer],
                                 originalFile.name,
                                 {
                                     type: safeMime,
+
                                     lastModified:
                                         originalFile.lastModified ||
                                         Date.now()
                                 }
                             );
 
-                        /* =============================================
-                         * VALIDASI SIZE HASIL
-                         * ============================================= */
+
                         if (
                             safeFile.size === 0
                         ) {
@@ -1043,6 +1054,7 @@
 
                             continue;
                         }
+
 
                         if (
                             safeFile.size > this.maxSize
@@ -1054,9 +1066,13 @@
                             continue;
                         }
 
-                        /* =============================================
-                         * CEK DUPLIKAT
-                         * ============================================= */
+
+                        /*
+                        |--------------------------------------------------------------------------
+                        | Duplicate Check
+                        |--------------------------------------------------------------------------
+                        */
+
                         const alreadyExists =
                             this.files.some(
                                 existingFile =>
@@ -1066,17 +1082,23 @@
                                         safeFile.size
                             );
 
+
                         if (!alreadyExists) {
 
                             validFiles.push(
                                 safeFile
                             );
                         }
+
                     }
 
-                    /* =================================================
-                     * GABUNGKAN FILE
-                     * ================================================= */
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Merge
+                    |--------------------------------------------------------------------------
+                    */
+
                     this.files = [
                         ...this.files,
                         ...validFiles
@@ -1095,18 +1117,23 @@
                 } finally {
 
                     /*
-                     * Sekarang aman mengosongkan input.
-                     *
-                     * Karena file sudah dibuat ulang melalui
-                     * ArrayBuffer dan disimpan di this.files.
-                     */
+                    |--------------------------------------------------------------------------
+                    | Reset Input
+                    |--------------------------------------------------------------------------
+                    */
+
                     input.value = '';
+
                 }
             },
 
-            /* =====================================================
-             * REMOVE FILE
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | REMOVE FILE
+            |--------------------------------------------------------------------------
+            */
+
             removeFile(index) {
 
                 if (
@@ -1122,32 +1149,46 @@
                 );
 
                 this.error = '';
+
                 this.uploadError = '';
             },
 
-            /* =====================================================
-             * CLEAR FILES
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | CLEAR FILES
+            |--------------------------------------------------------------------------
+            */
+
             clearFiles() {
 
                 this.files = [];
 
                 this.error = '';
+
                 this.uploadError = '';
             },
 
-            /* =====================================================
-             * FORMAT SIZE
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | FORMAT SIZE
+            |--------------------------------------------------------------------------
+            */
+
             formatSize(bytes) {
 
-                if (!bytes || bytes < 1024) {
+                if (
+                    !bytes ||
+                    bytes < 1024
+                ) {
+
                     return `${bytes || 0} B`;
                 }
 
+
                 if (
-                    bytes <
-                    1024 * 1024
+                    bytes < 1024 * 1024
                 ) {
 
                     return `${(
@@ -1155,31 +1196,41 @@
                     ).toFixed(1)} KB`;
                 }
 
+
                 return `${(
                     bytes /
-                    (
-                        1024 *
-                        1024
-                    )
+                    (1024 * 1024)
                 ).toFixed(1)} MB`;
             },
 
-            /* =====================================================
-             * HAS FILES
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | HAS FILES
+            |--------------------------------------------------------------------------
+            */
+
             get hasFiles() {
+
                 return this.files.length > 0;
+
             },
 
-            /* =====================================================
-             * GO TO STEP
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | GO TO STEP
+            |--------------------------------------------------------------------------
+            */
+
             goToStep(step) {
 
                 this.step = step;
 
                 this.errors = {};
+
                 this.uploadError = '';
+
                 this.error = '';
 
                 window.scrollTo({
@@ -1188,9 +1239,13 @@
                 });
             },
 
-            /* =====================================================
-             * VALIDATE STEP 2
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | VALIDATE STEP 2
+            |--------------------------------------------------------------------------
+            */
+
             validateStep2() {
 
                 this.errors = {};
@@ -1200,9 +1255,11 @@
                         'registrationForm'
                     );
 
+
                 if (!form) {
                     return;
                 }
+
 
                 if (
                     !form.full_name ||
@@ -1213,6 +1270,7 @@
                         'Nama lengkap wajib diisi.';
                 }
 
+
                 if (
                     !form.nik ||
                     form.nik.value.trim() === ''
@@ -1221,6 +1279,7 @@
                     this.errors.nik =
                         'NIK wajib diisi.';
                 }
+
 
                 if (
                     !form.birth_place ||
@@ -1231,6 +1290,7 @@
                         'Tempat lahir wajib diisi.';
                 }
 
+
                 if (
                     !form.birth_date ||
                     form.birth_date.value === ''
@@ -1239,6 +1299,7 @@
                     this.errors.birth_date =
                         'Tanggal lahir wajib diisi.';
                 }
+
 
                 if (
                     !form.gender ||
@@ -1249,6 +1310,7 @@
                         'Jenis kelamin wajib dipilih.';
                 }
 
+
                 if (
                     !form.phone ||
                     form.phone.value.trim() === ''
@@ -1258,14 +1320,26 @@
                         'Nomor WhatsApp wajib diisi.';
                 }
 
+
                 if (
-                    !form.email ||
-                    form.email.value.trim() === ''
+                    form.email &&
+                    form.email.value.trim() !== ''
                 ) {
 
-                    this.errors.email =
-                        'Email wajib diisi.';
+                    const emailPattern =
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    if (
+                        !emailPattern.test(
+                            form.email.value.trim()
+                        )
+                    ) {
+
+                        this.errors.email =
+                            'Format email tidak valid.';
+                    }
                 }
+
 
                 if (
                     !form.education ||
@@ -1276,6 +1350,7 @@
                         'Pendidikan wajib dipilih.';
                 }
 
+
                 if (
                     !form.job ||
                     form.job.value.trim() === ''
@@ -1284,6 +1359,7 @@
                     this.errors.job =
                         'Pekerjaan wajib diisi.';
                 }
+
 
                 if (
                     !form.address ||
@@ -1294,6 +1370,7 @@
                         'Alamat wajib diisi.';
                 }
 
+
                 if (
                     Object.keys(this.errors).length === 0
                 ) {
@@ -1302,13 +1379,19 @@
                 }
             },
 
-            /* =====================================================
-             * VALIDATE STEP 3
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | VALIDATE STEP 3
+            |--------------------------------------------------------------------------
+            */
+
             validateStep3() {
 
                 this.errors = {};
+
                 this.uploadError = '';
+
 
                 if (
                     !this.files ||
@@ -1326,12 +1409,13 @@
                     return;
                 }
 
+
                 if (
                     this.files.length < 2
                 ) {
 
                     this.uploadError =
-                        'Minimal upload 2 dokumen, yaitu KTP dan ijazah.';
+                        'Minimal upload 2 dokumen.';
 
                     window.scrollTo({
                         top: 0,
@@ -1341,26 +1425,41 @@
                     return;
                 }
 
+
                 this.goToStep(4);
             },
 
-            /* =====================================================
-             * PREPARE SUBMIT
-             * ===================================================== */
+
+            /*
+            |--------------------------------------------------------------------------
+            | PREPARE SUBMIT
+            |--------------------------------------------------------------------------
+            */
+
             async prepareSubmit(event) {
 
-                event.preventDefault();
+    event.preventDefault();
 
-                if (this.submitting) {
-                    return;
-                }
+    if (this.submitting) {
+        return;
+    }
 
-                this.errors = {};
-                this.uploadError = '';
+    if (!this.agreement) {
+        this.uploadError =
+            'Silakan menyetujui pernyataan kebenaran data sebelum mengirim pendaftaran.';
+        return;
+    }
 
-                /* =================================================
-                 * CEK FILE
-                 * ================================================= */
+    this.errors = {};
+    this.uploadError = '';
+
+
+                /*
+                |--------------------------------------------------------------------------
+                | File Validation
+                |--------------------------------------------------------------------------
+                */
+
                 if (
                     !this.files ||
                     this.files.length === 0
@@ -1379,15 +1478,13 @@
                     return;
                 }
 
-                /* =================================================
-                 * MINIMAL 2 FILE
-                 * ================================================= */
+
                 if (
                     this.files.length < 2
                 ) {
 
                     this.uploadError =
-                        'Minimal upload 2 dokumen, yaitu KTP dan ijazah.';
+                        'Minimal upload 2 dokumen.';
 
                     this.step = 3;
 
@@ -1399,13 +1496,18 @@
                     return;
                 }
 
-                /* =================================================
-                 * FORM
-                 * ================================================= */
+
+                /*
+                |--------------------------------------------------------------------------
+                | Form
+                |--------------------------------------------------------------------------
+                */
+
                 const form =
                     document.getElementById(
                         'registrationForm'
                     );
+
 
                 if (!form) {
 
@@ -1415,21 +1517,31 @@
                     return;
                 }
 
+
                 this.submitting = true;
+
 
                 try {
 
-                    /* =================================================
-                     * FORM DATA
-                     * ================================================= */
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Build FormData
+                    |--------------------------------------------------------------------------
+                    */
+
                     const formData =
                         new FormData();
 
+
                     /*
-                     * Ambil seluruh field biasa dari form.
-                     */
+                    |--------------------------------------------------------------------------
+                    | Normal Form Fields
+                    |--------------------------------------------------------------------------
+                    */
+
                     const formElements =
                         form.elements;
+
 
                     for (
                         const element
@@ -1443,24 +1555,20 @@
                             continue;
                         }
 
-                        /*
-                         * Checkbox agreement tidak perlu dikirim
-                         * sebagai field pendaftaran.
-                         */
+
                         if (
                             element.type === 'checkbox'
                         ) {
                             continue;
                         }
 
-                        /*
-                         * File input tidak digunakan.
-                         */
+
                         if (
                             element.type === 'file'
                         ) {
                             continue;
                         }
+
 
                         formData.append(
                             element.name,
@@ -1468,18 +1576,18 @@
                         );
                     }
 
-                    /* =================================================
-                     * APPEND DOKUMEN
-                     * ================================================= */
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Documents
+                    |--------------------------------------------------------------------------
+                    */
+
                     for (
                         const file
                         of this.files
                     ) {
 
-                        /*
-                         * File di this.files sekarang merupakan
-                         * File baru yang sudah dibaca ke memory.
-                         */
                         formData.append(
                             'documents[]',
                             file,
@@ -1487,18 +1595,25 @@
                         );
                     }
 
-                    /* =================================================
-                     * KIRIM KE LARAVEL
-                     * ================================================= */
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Submit
+                    |--------------------------------------------------------------------------
+                    */
+
                     const response =
                         await fetch(
                             form.action,
                             {
                                 method: 'POST',
+
                                 body: formData,
+
                                 credentials: 'same-origin',
 
                                 headers: {
+
                                     'X-Requested-With':
                                         'XMLHttpRequest',
 
@@ -1508,9 +1623,13 @@
                             }
                         );
 
-                    /* =================================================
-                     * REDIRECT
-                     * ================================================= */
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Redirect
+                    |--------------------------------------------------------------------------
+                    */
+
                     if (
                         response.redirected &&
                         response.url
@@ -1522,9 +1641,13 @@
                         return;
                     }
 
-                    /* =================================================
-                     * HTTP ERROR
-                     * ================================================= */
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Server Error
+                    |--------------------------------------------------------------------------
+                    */
+
                     if (!response.ok) {
 
                         const responseText =
@@ -1540,16 +1663,20 @@
                         );
                     }
 
-                    /* =================================================
-                     * FALLBACK
-                     * ================================================= */
+
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Fallback
+                    |--------------------------------------------------------------------------
+                    */
+
                     window.location.reload();
 
-                } catch (error) {
+                } catch (submitError) {
 
                     console.error(
                         'Gagal mengirim pendaftaran:',
-                        error
+                        submitError
                     );
 
                     this.submitting = false;
@@ -1568,6 +1695,5 @@
         };
     }
 </script>
-
 
 @endsection

@@ -3,73 +3,145 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Registration;
 use App\Models\Program;
+use App\Models\Registration;
+use Illuminate\View\View;
 
 class AdminDashboardController extends Controller
 {
-    public function index()
+    public function index(): View
     {
+        /*
+        |--------------------------------------------------------------------------
+        | STATISTIK PESERTA
+        |--------------------------------------------------------------------------
+        */
 
-        // Total seluruh pendaftar
         $totalPeserta = Registration::count();
 
-
-        // Menunggu admin cek bukti pembayaran
         $menungguVerifikasi = Registration::where(
             'payment_status',
             'waiting_verification'
         )->count();
 
-
-        // Pembayaran sudah diterima
         $pesertaPaid = Registration::where(
             'payment_status',
             'paid'
         )->count();
 
+        $pesertaRejected = Registration::where(
+            'payment_status',
+            'rejected'
+        )->count();
 
-        // Peserta sudah diverifikasi admin
+        $pesertaUnpaid = Registration::where(function ($query) {
+            $query->whereNull('payment_status')
+                ->orWhere('payment_status', 'unpaid');
+        })->count();
+
         $pesertaVerified = Registration::where(
             'status',
             'verified'
         )->count();
 
 
-        // Program aktif
+        /*
+        |--------------------------------------------------------------------------
+        | PROGRAM AKTIF
+        |--------------------------------------------------------------------------
+        */
+
         $programAktif = Program::where(
             'is_active',
             true
         )->count();
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | PENDAFTARAN TERBARU
+        |--------------------------------------------------------------------------
+        */
 
-        // 5 pendaftar terbaru
         $recentRegistrations = Registration::with('program')
             ->latest()
-            ->take(5)
+            ->take(8)
             ->get();
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | STATISTIK PROGRAM
+        |--------------------------------------------------------------------------
+        */
 
-        // Statistik jumlah peserta tiap program
-        $programStats = Program::withCount('registrations')
+        $programStats = Program::query()
+            ->withCount('registrations')
+            ->where('is_active', true)
+            ->orderByDesc('registrations_count')
             ->get();
 
 
+        /*
+        |--------------------------------------------------------------------------
+        | DATA DONUT CHART
+        |--------------------------------------------------------------------------
+        */
 
-        return view(
-            'admin.dashboard',
-            compact(
-                'totalPeserta',
-                'menungguVerifikasi',
-                'pesertaPaid',
-                'pesertaVerified',
-                'programAktif',
-                'recentRegistrations',
-                'programStats'
-            )
-        );
+        $statusChart = [
+            'labels' => [
+                'Belum Bayar',
+                'Menunggu Verifikasi',
+                'Lunas',
+                'Ditolak',
+            ],
 
+            'data' => [
+                $pesertaUnpaid,
+                $menungguVerifikasi,
+                $pesertaPaid,
+                $pesertaRejected,
+            ],
+        ];
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | DATA BAR CHART
+        |--------------------------------------------------------------------------
+        */
+
+        $programChart = [
+            'labels' => $programStats
+                ->pluck('name')
+                ->values()
+                ->toArray(),
+
+            'data' => $programStats
+                ->pluck('registrations_count')
+                ->values()
+                ->toArray(),
+        ];
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | VIEW
+        |--------------------------------------------------------------------------
+        */
+
+        return view('admin.dashboard', compact(
+            'totalPeserta',
+            'menungguVerifikasi',
+            'pesertaPaid',
+            'pesertaRejected',
+            'pesertaUnpaid',
+            'pesertaVerified',
+            'programAktif',
+            'recentRegistrations',
+            'programStats',
+            'statusChart',
+            'programChart'
+        ));
     }
 }

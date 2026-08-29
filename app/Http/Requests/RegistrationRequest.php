@@ -11,16 +11,16 @@ class RegistrationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check()
+            && auth()->user()->hasRole('peserta');
     }
 
     /**
-     * Validation Rules
+     * Validation rules.
      */
     public function rules(): array
     {
         return [
-
             /*
             |--------------------------------------------------------------------------
             | Program
@@ -29,8 +29,10 @@ class RegistrationRequest extends FormRequest
 
             'program_id' => [
                 'required',
+                'integer',
                 'exists:programs,id',
             ],
+
 
             /*
             |--------------------------------------------------------------------------
@@ -73,6 +75,16 @@ class RegistrationRequest extends FormRequest
                 'max:20',
             ],
 
+            /*
+            |--------------------------------------------------------------------------
+            | Email
+            |--------------------------------------------------------------------------
+            |
+            | Email nantinya akan diganti di Controller menggunakan
+            | email akun yang sedang login.
+            |
+            */
+
             'email' => [
                 'nullable',
                 'email',
@@ -96,13 +108,11 @@ class RegistrationRequest extends FormRequest
                 'max:100',
             ],
 
+
             /*
             |--------------------------------------------------------------------------
-            | Dokumen
+            | Documents
             |--------------------------------------------------------------------------
-            |
-            | Peserta dapat memilih banyak file.
-            |
             */
 
             'documents' => [
@@ -121,12 +131,11 @@ class RegistrationRequest extends FormRequest
     }
 
     /**
-     * Custom Error Message
+     * Custom validation messages.
      */
     public function messages(): array
     {
         return [
-
             /*
             |--------------------------------------------------------------------------
             | Program
@@ -136,8 +145,12 @@ class RegistrationRequest extends FormRequest
             'program_id.required' =>
                 'Program wajib dipilih.',
 
+            'program_id.integer' =>
+                'Program tidak valid.',
+
             'program_id.exists' =>
                 'Program tidak ditemukan.',
+
 
             /*
             |--------------------------------------------------------------------------
@@ -147,6 +160,12 @@ class RegistrationRequest extends FormRequest
 
             'full_name.required' =>
                 'Nama lengkap wajib diisi.',
+
+            'full_name.string' =>
+                'Nama lengkap tidak valid.',
+
+            'full_name.max' =>
+                'Nama lengkap maksimal 255 karakter.',
 
             'nik.required' =>
                 'NIK wajib diisi.',
@@ -160,11 +179,17 @@ class RegistrationRequest extends FormRequest
             'birth_date.required' =>
                 'Tanggal lahir wajib diisi.',
 
+            'birth_date.date' =>
+                'Tanggal lahir tidak valid.',
+
             'gender.required' =>
                 'Jenis kelamin wajib dipilih.',
 
+            'gender.in' =>
+                'Jenis kelamin tidak valid.',
+
             'phone.required' =>
-                'Nomor HP wajib diisi.',
+                'Nomor WhatsApp wajib diisi.',
 
             'email.email' =>
                 'Format email tidak valid.',
@@ -172,22 +197,12 @@ class RegistrationRequest extends FormRequest
             'address.required' =>
                 'Alamat wajib diisi.',
 
+
             /*
-|--------------------------------------------------------------------------
-| Dokumen
-|--------------------------------------------------------------------------
-*/
-
-'documents' => 'required|array|min:2',
-
-'documents.*' => [
-    'required',
-    'file',
-    'mimes:jpg,jpeg,png,pdf',
-    'max:5120',
-],
-
-
+            |--------------------------------------------------------------------------
+            | Documents
+            |--------------------------------------------------------------------------
+            */
 
             'documents.required' =>
                 'Dokumen wajib diupload.',
@@ -196,7 +211,7 @@ class RegistrationRequest extends FormRequest
                 'Format dokumen tidak valid.',
 
             'documents.min' =>
-                'Minimal upload 2 dokumen, yaitu KTP dan ijazah.',
+                'Minimal upload 2 dokumen.',
 
             'documents.*.required' =>
                 'Dokumen wajib diupload.',
@@ -210,14 +225,5 @@ class RegistrationRequest extends FormRequest
             'documents.*.max' =>
                 'Ukuran setiap dokumen maksimal 5 MB.',
         ];
-    }
-
-    /**
-     * Handle failed validation.
-     */
-    protected function failedValidation(
-        \Illuminate\Contracts\Validation\Validator $validator
-    ) {
-        dd($validator->errors()->all());
     }
 }

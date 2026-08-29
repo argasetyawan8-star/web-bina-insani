@@ -6,47 +6,71 @@
 
 @section('content')
 
-@if(session('success'))
-    <div class="mb-6 rounded-2xl border border-green-200 bg-green-50 p-4 text-green-700 shadow-sm">
-        <div class="flex items-center gap-3">
-            <i class="bi bi-check-circle-fill text-xl"></i>
-            <p class="font-medium">
-                {{ session('success') }}
-            </p>
-        </div>
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700 shadow-sm">
-        <div class="flex items-center gap-3">
-            <i class="bi bi-exclamation-circle-fill text-xl"></i>
-            <p class="font-medium">
-                {{ session('error') }}
-            </p>
-        </div>
-    </div>
-@endif
-
-
 <div class="space-y-6">
 
-    {{-- ===========================================================
-        HEADER
-    ============================================================ --}}
+    {{-- =========================================================
+         FLASH MESSAGE
+    ========================================================== --}}
+
+    @if (session('success'))
+
+        <div class="rounded-2xl border border-green-200 bg-green-50 p-4 text-green-700 shadow-sm">
+
+            <div class="flex items-center gap-3">
+
+                <i class="bi bi-check-circle-fill text-xl"></i>
+
+                <p class="font-medium">
+                    {{ session('success') }}
+                </p>
+
+            </div>
+
+        </div>
+
+    @endif
+
+
+    @if (session('error'))
+
+        <div class="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700 shadow-sm">
+
+            <div class="flex items-center gap-3">
+
+                <i class="bi bi-exclamation-circle-fill text-xl"></i>
+
+                <p class="font-medium">
+                    {{ session('error') }}
+                </p>
+
+            </div>
+
+        </div>
+
+    @endif
+
+
+
+    {{-- =========================================================
+         HEADER
+    ========================================================== --}}
 
     <div class="overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 via-sky-500 to-orange-400 p-6 text-white shadow-xl sm:p-8">
 
         <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
 
-            {{-- Identitas --}}
+
+            {{-- IDENTITAS --}}
             <div class="min-w-0">
 
                 <div class="flex items-center gap-4">
 
                     <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/20 sm:h-16 sm:w-16">
+
                         <i class="bi bi-person-badge text-3xl"></i>
+
                     </div>
+
 
                     <div class="min-w-0">
 
@@ -55,10 +79,13 @@
                         </h1>
 
                         <p class="mt-1 text-sm text-blue-100 sm:text-base">
+
                             Kode Pendaftaran:
+
                             <span class="font-semibold text-white">
-                                {{ $registration->registration_code }}
+                                {{ $registration->registration_code ?? '-' }}
                             </span>
+
                         </p>
 
                     </div>
@@ -68,37 +95,44 @@
             </div>
 
 
-            {{-- Action --}}
+
+            {{-- =====================================================
+                 ACTION AREA
+            ====================================================== --}}
+
             <div class="flex flex-wrap items-center gap-3">
 
+                {{-- BACK --}}
                 <a
                     href="{{ route('admin.registrations.index') }}"
-                    class="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100">
-
+                    class="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
+                >
                     <i class="bi bi-arrow-left me-2"></i>
-
                     Kembali
-
                 </a>
 
 
+
                 {{-- =================================================
-                    PEMBAYARAN MENUNGGU VERIFIKASI
+                     PAYMENT ACTION
                 ================================================== --}}
 
-                @if($registration->payment_status === 'waiting_verification')
+                @if ($registration->payment_status === 'waiting_verification')
 
+                    {{-- APPROVE --}}
                     <form
-                        action="{{ route('admin.registrations.payment.approve', $registration->id) }}"
+                        action="{{ route('admin.registrations.payment.approve', $registration) }}"
                         method="POST"
-                        onsubmit="return confirm('Apakah Anda yakin ingin menyetujui pembayaran peserta ini?')">
+                        onsubmit="return confirm('Apakah Anda yakin ingin menyetujui pembayaran peserta ini?')"
+                    >
 
                         @csrf
                         @method('PATCH')
 
                         <button
                             type="submit"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-green-700">
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-green-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-green-700"
+                        >
 
                             <i class="bi bi-check-circle-fill"></i>
 
@@ -109,17 +143,20 @@
                     </form>
 
 
+                    {{-- REJECT --}}
                     <form
-                        action="{{ route('admin.registrations.payment.reject', $registration->id) }}"
+                        action="{{ route('admin.registrations.payment.reject', $registration) }}"
                         method="POST"
-                        onsubmit="return confirm('Apakah Anda yakin ingin menolak pembayaran peserta ini?')">
+                        onsubmit="return confirm('Apakah Anda yakin ingin menolak pembayaran peserta ini?')"
+                    >
 
                         @csrf
                         @method('PATCH')
 
                         <button
                             type="submit"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-red-700">
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-red-700"
+                        >
 
                             <i class="bi bi-x-circle-fill"></i>
 
@@ -130,56 +167,28 @@
                     </form>
 
 
-                {{-- =================================================
-                    PEMBAYARAN SUDAH LUNAS
-                ================================================== --}}
 
-                @elseif($registration->payment_status === 'paid')
+                @elseif ($registration->payment_status === 'paid')
 
-                    @if($registration->status !== 'verified')
-
-                        <form
-                            action="{{ route('admin.registrations.verify', $registration->id) }}"
-                            method="POST"
-                            onsubmit="return confirm('Verifikasi peserta ini?')">
-
-                            @csrf
-                            @method('PATCH')
-
-                            <button
-                                type="submit"
-                                class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-blue-700">
-
-                                <i class="bi bi-person-check-fill"></i>
-
-                                Verifikasi Peserta
-
-                            </button>
-
-                        </form>
-
-                    @else
-
-                        <span
-                            class="inline-flex items-center gap-2 rounded-xl bg-green-100 px-5 py-3 text-sm font-bold text-green-700">
-
-                            <i class="bi bi-check-circle-fill"></i>
-
-                            Peserta Terverifikasi
-
-                        </span>
-
-                    @endif
-
-
-                {{-- =================================================
-                    PEMBAYARAN DITOLAK
-                ================================================== --}}
-
-                @elseif($registration->payment_status === 'rejected')
-
+                    {{-- PAYMENT PAID --}}
                     <span
-                        class="inline-flex items-center gap-2 rounded-xl bg-red-100 px-5 py-3 text-sm font-bold text-red-700">
+                        class="inline-flex items-center gap-2 rounded-xl bg-green-100 px-5 py-3 text-sm font-bold text-green-700"
+                    >
+
+                        <i class="bi bi-check-circle-fill"></i>
+
+                        Pembayaran Lunas
+
+                    </span>
+
+
+
+                @elseif ($registration->payment_status === 'rejected')
+
+                    {{-- PAYMENT REJECTED --}}
+                    <span
+                        class="inline-flex items-center gap-2 rounded-xl bg-red-100 px-5 py-3 text-sm font-bold text-red-700"
+                    >
 
                         <i class="bi bi-x-circle-fill"></i>
 
@@ -188,18 +197,64 @@
                     </span>
 
 
-                {{-- =================================================
-                    BELUM BAYAR
-                ================================================== --}}
 
                 @else
 
+                    {{-- NOT PAID --}}
                     <span
-                        class="inline-flex items-center gap-2 rounded-xl bg-white/20 px-5 py-3 text-sm font-bold text-white">
+                        class="inline-flex items-center gap-2 rounded-xl bg-white/20 px-5 py-3 text-sm font-bold text-white"
+                    >
 
                         <i class="bi bi-clock"></i>
 
                         Belum Bayar
+
+                    </span>
+
+                @endif
+
+
+
+                {{-- =================================================
+                     PARTICIPANT VERIFICATION
+                ================================================== --}}
+
+                @if (
+                    $registration->payment_status === 'paid' &&
+                    $registration->status !== 'verified'
+                )
+
+                    <form
+                        action="{{ route('admin.registrations.verify', $registration->id) }}"
+                        method="POST"
+                        onsubmit="return confirm('Apakah Anda yakin ingin memverifikasi peserta ini?')"
+                    >
+
+                        @csrf
+                        @method('PATCH')
+
+                        <button
+                            type="submit"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-blue-700"
+                        >
+
+                            <i class="bi bi-person-check-fill"></i>
+
+                            Verifikasi Peserta
+
+                        </button>
+
+                    </form>
+
+                @elseif ($registration->status === 'verified')
+
+                    <span
+                        class="inline-flex items-center gap-2 rounded-xl bg-green-100 px-5 py-3 text-sm font-bold text-green-700"
+                    >
+
+                        <i class="bi bi-person-check-fill"></i>
+
+                        Peserta Terverifikasi
 
                     </span>
 
@@ -213,12 +268,13 @@
 
 
 
-    {{-- ===========================================================
-        BIODATA PESERTA
-    ============================================================ --}}
+    {{-- =========================================================
+         BIODATA PESERTA
+    ========================================================== --}}
 
     <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
 
+        {{-- HEADER --}}
         <div class="border-b bg-slate-50 px-6 py-6 sm:px-8">
 
             <div class="flex items-center gap-3">
@@ -246,9 +302,12 @@
         </div>
 
 
+
+        {{-- BODY --}}
         <div class="grid gap-6 p-6 sm:p-8 md:grid-cols-2">
 
-            {{-- Nama --}}
+
+            {{-- NAMA --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -256,13 +315,13 @@
                 </p>
 
                 <h3 class="mt-2 text-lg font-bold text-slate-800">
-                    {{ $registration->full_name }}
+                    {{ $registration->full_name ?? '-' }}
                 </h3>
 
             </div>
 
 
-            {{-- Program --}}
+            {{-- PROGRAM --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -283,14 +342,14 @@
                     NIK
                 </p>
 
-                <h3 class="mt-2 text-lg font-semibold text-slate-800">
-                    {{ $registration->nik }}
+                <h3 class="mt-2 break-all text-lg font-semibold text-slate-800">
+                    {{ $registration->nik ?? '-' }}
                 </h3>
 
             </div>
 
 
-            {{-- Gender --}}
+            {{-- GENDER --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -298,13 +357,13 @@
                 </p>
 
                 <h3 class="mt-2 text-lg font-semibold text-slate-800">
-                    {{ $registration->gender }}
+                    {{ $registration->gender ?? '-' }}
                 </h3>
 
             </div>
 
 
-            {{-- Tempat Tanggal Lahir --}}
+            {{-- TEMPAT / TANGGAL LAHIR --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -313,16 +372,21 @@
 
                 <h3 class="mt-2 text-lg font-semibold text-slate-800">
 
-                    {{ $registration->birth_place }},
+                    {{ $registration->birth_place ?? '-' }}
 
-                    {{ $registration->birth_date?->format('d F Y') ?? '-' }}
+                    @if ($registration->birth_date)
+
+                        ,
+                        {{ $registration->birth_date->format('d F Y') }}
+
+                    @endif
 
                 </h3>
 
             </div>
 
 
-            {{-- WhatsApp --}}
+            {{-- WHATSAPP --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -330,13 +394,13 @@
                 </p>
 
                 <h3 class="mt-2 text-lg font-semibold text-slate-800">
-                    {{ $registration->phone }}
+                    {{ $registration->phone ?? '-' }}
                 </h3>
 
             </div>
 
 
-            {{-- Email --}}
+            {{-- EMAIL --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -350,7 +414,7 @@
             </div>
 
 
-            {{-- Pendidikan --}}
+            {{-- PENDIDIKAN --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -364,7 +428,7 @@
             </div>
 
 
-            {{-- Pekerjaan --}}
+            {{-- PEKERJAAN --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -378,7 +442,43 @@
             </div>
 
 
-            {{-- Tanggal --}}
+            {{-- STATUS PESERTA --}}
+            <div class="rounded-2xl bg-slate-50 p-5">
+
+                <p class="text-sm text-slate-500">
+                    Status Peserta
+                </p>
+
+                <div class="mt-2">
+
+                    @if ($registration->status === 'verified')
+
+                        <span class="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Terverifikasi
+
+                        </span>
+
+                    @else
+
+                        <span class="inline-flex items-center gap-2 rounded-full bg-orange-100 px-4 py-2 text-sm font-semibold text-orange-700">
+
+                            <i class="bi bi-hourglass-split"></i>
+
+                            Menunggu Verifikasi
+
+                        </span>
+
+                    @endif
+
+                </div>
+
+            </div>
+
+
+            {{-- TANGGAL --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -394,16 +494,16 @@
             </div>
 
 
-            {{-- Alamat --}}
+            {{-- ALAMAT --}}
             <div class="rounded-2xl bg-slate-50 p-5 md:col-span-2">
 
                 <p class="text-sm text-slate-500">
                     Alamat
                 </p>
 
-                <h3 class="mt-2 text-lg leading-relaxed text-slate-800">
-                    {{ $registration->address }}
-                </h3>
+                <p class="mt-2 text-lg leading-relaxed text-slate-800">
+                    {{ $registration->address ?? '-' }}
+                </p>
 
             </div>
 
@@ -413,12 +513,13 @@
 
 
 
-    {{-- ===========================================================
-        INFORMASI PEMBAYARAN
-    ============================================================ --}}
+    {{-- =========================================================
+         INFORMASI PEMBAYARAN
+    ========================================================== --}}
 
     <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
 
+        {{-- HEADER --}}
         <div class="border-b bg-slate-50 px-6 py-6 sm:px-8">
 
             <div class="flex items-center gap-3">
@@ -446,16 +547,19 @@
         </div>
 
 
+
+        {{-- BODY --}}
         <div class="grid gap-6 p-6 sm:p-8 md:grid-cols-2">
 
-            {{-- Status --}}
+
+            {{-- STATUS --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="mb-3 text-sm text-slate-500">
                     Status Pembayaran
                 </p>
 
-                @if($registration->payment_status === 'paid')
+                @if ($registration->payment_status === 'paid')
 
                     <span class="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
 
@@ -465,7 +569,7 @@
 
                     </span>
 
-                @elseif($registration->payment_status === 'waiting_verification')
+                @elseif ($registration->payment_status === 'waiting_verification')
 
                     <span class="inline-flex items-center gap-2 rounded-full bg-yellow-100 px-4 py-2 text-sm font-semibold text-yellow-700">
 
@@ -475,7 +579,7 @@
 
                     </span>
 
-                @elseif($registration->payment_status === 'rejected')
+                @elseif ($registration->payment_status === 'rejected')
 
                     <span class="inline-flex items-center gap-2 rounded-full bg-red-100 px-4 py-2 text-sm font-semibold text-red-700">
 
@@ -500,7 +604,7 @@
             </div>
 
 
-            {{-- Metode --}}
+            {{-- METODE --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -509,7 +613,7 @@
 
                 <div class="mt-2 flex items-center gap-3">
 
-                    @if($registration->payment_method === 'qris')
+                    @if ($registration->payment_method === 'qris')
 
                         <i class="bi bi-qr-code text-2xl text-red-500"></i>
 
@@ -517,7 +621,7 @@
                             QRIS
                         </span>
 
-                    @elseif($registration->payment_method === 'transfer')
+                    @elseif ($registration->payment_method === 'transfer')
 
                         <i class="bi bi-bank text-2xl text-blue-600"></i>
 
@@ -540,54 +644,69 @@
             </div>
 
 
-            {{-- Bukti --}}
-            <div class="rounded-2xl bg-slate-50 p-5">
+            {{-- BUKTI PEMBAYARAN --}}
+            <div class="rounded-2xl bg-slate-50 p-5 md:col-span-2">
 
-                <p class="text-sm text-slate-500">
-                    Bukti Pembayaran
-                </p>
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-                @if($registration->payment_proof)
+                    <div>
 
-                    <div class="mt-3 flex items-center gap-3">
+                        <p class="text-sm text-slate-500">
+                            Bukti Pembayaran
+                        </p>
 
-                        <span class="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+                        @if ($registration->payment_proof)
 
-                            <i class="bi bi-check-circle-fill"></i>
+                            <div class="mt-2 flex items-center gap-2">
 
-                            Sudah Upload
+                                <span class="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
 
-                        </span>
+                                    <i class="bi bi-check-circle-fill"></i>
 
-                        <a
-                            href="{{ asset('storage/'.$registration->payment_proof) }}"
-                            target="_blank"
-                            class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700">
+                                    Sudah Upload
 
-                            <i class="bi bi-eye"></i>
+                                </span>
 
-                            Lihat
+                            </div>
 
-                        </a>
+                        @else
+
+                            <span class="mt-2 inline-flex items-center gap-2 rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-600">
+
+                                <i class="bi bi-image"></i>
+
+                                Belum Upload
+
+                            </span>
+
+                        @endif
 
                     </div>
 
-                @else
 
-                    <span class="mt-2 inline-flex items-center gap-2 rounded-full bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-600">
+                    @if ($registration->payment_proof)
 
-                        <i class="bi bi-image"></i>
+                        <a
+                            href="{{ asset('storage/' . $registration->payment_proof) }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+                        >
 
-                        Belum Upload
+                            <i class="bi bi-eye"></i>
 
-                    </span>
+                            Lihat Bukti Pembayaran
 
-                @endif
+                        </a>
+
+                    @endif
+
+                </div>
 
             </div>
 
 
-            {{-- Tanggal Pembayaran --}}
+            {{-- PAID AT --}}
             <div class="rounded-2xl bg-slate-50 p-5">
 
                 <p class="text-sm text-slate-500">
@@ -596,7 +715,7 @@
 
                 <h3 class="mt-2 text-lg font-semibold text-slate-800">
 
-                    @if($registration->paid_at)
+                    @if ($registration->paid_at)
 
                         {{ $registration->paid_at->format('d F Y H:i') }}
 
@@ -612,11 +731,34 @@
 
             </div>
 
+
+            {{-- REGISTRATION FEE --}}
+            <div class="rounded-2xl bg-slate-50 p-5">
+
+                <p class="text-sm text-slate-500">
+                    Biaya Pendaftaran
+                </p>
+
+                <h3 class="mt-2 text-xl font-extrabold text-[#2E3192]">
+
+                    Rp
+                    {{ number_format(
+                        $registration->program->registration_fee ?? 0,
+                        0,
+                        ',',
+                        '.'
+                    ) }}
+
+                </h3>
+
+            </div>
+
         </div>
 
 
-        {{-- Status info --}}
-        @if($registration->payment_status === 'waiting_verification')
+
+        {{-- PAYMENT MESSAGE --}}
+        @if ($registration->payment_status === 'waiting_verification')
 
             <div class="border-t border-yellow-200 bg-yellow-50 px-6 py-5 sm:px-8">
 
@@ -633,7 +775,8 @@
                         <p class="mt-1 text-sm leading-6 text-yellow-700">
 
                             Peserta telah mengirimkan bukti pembayaran.
-                            Silakan periksa bukti pembayaran sebelum menyetujui atau menolaknya.
+                            Silakan periksa bukti tersebut sebelum melakukan
+                            approve atau reject.
 
                         </p>
 
@@ -643,7 +786,7 @@
 
             </div>
 
-        @elseif($registration->payment_status === 'paid')
+        @elseif ($registration->payment_status === 'paid')
 
             <div class="border-t border-green-200 bg-green-50 px-6 py-5 sm:px-8">
 
@@ -658,9 +801,7 @@
                         </h3>
 
                         <p class="mt-1 text-sm leading-6 text-green-700">
-
                             Pembayaran peserta telah disetujui oleh admin.
-
                         </p>
 
                     </div>
@@ -669,7 +810,7 @@
 
             </div>
 
-        @elseif($registration->payment_status === 'rejected')
+        @elseif ($registration->payment_status === 'rejected')
 
             <div class="border-t border-red-200 bg-red-50 px-6 py-5 sm:px-8">
 
@@ -684,10 +825,8 @@
                         </h3>
 
                         <p class="mt-1 text-sm leading-6 text-red-700">
-
-                            Bukti pembayaran peserta ditolak.
-                            Peserta perlu melakukan pembayaran kembali dan mengirimkan bukti yang sesuai.
-
+                            Peserta perlu melakukan pembayaran kembali
+                            dan mengirimkan bukti pembayaran yang sesuai.
                         </p>
 
                     </div>
@@ -702,69 +841,138 @@
 
 
 
-    {{-- ===========================================================
-    DOKUMEN PESERTA
-============================================================ --}}
+    {{-- =========================================================
+         DOKUMEN PESERTA
+    ========================================================== --}}
 
-<div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+    <div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
 
-    <div class="border-b bg-slate-50 px-6 py-6 sm:px-8">
+        {{-- HEADER --}}
+        <div class="border-b bg-slate-50 px-6 py-6 sm:px-8">
 
-        <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3">
 
-            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100">
-                <i class="bi bi-folder2-open text-2xl text-orange-500"></i>
-            </div>
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-orange-100">
 
-            <div>
-                <h2 class="text-xl font-bold text-slate-800">
-                    Dokumen Peserta
-                </h2>
+                    <i class="bi bi-folder2-open text-2xl text-orange-500"></i>
 
-                <p class="text-sm text-slate-500">
-                    Seluruh dokumen yang telah diupload oleh peserta.
-                </p>
+                </div>
+
+                <div>
+
+                    <h2 class="text-xl font-bold text-slate-800">
+                        Dokumen Peserta
+                    </h2>
+
+                    <p class="text-sm text-slate-500">
+                        Seluruh dokumen yang telah diupload oleh peserta.
+                    </p>
+
+                </div>
+
             </div>
 
         </div>
 
-    </div>
 
 
-    <div class="p-6 sm:p-8">
+        {{-- BODY --}}
+        <div class="p-6 sm:p-8">
 
-        @if($registration->documents && $registration->documents->count() > 0)
+            @if ($registration->documents && $registration->documents->count() > 0)
 
-            <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 
-                @foreach($registration->documents as $document)
+                    @foreach ($registration->documents as $document)
 
-                    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-                        {{-- Preview --}}
-                        <div class="bg-slate-100 p-3">
+                            {{-- PREVIEW --}}
+                            <div class="bg-slate-100 p-3">
 
-                            @if($document->mime_type && str_starts_with($document->mime_type, 'image/'))
+                                @php
+                                    $documentUrl = asset(
+                                        'storage/' .
+                                        $document->file_path
+                                    );
 
-                                <a
-                                    href="{{ asset('storage/' . $document->file_path) }}"
-                                    target="_blank"
-                                    class="group block overflow-hidden rounded-xl"
-                                >
+                                    $mimeType =
+                                        $document->mime_type ??
+                                        '';
 
-                                    <img
-                                        src="{{ asset('storage/' . $document->file_path) }}"
-                                        alt="{{ $document->original_name }}"
-                                        class="h-64 w-full object-cover transition duration-300 group-hover:scale-105"
+                                    $isImage =
+                                        str_starts_with(
+                                            $mimeType,
+                                            'image/'
+                                        );
+
+                                    $isPdf =
+                                        $mimeType ===
+                                        'application/pdf'
+                                        ||
+                                        str_ends_with(
+                                            strtolower(
+                                                $document->original_name ?? ''
+                                            ),
+                                            '.pdf'
+                                        );
+                                @endphp
+
+
+                                {{-- IMAGE --}}
+                                @if ($isImage)
+
+                                    <a
+                                        href="{{ $documentUrl }}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="group block overflow-hidden rounded-xl"
                                     >
 
-                                </a>
+                                        <img
+                                            src="{{ $documentUrl }}"
+                                            alt="{{ $document->original_name }}"
+                                            class="h-64 w-full object-cover transition duration-300 group-hover:scale-105"
+                                        >
 
-                            @else
+                                    </a>
 
-                                <div class="flex h-64 items-center justify-center rounded-xl bg-slate-200">
 
-                                    <div class="text-center">
+                                {{-- PDF --}}
+                                @elseif ($isPdf)
+
+                                    <div class="flex h-64 flex-col items-center justify-center rounded-xl bg-red-50">
+
+                                        <div class="flex h-20 w-20 items-center justify-center rounded-2xl bg-white shadow-sm">
+
+                                            <i class="bi bi-file-earmark-pdf-fill text-5xl text-red-500"></i>
+
+                                        </div>
+
+                                        <p class="mt-4 text-sm font-bold text-slate-700">
+                                            Dokumen PDF
+                                        </p>
+
+                                        <a
+                                            href="{{ $documentUrl }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="mt-3 inline-flex items-center gap-2 rounded-xl bg-red-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-red-700"
+                                        >
+
+                                            <i class="bi bi-box-arrow-up-right"></i>
+
+                                            Buka PDF
+
+                                        </a>
+
+                                    </div>
+
+
+                                {{-- OTHER --}}
+                                @else
+
+                                    <div class="flex h-64 flex-col items-center justify-center rounded-xl bg-slate-200">
 
                                         <i class="bi bi-file-earmark-text text-6xl text-slate-400"></i>
 
@@ -772,85 +980,177 @@
                                             File Dokumen
                                         </p>
 
+                                        <a
+                                            href="{{ $documentUrl }}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            class="mt-3 inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-xs font-semibold text-white transition hover:bg-blue-700"
+                                        >
+
+                                            <i class="bi bi-eye"></i>
+
+                                            Buka File
+
+                                        </a>
+
+                                    </div>
+
+                                @endif
+
+                            </div>
+
+
+
+                            {{-- INFORMATION --}}
+                            <div class="p-5">
+
+
+                                {{-- DOCUMENT TYPE --}}
+                                <div class="mb-4">
+
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                                        Jenis Dokumen
+                                    </p>
+
+                                    <div class="mt-1">
+
+                                        @php
+                                            $typeLabel = match (
+                                                strtolower(
+                                                    $document->document_type ?? ''
+                                                )
+                                            ) {
+                                                'ktp' => 'KTP',
+                                                'kk' => 'Kartu Keluarga',
+                                                'ijazah' => 'Ijazah',
+                                                'paspor' => 'Paspor',
+                                                'skck' => 'SKCK',
+                                                default => 'Lainnya',
+                                            };
+                                        @endphp
+
+                                        <span class="inline-flex rounded-full bg-[#2E3192]/10 px-3 py-1.5 text-xs font-bold text-[#2E3192]">
+                                            {{ $typeLabel }}
+                                        </span>
+
                                     </div>
 
                                 </div>
 
-                            @endif
 
-                        </div>
+                                {{-- FILE NAME --}}
+                                <div class="mb-4">
+
+                                    <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                                        Nama File
+                                    </p>
+
+                                    <p class="mt-1 break-all text-sm text-slate-600">
+                                        {{ $document->original_name ?? '-' }}
+                                    </p>
+
+                                </div>
 
 
-                        {{-- Informasi --}}
-                        <div class="p-5">
+                                {{-- FILE SIZE --}}
+                                @if (!empty($document->file_size))
 
-                            <div class="mb-3">
+                                    <div class="mb-4">
 
-                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                                    Jenis Dokumen
-                                </p>
+                                        <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">
+                                            Ukuran
+                                        </p>
 
-                                <p class="mt-1 text-sm font-bold text-slate-800">
-                                    {{ ucfirst($document->document_type) }}
-                                </p>
+                                        <p class="mt-1 text-sm text-slate-600">
+
+                                            @if ($document->file_size >= 1048576)
+
+                                                {{ number_format(
+                                                    $document->file_size / 1048576,
+                                                    1
+                                                ) }}
+                                                MB
+
+                                            @else
+
+                                                {{ number_format(
+                                                    $document->file_size / 1024,
+                                                    1
+                                                ) }}
+                                                KB
+
+                                            @endif
+
+                                        </p>
+
+                                    </div>
+
+                                @endif
+
+
+                                {{-- OPEN BUTTON --}}
+                                <a
+                                    href="{{ $documentUrl }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+                                >
+
+                                    <i class="bi bi-eye"></i>
+
+                                    Lihat Dokumen
+
+                                </a>
 
                             </div>
 
-
-                            <div class="mb-4">
-
-                                <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">
-                                    Nama File
-                                </p>
-
-                                <p class="mt-1 break-all text-sm text-slate-600">
-                                    {{ $document->original_name }}
-                                </p>
-
-                            </div>
-
-
-                            <a
-                                href="{{ asset('storage/' . $document->file_path) }}"
-                                target="_blank"
-                                class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
-                            >
-
-                                <i class="bi bi-eye"></i>
-
-                                Lihat Dokumen
-
-                            </a>
-
                         </div>
 
-                    </div>
+                    @endforeach
 
-                @endforeach
+                </div>
 
-            </div>
+            @else
 
-        @else
+                {{-- EMPTY STATE --}}
+                <div class="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 px-6 py-16 text-center">
 
-            <div class="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50 px-6 py-16 text-center">
+                    <i class="bi bi-folder-x text-6xl text-slate-300"></i>
 
-                <i class="bi bi-folder-x text-6xl text-slate-300"></i>
+                    <h3 class="mt-4 text-lg font-bold text-slate-700">
+                        Belum Ada Dokumen
+                    </h3>
 
-                <h3 class="mt-4 text-lg font-bold text-slate-700">
-                    Belum Ada Dokumen
-                </h3>
+                    <p class="mt-2 text-sm text-slate-500">
+                        Peserta belum mengupload dokumen pendaftaran.
+                    </p>
 
-                <p class="mt-2 text-sm text-slate-500">
-                    Peserta belum mengupload dokumen pendaftaran.
-                </p>
+                </div>
 
-            </div>
+            @endif
 
-        @endif
+        </div>
 
     </div>
 
-</div>
+
+
+    {{-- =========================================================
+         BOTTOM ACTION
+    ========================================================== --}}
+
+    <div class="flex justify-end">
+
+        <a
+            href="{{ route('admin.registrations.index') }}"
+            class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+        >
+
+            <i class="bi bi-arrow-left"></i>
+
+            Kembali ke Daftar Peserta
+
+        </a>
 
     </div>
 

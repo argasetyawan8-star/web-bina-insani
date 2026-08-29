@@ -1,26 +1,36 @@
 @extends('layouts.landing')
 
-@section('title', 'Bina Insani')
+@section('title', 'Home')
 
 @section('content')
 
-@include('landing.sections.hero')
+    {{-- =========================================================
+         HOME
+    ========================================================== --}}
 
-@include('landing.sections.about')
+    {{-- HERO --}}
+    @include('landing.sections.hero')
 
-@include('landing.sections.programs')
 
-@include('landing.sections.why-us')
+    {{-- ABOUT SINGKAT --}}
+    @include('landing.sections.about')
 
-@include('landing.sections.process')
+    {{-- Gallery --}}
 
-@include('landing.sections.gallery')
+    @include('landing.sections.gallery')
 
-@include('landing.sections.faq')
 
-@include('landing.sections.sector')
+    {{-- KEUNGGULAN SINGKAT --}}
+    @include('landing.sections.why-us')
 
-@include('landing.sections.contact')
+
+    {{-- ALUR PENDAFTARAN SINGKAT --}}
+    @include('landing.sections.process')
+
+    {{-- Sector --}}
+     @include('landing.sections.sector')
+
+    
 
 
 

@@ -30,11 +30,41 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Validate Registration Data
+        |--------------------------------------------------------------------------
+        */
+
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+
+            'email' => [
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                'max:255',
+                'unique:' . User::class,
+            ],
+
+            'password' => [
+                'required',
+                'confirmed',
+                Rules\Password::defaults(),
+            ],
         ]);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Create User
+        |--------------------------------------------------------------------------
+        */
 
         $user = User::create([
             'name' => $request->name,
@@ -42,10 +72,50 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+
+        /*
+        |--------------------------------------------------------------------------
+        | Assign Participant Role
+        |--------------------------------------------------------------------------
+        |
+        | Semua akun yang mendaftar melalui halaman Register
+        | otomatis mendapatkan role "peserta".
+        |
+        */
+
+        $user->assignRole('peserta');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Registered Event
+        |--------------------------------------------------------------------------
+        */
+
         event(new Registered($user));
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Login New User
+        |--------------------------------------------------------------------------
+        */
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect
+        |--------------------------------------------------------------------------
+        |
+        | Setelah registrasi, user diarahkan ke halaman yang
+        | sebelumnya ingin mereka akses.
+        |
+        | Kalau tidak ada intended URL, user kembali ke Home.
+        |
+        */
+
+        return redirect()->intended(route('home'));
     }
 }

@@ -1,160 +1,271 @@
-{{-- GALLERY SECTION --}}
+{{-- =========================================================
+     ALUMNI GALLERY
+========================================================= --}}
 
-<section id="gallery-section" class="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-24">
+<section
+    id="gallery"
+    class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+>
 
-    {{-- Background Decoration --}}
-    <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div class="absolute -left-32 -top-32 h-72 w-72 rounded-full bg-[#2E3192]/10 blur-3xl sm:h-96 sm:w-96"></div>
+    {{-- =====================================================
+         BACKGROUND
+    ====================================================== --}}
 
-        <div class="absolute -bottom-32 -right-32 h-72 w-72 rounded-full bg-[#F6D21A]/10 blur-3xl sm:h-96 sm:w-96"></div>
+    <div
+        class="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+    >
+        <div
+            class="absolute -left-32 top-20 h-72 w-72 rounded-full bg-[#2E3192]/8 blur-3xl"
+        ></div>
+
+        <div
+            class="absolute -right-32 bottom-10 h-80 w-80 rounded-full bg-[#F6D21A]/10 blur-3xl"
+        ></div>
     </div>
 
 
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    {{-- =====================================================
+         CONTAINER
+    ====================================================== --}}
 
-        {{-- HEADING --}}
+    <div
+        class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+    >
+
+        {{-- =================================================
+             HEADER
+        ================================================== --}}
+
         <div
-            id="gallery"
             class="mx-auto max-w-3xl text-center"
             data-aos="fade-up"
         >
 
-            {{-- Badge --}}
             <span
-                class="inline-flex items-center gap-2 rounded-full bg-[#2E3192]/10 px-3 py-1.5 text-xs font-semibold text-[#2E3192] sm:px-4 sm:py-2 sm:text-sm"
+                class="inline-flex items-center gap-2 text-sm font-bold text-[#2E3192]"
             >
-                <i class="bi bi-images"></i>
-                Dokumentasi
+
+                <span class="h-2 w-2 rounded-full bg-[#F6D21A]"></span>
+
+                JEJAK ALUMNI
+
             </span>
 
 
-            {{-- Title --}}
             <h2
-                class="mt-5 text-3xl font-extrabold leading-tight text-[#1E293B] sm:mt-6 sm:text-4xl lg:text-5xl"
+                class="mt-4 text-3xl font-black tracking-tight text-[#1E293B] sm:text-4xl lg:text-5xl"
             >
 
-                Alumni Bina Insani
-
+                Mereka Telah
                 <span
-                    class="block bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent"
+                    class="bg-gradient-to-r from-[#2E3192] to-[#ED1C24] bg-clip-text text-transparent"
                 >
-                    Yang Sudah Berhasil Berangkat ke Korea
+                    Melangkah ke Korea
                 </span>
 
             </h2>
 
 
-            {{-- Description --}}
             <p
-                class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600 sm:mt-6 sm:text-base sm:leading-8 lg:text-lg"
+                class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-500 sm:text-base sm:leading-8"
             >
-                Beberapa dokumentasi Alumni Bina Insani yang telah berhasil
-                berangkat ke Korea Selatan untuk bekerja dan meningkatkan
-                kualitas hidup mereka. Semoga menjadi inspirasi bagi calon
-                peserta lainnya.
+
+                Beberapa dokumentasi alumni Bina Insani yang telah melalui
+                proses persiapan dan melanjutkan perjalanan menuju Korea Selatan.
+
             </p>
 
         </div>
 
 
 
-        {{-- GALLERY --}}
-        <div
-            class="mt-12 grid grid-cols-1 gap-5 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:mt-20 lg:grid-cols-3"
-        >
+        {{-- =================================================
+             GALLERY
+        ================================================== --}}
 
-            @forelse($galleries as $gallery)
+        @if ($galleries->count() > 0)
 
-                <div
-                    data-aos="zoom-in"
-                    class="group relative overflow-hidden rounded-2xl shadow-lg sm:rounded-[28px]"
-                >
+            <div
+                class="mt-12 columns-1 gap-5 space-y-5 sm:mt-14 sm:columns-2 sm:space-y-5 lg:mt-16 lg:columns-3"
+            >
 
-                    {{-- IMAGE --}}
-                    <img
-                        src="{{ asset('storage/'.$gallery->image) }}"
-                        class="h-64 w-full object-cover transition duration-700 group-hover:scale-110 sm:h-72 lg:h-80"
-                        alt="Dokumentasi Alumni Bina Insani"
+                @foreach ($galleries as $index => $gallery)
+
+                    <a
+                        href="{{ asset('storage/' . $gallery->image) }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="group relative block overflow-hidden rounded-[24px] bg-slate-100 break-inside-avoid"
+                        data-aos="fade-up"
+                        data-aos-delay="{{ min($index * 80, 400) }}"
                     >
 
-
-                    {{-- Overlay --}}
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-[#2E3192]/90 via-black/30 to-transparent opacity-0 transition duration-500 group-hover:opacity-100"
-                    ></div>
-
-
-                    {{-- Content --}}
-                    <div
-                        class="absolute bottom-0 left-0 right-0 translate-y-8 p-4 text-white opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:p-6"
-                    >
-
-                        <div
-                            class="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#F6D21A]/90 text-[#2E3192] backdrop-blur sm:mb-4 sm:h-14 sm:w-14 sm:rounded-2xl"
+                        {{-- IMAGE --}}
+                        <img
+                            src="{{ asset('storage/' . $gallery->image) }}"
+                            alt="{{ $gallery->title ?? 'Dokumentasi Alumni Bina Insani' }}"
+                            class="h-auto w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                         >
-                            <i class="bi bi-camera-fill text-xl sm:text-2xl"></i>
+
+
+                        {{-- SUBTLE OVERLAY --}}
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/70 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100"
+                        ></div>
+
+
+                        {{-- OPEN BUTTON --}}
+                        <div
+                            class="absolute right-4 top-4 flex h-10 w-10 translate-y-2 items-center justify-center rounded-full bg-white/90 text-[#1E293B] opacity-0 shadow-lg backdrop-blur transition duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                        >
+
+                            <i class="bi bi-arrow-up-right"></i>
+
                         </div>
 
 
-                        <h3 class="text-lg font-bold sm:text-2xl">
-                            Dokumentasi Alumni
-                        </h3>
+                        {{-- CAPTION --}}
+                        <div
+                            class="absolute inset-x-4 bottom-4 translate-y-3 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+                        >
+
+                            <div
+                                class="rounded-2xl border border-white/15 bg-[#0F172A]/55 p-4 backdrop-blur-md"
+                            >
+
+                                <div
+                                    class="flex items-center gap-3"
+                                >
+
+                                    <div
+                                        class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#F6D21A] text-[#1E293B]"
+                                    >
+
+                                        <i class="bi bi-airplane-fill text-sm"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <p
+                                            class="text-xs font-semibold text-white"
+                                        >
+                                            Alumni Bina Insani
+                                        </p>
+
+                                        <p
+                                            class="mt-0.5 text-[11px] text-white/70"
+                                        >
+                                            Korea Selatan
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+                @endforeach
+
+            </div>
 
 
-                        <p class="mt-1 text-sm text-white/90 sm:mt-2">
-                            Bina Insani Training Center
-                        </p>
+            {{-- =================================================
+                 BOTTOM MESSAGE
+            ================================================== --}}
 
-                    </div>
-
-                </div>
-
-
-            @empty
+            <div
+                class="mx-auto mt-10 max-w-4xl text-center sm:mt-14"
+                data-aos="fade-up"
+            >
 
                 <div
-                    class="col-span-full py-16 text-center text-sm text-slate-500 sm:py-20 sm:text-base"
+                    class="mx-auto mb-5 h-px w-16 bg-[#F6D21A]"
+                ></div>
+
+
+                <p
+                    class="text-lg font-bold leading-7 text-[#1E293B] sm:text-2xl sm:leading-9"
                 >
-                    Belum ada foto yang diupload.
+
+                    Setiap perjalanan besar
+                    <span class="text-[#2E3192]">
+                        dimulai dari satu langkah.
+                    </span>
+
+                </p>
+
+
+                <p
+                    class="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base"
+                >
+
+                    Persiapkan langkahmu bersama Bina Insani melalui
+                    program pelatihan yang tersedia.
+
+                </p>
+
+
+                <a
+                    href="{{ route('programs.index') }}"
+                    class="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#2E3192] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#2E3192]/15 transition duration-300 hover:-translate-y-1 hover:bg-[#252879] hover:shadow-xl sm:px-7 sm:py-4 sm:text-base"
+                >
+
+                    Lihat Program
+
+                    <i
+                        class="bi bi-arrow-right transition duration-300 group-hover:translate-x-1"
+                    ></i>
+
+                </a>
+
+            </div>
+
+
+        @else
+
+            {{-- =================================================
+                 EMPTY STATE
+            ================================================== --}}
+
+            <div
+                class="mx-auto mt-12 max-w-2xl rounded-[28px] border border-slate-200 bg-slate-50 px-6 py-16 text-center sm:mt-14 sm:py-20"
+                data-aos="fade-up"
+            >
+
+                <div
+                    class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#2E3192]/10 text-[#2E3192]"
+                >
+
+                    <i class="bi bi-images text-2xl"></i>
+
                 </div>
 
-            @endforelse
 
-        </div>
-
-
-
-        {{-- BOTTOM CARD --}}
-        <div
-            class="mt-12 rounded-3xl bg-gradient-to-r from-[#2E3192] via-[#2E3192] to-[#ED1C24] p-6 text-center text-white shadow-2xl sm:mt-16 sm:rounded-[32px] sm:p-10 lg:mt-20 lg:p-12"
-            data-aos="fade-up"
-        >
-
-            <h3
-                class="text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl"
-            >
-                Bergabunglah Bersama Ribuan Alumni
-            </h3>
+                <h3
+                    class="mt-5 text-xl font-bold text-[#1E293B] sm:text-2xl"
+                >
+                    Dokumentasi Alumni Belum Tersedia
+                </h3>
 
 
-            <p
-                class="mx-auto mt-4 max-w-2xl text-sm leading-6 text-white/80 sm:mt-5 sm:text-base sm:leading-7 lg:text-lg"
-            >
-                Jadilah bagian dari peserta Bina Insani yang telah berhasil
-                mempersiapkan diri menuju kesempatan kerja di Korea Selatan.
-            </p>
+                <p
+                    class="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500"
+                >
 
+                    Dokumentasi alumni akan ditampilkan setelah
+                    ditambahkan melalui panel administrasi.
 
-            <a
-                href="#programs"
-                class="mt-6 inline-flex items-center rounded-xl bg-[#F6D21A] px-6 py-3 text-sm font-bold text-[#2E3192] shadow-lg transition hover:scale-105 sm:mt-8 sm:rounded-2xl sm:px-8 sm:py-4 sm:text-base"
-            >
-                Daftar Sekarang
+                </p>
 
-                <i class="bi bi-arrow-right ms-2 sm:ms-3"></i>
-            </a>
+            </div>
 
-        </div>
+        @endif
 
     </div>
 

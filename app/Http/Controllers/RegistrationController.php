@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Program;
 use App\Http\Requests\RegistrationRequest;
+use App\Models\Program;
 use App\Services\RegistrationService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class RegistrationController extends Controller
 {
@@ -16,54 +19,98 @@ class RegistrationController extends Controller
         $this->registrationService = $registrationService;
     }
 
+
     /**
-     * Halaman Form Pendaftaran
+     * Halaman Form Pendaftaran.
      */
-    public function create(Program $program)
+    public function create(Program $program): View
     {
+        /*
+        |--------------------------------------------------------------------------
+        | Pastikan Program Masih Aktif
+        |--------------------------------------------------------------------------
+        */
+
+        abort_unless(
+            $program->is_active,
+            404
+        );
+
+
         return view(
             'registration.index',
             compact('program')
         );
     }
 
+
     /**
-     * Simpan Pendaftaran
+     * Simpan Pendaftaran.
      */
-    public function store(RegistrationRequest $request)
-    {
+    public function store(
+        RegistrationRequest $request
+    ): RedirectResponse {
+
         /*
         |--------------------------------------------------------------------------
-        | Ambil data yang sudah divalidasi
+        | Get Validated Data
         |--------------------------------------------------------------------------
-        |
-        | Karena kita sudah menggunakan RegistrationRequest,
-        | tidak perlu melakukan validate() kedua kali di sini.
-        |
         */
 
         $validated = $request->validated();
 
+
         /*
         |--------------------------------------------------------------------------
-        | Simpan Registration + Dokumen
+        | Force Program
         |--------------------------------------------------------------------------
         */
 
-        $registration = $this->registrationService->store(
-            $validated
-        );
+        $program = Program::query()
+            ->whereKey($validated['program_id'])
+            ->where('is_active', true)
+            ->firstOrFail();
+
 
         /*
         |--------------------------------------------------------------------------
-        | Redirect ke Halaman Pembayaran
+        | Force Authenticated Participant Email
+        |--------------------------------------------------------------------------
+        |
+        | Email tidak dipercaya dari request browser.
+        | Selalu gunakan email akun yang sedang login.
+        |
+        */
+
+        $validated['email'] =
+            Auth::user()->email;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Store Registration
+        |--------------------------------------------------------------------------
+        */
+
+        $registration =
+            $this->registrationService->store(
+                $validated
+            );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Redirect To Payment
         |--------------------------------------------------------------------------
         */
 
         return redirect()
             ->route(
                 'payment.index',
-                ['registration' => $registration->id]
+                [
+                    'registration' =>
+                        $registration->id,
+                ]
             )
             ->with(
                 'success',
@@ -71,13 +118,18 @@ class RegistrationController extends Controller
             );
     }
 
+
     /**
-     * Halaman Pembayaran
+     * Halaman Pembayaran.
+     *
+     * Method ini tetap dipertahankan untuk kompatibilitas
+     * dengan struktur lama project.
      */
-    public function payment($id)
+    public function payment(int $id): View
     {
-        $registration = $this->registrationService
-            ->findById((int) $id);
+        $registration =
+            $this->registrationService
+                ->findById($id);
 
         return view(
             'registration.payment',
@@ -85,13 +137,18 @@ class RegistrationController extends Controller
         );
     }
 
+
     /**
-     * Halaman Success
+     * Halaman Success.
+     *
+     * Method ini tetap dipertahankan untuk kompatibilitas
+     * dengan struktur lama project.
      */
-    public function success($id)
+    public function success(int $id): View
     {
-        $registration = $this->registrationService
-            ->findById((int) $id);
+        $registration =
+            $this->registrationService
+                ->findById($id);
 
         return view(
             'registration.success',

@@ -288,48 +288,7 @@
 
 
         {{-- CTA --}}
-        <div
-            class="mt-12 rounded-[24px] bg-gradient-to-r from-[#2E3192] to-[#ED1C24] p-6 text-white shadow-2xl sm:mt-16 sm:rounded-[32px] sm:p-8 lg:mt-24 lg:p-10"
-            data-aos="fade-up"
-        >
-
-            <div
-                class="flex flex-col items-center justify-between gap-6 text-center lg:flex-row lg:gap-8 lg:text-left"
-            >
-
-                <div class="min-w-0">
-
-                    <h3
-                        class="text-2xl font-bold leading-tight sm:text-3xl"
-                    >
-                        Semua Proses Dilakukan Secara Online
-                    </h3>
-
-
-                    <p
-                        class="mt-3 text-sm leading-6 text-white/80 sm:text-base sm:leading-7 lg:text-lg"
-                    >
-                        Daftar, upload dokumen, pembayaran, hingga verifikasi
-                        peserta dapat dilakukan melalui platform ini.
-                    </p>
-
-                </div>
-
-
-                <a
-                    href="#programs"
-                    class="inline-flex w-full shrink-0 items-center justify-center rounded-2xl bg-white px-6 py-3.5 text-sm font-bold text-[#2E3192] shadow-lg transition hover:scale-105 sm:w-auto sm:px-8 sm:py-4 sm:text-base"
-                >
-
-                    Mulai Sekarang
-
-                    <i class="bi bi-arrow-right ms-2"></i>
-
-                </a>
-
-            </div>
-
-        </div>
+        
 
 
     </div>

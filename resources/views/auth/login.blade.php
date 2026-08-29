@@ -6,32 +6,56 @@
 
             <div class="grid md:grid-cols-2">
 
-                {{-- LEFT SIDE --}}
-                <div class="relative hidden md:flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#2E3192] via-[#3b3fa5] to-[#ED1C24] p-10 text-white">
+
+                {{-- =========================================================
+                     LEFT SIDE
+                ========================================================== --}}
+                <div class="relative hidden flex-col justify-between overflow-hidden bg-gradient-to-br from-[#2E3192] via-[#3b3fa5] to-[#ED1C24] p-10 text-white md:flex">
 
                     {{-- Decorative Circle --}}
                     <div class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/10"></div>
+
                     <div class="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-white/10"></div>
 
+
+                    {{-- =====================================================
+                         TOP CONTENT
+                    ====================================================== --}}
                     <div class="relative z-10">
 
                         {{-- Logo --}}
                         <div class="mb-10 flex items-center gap-3">
 
                             <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-lg">
-                                <span class="text-xl font-black text-[#2E3192]">
-                                    BI
-                                </span>
+
+                                @if (setting('logo'))
+
+                                    <img
+                                        src="{{ asset('storage/' . setting('logo')) }}"
+                                        alt="{{ setting('website_name', 'Bina Insani') }}"
+                                        class="h-full w-full object-contain p-2"
+                                    >
+
+                                @else
+
+                                    <span class="text-xl font-black text-[#2E3192]">
+                                        BI
+                                    </span>
+
+                                @endif
+
                             </div>
 
                             <div>
+
                                 <h1 class="text-lg font-bold">
-                                    Bina Insani
+                                    {{ setting('website_name', 'Bina Insani') }}
                                 </h1>
 
                                 <p class="text-xs text-white/70">
                                     Lembaga Pelatihan Kerja
                                 </p>
+
                             </div>
 
                         </div>
@@ -45,16 +69,19 @@
                             </p>
 
                             <h2 class="text-4xl font-extrabold leading-tight">
+
                                 Bangun Masa Depan
+
                                 <span class="text-yellow-300">
                                     Bersama Bina Insani
                                 </span>
+
                             </h2>
 
                             <p class="mt-5 text-sm leading-7 text-white/80">
-                                Akses sistem Bina Insani untuk mengelola
-                                program pelatihan, peserta, pembayaran,
-                                dan informasi lainnya dengan mudah.
+                                Akses sistem Bina Insani untuk mengikuti program pelatihan,
+                                melakukan pendaftaran, mengunggah dokumen, dan memantau
+                                proses persiapan kerja ke Korea Selatan.
                             </p>
 
                         </div>
@@ -62,7 +89,9 @@
                     </div>
 
 
-                    {{-- Bottom --}}
+                    {{-- =====================================================
+                         BOTTOM
+                    ====================================================== --}}
                     <div class="relative z-10">
 
                         <div class="mb-5 flex items-center gap-3">
@@ -76,7 +105,9 @@
                         </div>
 
                         <p class="text-xs text-white/60">
-                            © {{ date('Y') }} Bina Insani. All rights reserved.
+                            © {{ date('Y') }}
+                            {{ setting('website_name', 'Bina Insani') }}.
+                            All rights reserved.
                         </p>
 
                     </div>
@@ -84,20 +115,40 @@
                 </div>
 
 
-                {{-- RIGHT SIDE --}}
+
+                {{-- =========================================================
+                     RIGHT SIDE
+                ========================================================== --}}
                 <div class="flex items-center justify-center p-8 sm:p-12">
 
                     <div class="w-full max-w-md">
 
-                        {{-- Mobile Logo --}}
+
+                        {{-- =================================================
+                             MOBILE LOGO
+                        ================================================== --}}
                         <div class="mb-8 text-center md:hidden">
 
                             <div class="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#2E3192] text-xl font-black text-white shadow-lg">
-                                BI
+
+                                @if (setting('logo'))
+
+                                    <img
+                                        src="{{ asset('storage/' . setting('logo')) }}"
+                                        alt="{{ setting('website_name', 'Bina Insani') }}"
+                                        class="h-full w-full rounded-2xl object-contain p-2"
+                                    >
+
+                                @else
+
+                                    BI
+
+                                @endif
+
                             </div>
 
                             <h1 class="text-xl font-bold text-slate-800">
-                                Bina Insani
+                                {{ setting('website_name', 'Bina Insani') }}
                             </h1>
 
                             <p class="text-sm text-slate-500">
@@ -107,34 +158,66 @@
                         </div>
 
 
-                        {{-- Heading --}}
+
+                        {{-- =================================================
+                             HEADING
+                        ================================================== --}}
                         <div class="mb-8">
 
-                            <h2 class="text-3xl font-bold tracking-tight text-slate-800">
-                                Selamat Datang 👋
-                            </h2>
+                            <div class="flex items-start justify-between gap-4">
 
-                            <p class="mt-2 text-sm text-slate-500">
-                                Silakan masuk untuk melanjutkan ke dashboard.
-                            </p>
+                                <div>
+
+                                    <h2 class="text-3xl font-bold tracking-tight text-slate-800">
+                                        Selamat Datang 👋
+                                    </h2>
+
+                                    <p class="mt-2 text-sm leading-6 text-slate-500">
+                                        Silakan masuk untuk melanjutkan ke sistem Bina Insani.
+                                    </p>
+
+                                </div>
+
+                                {{-- Back Home --}}
+                                <a
+                                    href="{{ route('home') }}"
+                                    aria-label="Kembali ke halaman utama"
+                                    class="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-400 transition hover:border-[#2E3192] hover:bg-[#2E3192]/5 hover:text-[#2E3192] sm:flex"
+                                >
+                                    <i class="bi bi-house"></i>
+                                </a>
+
+                            </div>
 
                         </div>
 
 
-                        {{-- Session Status --}}
+
+                        {{-- =================================================
+                             SESSION STATUS
+                        ================================================== --}}
                         <x-auth-session-status
                             class="mb-4"
                             :status="session('status')"
                         />
 
 
-                        {{-- Login Form --}}
-                        <form method="POST" action="{{ route('login') }}" class="space-y-5">
+
+                        {{-- =================================================
+                             LOGIN FORM
+                        ================================================== --}}
+                        <form
+                            method="POST"
+                            action="{{ route('login') }}"
+                            class="space-y-5"
+                        >
 
                             @csrf
 
 
-                            {{-- Email --}}
+                            {{-- =================================================
+                                 EMAIL
+                            ================================================== --}}
                             <div>
 
                                 <label
@@ -172,7 +255,10 @@
                             </div>
 
 
-                            {{-- Password --}}
+
+                            {{-- =================================================
+                                 PASSWORD
+                            ================================================== --}}
                             <div>
 
                                 <div class="mb-2 flex items-center justify-between">
@@ -204,6 +290,7 @@
                                         <i class="bi bi-lock text-slate-400"></i>
                                     </div>
 
+
                                     <input
                                         id="password"
                                         type="password"
@@ -214,12 +301,18 @@
                                         class="block w-full rounded-xl border-slate-200 bg-slate-50 py-3.5 pl-11 pr-12 text-sm text-slate-800 shadow-sm outline-none transition focus:border-[#2E3192] focus:bg-white focus:ring-2 focus:ring-[#2E3192]/20"
                                     >
 
+
+                                    {{-- Password Toggle --}}
                                     <button
                                         type="button"
                                         onclick="togglePassword()"
+                                        aria-label="Tampilkan atau sembunyikan password"
                                         class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 transition hover:text-[#2E3192]"
                                     >
-                                        <i id="passwordIcon" class="bi bi-eye"></i>
+                                        <i
+                                            id="passwordIcon"
+                                            class="bi bi-eye"
+                                        ></i>
                                     </button>
 
                                 </div>
@@ -232,7 +325,10 @@
                             </div>
 
 
-                            {{-- Remember --}}
+
+                            {{-- =================================================
+                                 REMEMBER ME
+                            ================================================== --}}
                             <div class="flex items-center">
 
                                 <label class="inline-flex cursor-pointer items-center">
@@ -253,14 +349,17 @@
                             </div>
 
 
-                            {{-- Button --}}
+
+                            {{-- =================================================
+                                 LOGIN BUTTON
+                            ================================================== --}}
                             <button
                                 type="submit"
                                 class="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2E3192] to-[#3f43a8] px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#2E3192]/20 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#2E3192]/30 active:translate-y-0"
                             >
 
                                 <span>
-                                    Masuk ke Dashboard
+                                    Masuk
                                 </span>
 
                                 <i class="bi bi-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
@@ -270,11 +369,77 @@
                         </form>
 
 
-                        {{-- Footer --}}
+
+                        {{-- =================================================
+                             REGISTER
+                        ================================================== --}}
+                        @if (Route::has('register'))
+
+                            <div class="mt-7">
+
+                                <div class="flex items-center gap-3">
+
+                                    <div class="h-px flex-1 bg-slate-200"></div>
+
+                                    <span class="text-xs font-medium text-slate-400">
+                                        atau
+                                    </span>
+
+                                    <div class="h-px flex-1 bg-slate-200"></div>
+
+                                </div>
+
+
+                                <p class="mt-5 text-center text-sm text-slate-500">
+
+                                    Belum punya akun?
+
+                                    <a
+                                        href="{{ route('register') }}"
+                                        class="font-bold text-[#2E3192] transition hover:text-[#ED1C24]"
+                                    >
+                                        Daftar sekarang
+                                    </a>
+
+                                </p>
+
+                            </div>
+
+                        @endif
+
+
+
+                        {{-- =================================================
+                             HOME MOBILE
+                        ================================================== --}}
+                        <div class="mt-6 text-center sm:hidden">
+
+                            <a
+                                href="{{ route('home') }}"
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-slate-500 transition hover:text-[#2E3192]"
+                            >
+                                <i class="bi bi-arrow-left"></i>
+                                Kembali ke halaman utama
+                            </a>
+
+                        </div>
+
+
+
+                        {{-- =================================================
+                             FOOTER
+                        ================================================== --}}
                         <div class="mt-8 text-center">
 
                             <p class="text-xs text-slate-400">
-                                Sistem Informasi Bina Insani
+                                {{ setting(
+                                    'website_name',
+                                    'Bina Insani Platform'
+                                ) }}
+                            </p>
+
+                            <p class="mt-1 text-[11px] text-slate-300">
+                                Sistem Informasi Pendaftaran
                             </p>
 
                         </div>
@@ -290,13 +455,19 @@
     </div>
 
 
-    {{-- Password Toggle --}}
-    <script>
 
+    {{-- =========================================================
+         PASSWORD TOGGLE
+    ========================================================== --}}
+    <script>
         function togglePassword() {
 
             const password = document.getElementById('password');
             const icon = document.getElementById('passwordIcon');
+
+            if (!password || !icon) {
+                return;
+            }
 
             if (password.type === 'password') {
 
@@ -313,9 +484,7 @@
                 icon.classList.add('bi-eye');
 
             }
-
         }
-
     </script>
 
 </x-guest-layout>
