@@ -154,13 +154,19 @@
                     id="nik"
                     x-model="form.nik"
                     type="text"
-                    inputmode="numeric"
                     name="nik"
+                    inputmode="numeric"
                     maxlength="16"
                     minlength="16"
                     autocomplete="off"
                     placeholder="16 digit NIK"
+
+                    @input="
+                        form.nik = form.nik.replace(/[^0-9]/g, '').slice(0, 16)
+                    "
+
                     class="w-full rounded-xl border bg-white py-3.5 pl-11 pr-4 text-sm outline-none transition-all duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 sm:rounded-2xl sm:py-4 sm:pl-14 sm:pr-5 sm:text-base"
+
                     :class="
                         errors.nik
                             ? 'border-red-500 ring-4 ring-red-100'
@@ -336,15 +342,22 @@
 
                 <i class="bi bi-whatsapp absolute left-4 top-1/2 -translate-y-1/2 text-green-500 sm:left-5"></i>
 
-                <input
+               <input
                     id="phone"
                     x-model="form.phone"
                     type="text"
-                    inputmode="tel"
                     name="phone"
+                    inputmode="numeric"
+                    maxlength="14"
                     autocomplete="tel"
                     placeholder="08xxxxxxxxxx"
+
+                    @input="
+                        form.phone = form.phone.replace(/[^0-9]/g, '').slice(0, 14)
+                    "
+
                     class="w-full rounded-xl border bg-white py-3.5 pl-11 pr-4 text-sm outline-none transition-all duration-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 sm:rounded-2xl sm:py-4 sm:pl-14 sm:pr-5 sm:text-base"
+
                     :class="
                         errors.phone
                             ? 'border-red-500 ring-4 ring-red-100'
@@ -470,10 +483,6 @@
 
                     <option value="D4">
                         D4
-                    </option>
-
-                    <option value="D5">
-                        D5
                     </option>
 
                     <option value="S1">

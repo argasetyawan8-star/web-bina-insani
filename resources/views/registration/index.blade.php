@@ -243,7 +243,7 @@
                                 <p
                                     class="mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base"
                                 >
-                                    Upload dokumen persyaratan yang dibutuhkan.
+                                    Upload dokumen persyaratan yang dibutuhkan(KTP & FC Ijazah).
                                     Anda dapat memilih beberapa file sekaligus
                                     atau menambahkan file secara bertahap.
                                 </p>
