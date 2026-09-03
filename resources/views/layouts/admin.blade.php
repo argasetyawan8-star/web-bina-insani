@@ -77,7 +77,7 @@
             @else
 
                 <img
-                    src="{{ asset('gallery/BI.png') }}"
+                    src="{{ asset('images/gallery/BI.png') }}"
                     alt="Bina Insani"
                     class="h-9 w-9 object-contain"
                 >

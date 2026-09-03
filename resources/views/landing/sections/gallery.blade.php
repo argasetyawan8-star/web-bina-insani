@@ -93,7 +93,7 @@
                 @foreach ($galleries as $index => $gallery)
 
                     <a
-                        href="{{ asset('storage/' . $gallery->image) }}"
+                        href="{{ asset('images/' . $gallery->image) }}"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="group relative block overflow-hidden rounded-[24px] bg-slate-100 break-inside-avoid"
@@ -103,7 +103,7 @@
 
                         {{-- IMAGE --}}
                         <img
-                            src="{{ asset('storage/' . $gallery->image) }}"
+                            src="{{ asset('images/' . $gallery->image) }}"
                             alt="{{ $gallery->title ?? 'Dokumentasi Alumni Bina Insani' }}"
                             class="h-auto w-full object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
                         >

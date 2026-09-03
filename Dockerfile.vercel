@@ -48,7 +48,8 @@ RUN mkdir -p storage/framework/cache \
     storage/framework/views \
     storage/logs \
     bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
-
+    && chmod -R 775 storage bootstrap/cache \
+    && php artisan storage:link
+    
 # Laravel HTTP server
 CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=${PORT:-80}"]

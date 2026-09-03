@@ -52,7 +52,7 @@
                         @else
 
                             <img
-                                src="{{ asset('gallery/BI.png') }}"
+                                src="{{ asset('images/gallery/BI.png') }}"
                                 alt="{{ setting('website_name', 'Bina Insani') }}"
                                 class="h-full w-full object-contain"
                             >

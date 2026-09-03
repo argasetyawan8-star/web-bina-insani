@@ -47,7 +47,7 @@
         <link
             rel="icon"
             type="image/png"
-            href="{{ asset('gallery/BI.png') }}"
+            href="{{ asset('images/gallery/BI.png') }}"
         >
     @endif
 

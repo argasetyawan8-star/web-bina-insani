@@ -119,7 +119,7 @@
                         @if ($about?->image)
 
                             <img
-                                src="{{ asset('storage/' . $about->image) }}"
+                                src="{{ asset('images/' . $about->image) }}"
                                 alt="Tentang Bina Insani"
                                 class="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-105"
                             >
