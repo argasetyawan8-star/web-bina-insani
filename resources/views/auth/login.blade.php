@@ -272,12 +272,12 @@
 
                                     @if (Route::has('password.request'))
 
-                                        <a
+                                        {{-- <a
                                             href="{{ route('password.request') }}"
                                             class="text-xs font-semibold text-[#2E3192] transition hover:text-[#ED1C24]"
                                         >
                                             Lupa password?
-                                        </a>
+                                        </a> --}}
 
                                     @endif
 
