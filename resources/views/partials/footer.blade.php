@@ -44,7 +44,7 @@
                         @if (setting('logo'))
 
                             <img
-                                src="{{ asset('storage/' . setting('logo')) }}"
+                                src="{{ asset('images/' . setting('logo')) }}"
                                 alt="{{ setting('website_name', 'Bina Insani') }}"
                                 class="h-full w-full object-contain"
                             >
@@ -361,3 +361,4 @@
         </div>
         
 </footer>
+

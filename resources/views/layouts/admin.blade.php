@@ -69,7 +69,7 @@
             @if(setting('logo'))
 
                 <img
-                    src="{{ asset('storage/'.setting('logo')) }}"
+                    src="{{ asset('images/' . setting('logo')) }}"
                     alt="Bina Insani"
                     class="h-9 w-9 object-contain"
                 >
@@ -619,3 +619,4 @@
 </body>
 
 </html>
+

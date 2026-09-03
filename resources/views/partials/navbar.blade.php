@@ -56,7 +56,7 @@
                     @if (setting('logo'))
 
                         <img
-                            src="{{ asset('storage/' . setting('logo')) }}"
+                            src="{{ asset('images/' . setting('logo')) }}"
                             class="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
                             alt="{{ setting('website_name', 'Bina Insani') }}"
                         >
@@ -577,3 +577,4 @@
     </div>
 
 </div>
+
