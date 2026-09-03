@@ -350,7 +350,7 @@
                         @if ($hero?->image)
 
                             <img
-                                src="{{ asset('storage/' . $hero->image) }}"
+                                src="{{ asset('images/' . $hero->image) }}"
                                 alt="{{ $hero->title }}"
                                 class="aspect-[4/5] w-full object-cover"
                             >
@@ -397,7 +397,7 @@
                                         @if (setting('logo'))
 
                                             <img
-                                                src="{{ asset('storage/' . setting('logo')) }}"
+                                                src="{{ asset('images/' . setting('logo')) }}"
                                                 alt="Bina Insani"
                                                 class="h-20 w-20 object-contain"
                                             >

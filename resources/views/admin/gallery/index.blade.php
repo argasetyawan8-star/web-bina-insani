@@ -51,7 +51,7 @@
             <div class="overflow-hidden rounded-xl bg-white shadow">
 
                 <img
-                    src="{{ asset('storage/'.$gallery->image) }}"
+                    src="{{ asset('images/'.$gallery->image) }}"
                     class="h-64 w-full object-cover">
 
                 <div class="p-4">

@@ -28,7 +28,7 @@
                                 @if (setting('logo'))
 
                                     <img
-                                        src="{{ asset('storage/' . setting('logo')) }}"
+                                        src="{{ asset('images/' . setting('logo')) }}"
                                         alt="{{ setting('website_name', 'Bina Insani') }}"
                                         class="h-full w-full object-contain p-2"
                                     >
@@ -129,7 +129,7 @@
                                 @if (setting('logo'))
 
                                     <img
-                                        src="{{ asset('storage/' . setting('logo')) }}"
+                                        src="{{ asset('images/' . setting('logo')) }}"
                                         alt="{{ setting('website_name', 'Bina Insani') }}"
                                         class="h-full w-full rounded-2xl object-contain p-2"
                                     >

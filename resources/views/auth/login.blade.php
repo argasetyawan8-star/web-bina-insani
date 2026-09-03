@@ -31,7 +31,7 @@
                                 @if (setting('logo'))
 
                                     <img
-                                        src="{{ asset('storage/' . setting('logo')) }}"
+                                        src="{{ asset('images/' . setting('logo')) }}"
                                         alt="{{ setting('website_name', 'Bina Insani') }}"
                                         class="h-full w-full object-contain p-2"
                                     >
@@ -134,7 +134,7 @@
                                 @if (setting('logo'))
 
                                     <img
-                                        src="{{ asset('storage/' . setting('logo')) }}"
+                                        src="{{ asset('images/' . setting('logo')) }}"
                                         alt="{{ setting('website_name', 'Bina Insani') }}"
                                         class="h-full w-full rounded-2xl object-contain p-2"
                                     >
@@ -272,12 +272,12 @@
 
                                     @if (Route::has('password.request'))
 
-                                        {{-- <a
+                                        <a
                                             href="{{ route('password.request') }}"
                                             class="text-xs font-semibold text-[#2E3192] transition hover:text-[#ED1C24]"
                                         >
                                             Lupa password?
-                                        </a> --}}
+                                        </a>
 
                                     @endif
 

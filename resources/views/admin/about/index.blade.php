@@ -40,7 +40,7 @@
                 @if($about->image)
 
                     <img
-                        src="{{ asset('storage/'.$about->image) }}"
+                        src="{{ asset('images/'.$about->image) }}"
                         class="w-full max-w-md rounded-2xl shadow border">
 
                 @else

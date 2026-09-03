@@ -224,7 +224,7 @@
                                 @if(setting('logo'))
 
                                     <img
-                                        src="{{ asset('storage/'.setting('logo')) }}"
+                                        src="{{ asset('images/'.setting('logo')) }}"
                                         alt="Logo Website"
                                         class="max-h-36 max-w-full object-contain"
                                     >
