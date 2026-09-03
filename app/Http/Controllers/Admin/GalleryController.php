@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Cloudinary\Api\Upload\UploadApi;
 
 class GalleryController extends Controller
 {
@@ -22,37 +22,96 @@ class GalleryController extends Controller
             'image' => 'required|image|max:2048',
         ]);
 
-        $directory = public_path('images/gallery');
+        try {
+            $file = $request->file('image');
 
-        if (!File::exists($directory)) {
-            File::makeDirectory($directory, 0755, true);
+            $result = (new UploadApi())->upload(
+                $file->getRealPath(),
+                [
+                    'folder' => 'bina-insani/gallery',
+                    'resource_type' => 'image',
+                ]
+            );
+
+            Gallery::create([
+                'image' => $result['secure_url'],
+            ]);
+
+            return back()->with(
+                'success',
+                'Foto berhasil ditambahkan.'
+            );
+        } catch (\Exception $e) {
+            return back()->with(
+                'error',
+                'Gagal mengupload foto: ' . $e->getMessage()
+            );
         }
-
-        $file = $request->file('image');
-
-        $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-
-        $file->move($directory, $filename);
-
-        Gallery::create([
-            'image' => 'gallery/' . $filename,
-        ]);
-
-        return back()->with('success', 'Foto berhasil ditambahkan.');
     }
 
     public function destroy(Gallery $gallery)
     {
-        if ($gallery->image) {
-            $filePath = public_path('images/' . $gallery->image);
+        try {
+            if (
+                $gallery->image &&
+                str_starts_with(
+                    $gallery->image,
+                    'https://res.cloudinary.com/'
+                )
+            ) {
+                $path = parse_url(
+                    $gallery->image,
+                    PHP_URL_PATH
+                );
 
-            if (File::exists($filePath)) {
-                File::delete($filePath);
+                $path = preg_replace(
+                    '#^/[^/]+/image/upload/#',
+                    '',
+                    $path
+                );
+
+                $path = preg_replace(
+                    '#^v\d+/#',
+                    '',
+                    $path
+                );
+
+                $directory = pathinfo(
+                    $path,
+                    PATHINFO_DIRNAME
+                );
+
+                $filename = pathinfo(
+                    $path,
+                    PATHINFO_FILENAME
+                );
+
+                if ($directory === '.') {
+                    $publicId = $filename;
+                } else {
+                    $publicId = $directory . '/' . $filename;
+                }
+
+                (new UploadApi())->destroy(
+                    $publicId,
+                    [
+                        'resource_type' => 'image',
+                        'invalidate' => true,
+                    ]
+                );
             }
+
+            $gallery->delete();
+
+            return back()->with(
+                'success',
+                'Foto berhasil dihapus.'
+            );
+        } catch (\Exception $e) {
+            return back()->with(
+                'error',
+                'Gagal menghapus foto: ' . $e->getMessage()
+            );
         }
-
-        $gallery->delete();
-
-        return back()->with('success', 'Foto berhasil dihapus.');
     }
 }

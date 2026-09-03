@@ -10,7 +10,6 @@
     {{-- =====================================================
          BACKGROUND DECORATION
     ====================================================== --}}
-
     <div
         class="pointer-events-none absolute -left-40 top-10 h-96 w-96 rounded-full bg-[#2E3192]/8 blur-3xl"
         aria-hidden="true"
@@ -27,14 +26,11 @@
     ></div>
 
 
-
     <div class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-
 
         {{-- =====================================================
              HEADER
         ====================================================== --}}
-
         <div
             class="mx-auto max-w-3xl text-center"
             data-aos="fade-up"
@@ -43,55 +39,43 @@
             <span
                 class="inline-flex items-center gap-2 rounded-full border border-[#2E3192]/10 bg-[#2E3192]/5 px-4 py-2 text-xs font-bold text-[#2E3192] sm:text-sm"
             >
-
                 <i class="bi bi-building-fill"></i>
-
                 Tentang Bina Insani
-
             </span>
-
 
             <h2
                 class="mt-5 text-3xl font-black leading-tight tracking-tight text-[#1E293B] sm:text-4xl lg:text-5xl"
             >
-
                 Mengenal Lebih Dekat
+
                 <span
                     class="bg-gradient-to-r from-[#2E3192] via-[#34389e] to-[#ED1C24] bg-clip-text text-transparent"
                 >
                     Bina Insani
                 </span>
-
             </h2>
-
 
             <p
                 class="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base sm:leading-8 lg:text-lg"
             >
-
                 Lembaga pelatihan yang membantu calon pekerja Indonesia
                 mempersiapkan diri melalui pembelajaran Bahasa Korea,
                 persiapan EPS-TOPIK, dan pendampingan proses pendaftaran.
-
             </p>
 
         </div>
 
 
-
         {{-- =====================================================
              INTRO CONTENT
         ====================================================== --}}
-
         <div
-            class="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16 lg:mt-16"
+            class="mt-12 grid items-center gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-16"
         >
-
 
             {{-- =================================================
                  IMAGE
             ================================================== --}}
-
             <div
                 class="relative"
                 data-aos="fade-right"
@@ -116,10 +100,25 @@
                         class="relative overflow-hidden rounded-[24px] sm:rounded-[30px]"
                     >
 
-                        @if ($about?->image)
+                        @php
+                            $aboutImage = $about?->image;
+
+                            $aboutImageUrl = $aboutImage
+                                ? (
+                                    str_starts_with(
+                                        $aboutImage,
+                                        'https://res.cloudinary.com/'
+                                    )
+                                    ? $aboutImage
+                                    : asset('images/' . $aboutImage)
+                                )
+                                : null;
+                        @endphp
+
+                        @if ($aboutImageUrl)
 
                             <img
-                                src="{{ asset('images/' . $about->image) }}"
+                                src="{{ $aboutImageUrl }}"
                                 alt="Tentang Bina Insani"
                                 class="aspect-[4/3] w-full object-cover transition duration-700 hover:scale-105"
                             >
@@ -140,10 +139,29 @@
                                         class="mx-auto flex h-24 w-24 items-center justify-center rounded-3xl bg-white/10 backdrop-blur"
                                     >
 
-                                        @if (setting('logo'))
+                                        @php
+                                            $logo = setting('logo');
+
+                                            $logoUrl = $logo
+                                                ? (
+                                                    str_starts_with(
+                                                        $logo,
+                                                        'https://res.cloudinary.com/'
+                                                    )
+                                                    ? $logo
+                                                    : (
+                                                        str_starts_with($logo, 'images/')
+                                                        ? asset($logo)
+                                                        : asset('images/' . $logo)
+                                                    )
+                                                )
+                                                : null;
+                                        @endphp
+
+                                        @if ($logoUrl)
 
                                             <img
-                                                src="{{ asset('images/' . setting('logo')) }}"
+                                                src="{{ $logoUrl }}"
                                                 alt="Bina Insani"
                                                 class="h-16 w-16 object-contain"
                                             >
@@ -190,11 +208,15 @@
 
                                 <div>
 
-                                    <p class="text-[10px] uppercase tracking-wider text-slate-300">
+                                    <p
+                                        class="text-[10px] uppercase tracking-wider text-slate-300"
+                                    >
                                         Fokus
                                     </p>
 
-                                    <p class="text-sm font-bold sm:text-base">
+                                    <p
+                                        class="text-sm font-bold sm:text-base"
+                                    >
                                         Pelatihan Bahasa Korea
                                     </p>
 
@@ -211,28 +233,22 @@
             </div>
 
 
-
             {{-- =================================================
                  TEXT
             ================================================== --}}
-
             <div
                 class="min-w-0"
                 data-aos="fade-left"
             >
 
-                
-
-
                 <h3
                     class="mt-3 text-2xl font-black leading-tight text-[#1E293B] sm:text-3xl lg:text-4xl"
                 >
-
                     Membantu Mempersiapkan
+
                     <span class="text-[#2E3192]">
                         Langkahmu
                     </span>
-
                 </h3>
 
 
@@ -276,9 +292,9 @@
                 {{-- =================================================
                      HIGHLIGHTS
                 ================================================== --}}
-
-                <div class="mt-7 grid gap-3 sm:mt-8 sm:grid-cols-2">
-
+                <div
+                    class="mt-7 grid gap-3 sm:mt-8 sm:grid-cols-2"
+                >
 
                     {{-- 01 --}}
                     <div
@@ -290,18 +306,20 @@
                             <div
                                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#2E3192]/10 text-[#2E3192]"
                             >
-
                                 <i class="bi bi-book-fill"></i>
-
                             </div>
 
                             <div>
 
-                                <h4 class="text-sm font-bold text-[#1E293B] sm:text-base">
+                                <h4
+                                    class="text-sm font-bold text-[#1E293B] sm:text-base"
+                                >
                                     Pembelajaran Bahasa Korea
                                 </h4>
 
-                                <p class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm">
+                                <p
+                                    class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm"
+                                >
                                     Materi pembelajaran disusun agar peserta dapat belajar secara bertahap.
                                 </p>
 
@@ -322,18 +340,20 @@
                             <div
                                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F6D21A]/25 text-[#2E3192]"
                             >
-
                                 <i class="bi bi-award-fill"></i>
-
                             </div>
 
                             <div>
 
-                                <h4 class="text-sm font-bold text-[#1E293B] sm:text-base">
+                                <h4
+                                    class="text-sm font-bold text-[#1E293B] sm:text-base"
+                                >
                                     Persiapan EPS-TOPIK
                                 </h4>
 
-                                <p class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm">
+                                <p
+                                    class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm"
+                                >
                                     Membantu peserta mempersiapkan kemampuan menghadapi tahapan ujian.
                                 </p>
 
@@ -354,18 +374,20 @@
                             <div
                                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-green-100 text-green-600"
                             >
-
                                 <i class="bi bi-person-check-fill"></i>
-
                             </div>
 
                             <div>
 
-                                <h4 class="text-sm font-bold text-[#1E293B] sm:text-base">
+                                <h4
+                                    class="text-sm font-bold text-[#1E293B] sm:text-base"
+                                >
                                     Pendampingan Peserta
                                 </h4>
 
-                                <p class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm">
+                                <p
+                                    class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm"
+                                >
                                     Informasi dan pendampingan selama proses pendaftaran.
                                 </p>
 
@@ -386,18 +408,20 @@
                             <div
                                 class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#ED1C24]/10 text-[#ED1C24]"
                             >
-
                                 <i class="bi bi-globe2"></i>
-
                             </div>
 
                             <div>
 
-                                <h4 class="text-sm font-bold text-[#1E293B] sm:text-base">
+                                <h4
+                                    class="text-sm font-bold text-[#1E293B] sm:text-base"
+                                >
                                     Persiapan Internasional
                                 </h4>
 
-                                <p class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm">
+                                <p
+                                    class="mt-1 text-xs leading-5 text-slate-500 sm:text-sm"
+                                >
                                     Mempersiapkan peserta menuju peluang kerja di Korea Selatan.
                                 </p>
 
@@ -414,11 +438,9 @@
         </div>
 
 
-
         {{-- =====================================================
              WHAT WE DO
         ====================================================== --}}
-
         <div
             class="mt-16 border-t border-slate-200 pt-14 sm:mt-20 sm:pt-16"
         >
@@ -426,7 +448,6 @@
             <div
                 class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16"
             >
-
 
                 {{-- LEFT --}}
                 <div
@@ -436,38 +457,29 @@
                     <span
                         class="inline-flex items-center gap-2 rounded-full bg-[#F6D21A]/25 px-4 py-2 text-xs font-bold text-[#2E3192] sm:text-sm"
                     >
-
                         <i class="bi bi-compass-fill"></i>
-
                         Apa yang Kami Bantu
-
                     </span>
-
 
                     <h3
                         class="mt-5 text-2xl font-black leading-tight text-[#1E293B] sm:text-3xl lg:text-4xl"
                     >
-
                         Dari Persiapan
+
                         <span class="text-[#2E3192]">
                             Hingga Siap Melangkah
                         </span>
-
                     </h3>
-
 
                     <p
                         class="mt-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-8"
                     >
-
                         Bina Insani berfokus membantu peserta memahami
                         proses persiapan secara lebih terarah, mulai dari
                         pembelajaran hingga tahapan administrasi pendaftaran.
-
                     </p>
 
                 </div>
-
 
 
                 {{-- RIGHT --}}
@@ -476,7 +488,7 @@
                     data-aos="fade-left"
                 >
 
-                    {{-- CARD --}}
+                    {{-- CARD 1 --}}
                     <div
                         class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#2E3192]/20 hover:shadow-lg sm:p-6"
                     >
@@ -499,6 +511,7 @@
                     </div>
 
 
+                    {{-- CARD 2 --}}
                     <div
                         class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#F6D21A]/40 hover:shadow-lg sm:p-6"
                     >
@@ -521,6 +534,7 @@
                     </div>
 
 
+                    {{-- CARD 3 --}}
                     <div
                         class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-green-200 hover:shadow-lg sm:p-6"
                     >
@@ -543,6 +557,7 @@
                     </div>
 
 
+                    {{-- CARD 4 --}}
                     <div
                         class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#ED1C24]/20 hover:shadow-lg sm:p-6"
                     >
@@ -569,10 +584,6 @@
             </div>
 
         </div>
-
-
-
-        
 
     </div>
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use Cloudinary\Api\Upload\UploadApi;
 
 class PaymentSettingController extends Controller
 {
@@ -24,28 +24,24 @@ class PaymentSettingController extends Controller
         $setting = Setting::firstOrNew([]);
 
         if ($request->hasFile('qris')) {
-            $directory = public_path('images/payment');
+            try {
+                $file = $request->file('qris');
 
-            if (!File::exists($directory)) {
-                File::makeDirectory($directory, 0755, true);
+                $result = (new UploadApi())->upload(
+                    $file->getRealPath(),
+                    [
+                        'folder' => 'bina-insani/payment',
+                        'resource_type' => 'image',
+                    ]
+                );
+
+                $setting->qris = $result['secure_url'];
+            } catch (\Exception $e) {
+                return back()->with(
+                    'error',
+                    'Gagal mengupload QRIS: ' . $e->getMessage()
+                );
             }
-
-            // Hapus QRIS lama
-            if ($setting->qris) {
-                $oldQris = public_path('images/' . $setting->qris);
-
-                if (File::exists($oldQris)) {
-                    File::delete($oldQris);
-                }
-            }
-
-            $file = $request->file('qris');
-
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-
-            $file->move($directory, $filename);
-
-            $setting->qris = 'payment/' . $filename;
         }
 
         $setting->bank_account = $request->bank_number;

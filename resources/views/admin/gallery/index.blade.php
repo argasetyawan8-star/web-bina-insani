@@ -50,9 +50,13 @@
 
             <div class="overflow-hidden rounded-xl bg-white shadow">
 
-                <img
-                    src="{{ asset('images/'.$gallery->image) }}"
-                    class="h-64 w-full object-cover">
+               <img
+                    src="{{ str_starts_with($gallery->image, 'https://res.cloudinary.com/')
+                        ? $gallery->image
+                        : asset('images/' . $gallery->image) }}"
+                    class="h-64 w-full object-cover"
+                    alt="Gallery Bina Insani"
+                >
 
                 <div class="p-4">
 
