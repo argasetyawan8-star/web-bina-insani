@@ -56,7 +56,7 @@ class="mt-2 w-full rounded-xl border p-3">
 @if(setting('qris'))
 
 <img
-src="{{ asset('storage/'.setting('qris')) }}"
+src="{{ asset('images/' . setting('qris')) }}"
 class="mt-5 w-48 rounded-xl">
 
 @endif

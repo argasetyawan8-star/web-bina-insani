@@ -606,7 +606,7 @@
                                         <div class="rounded-2xl border border-slate-200 bg-white p-3 shadow-lg sm:p-4">
 
                                             <img
-                                                src="{{ asset('storage/' . setting('qris')) }}"
+                                                src="{{ asset('images/' . setting('qris')) }}"
                                                 alt="QRIS Bina Insani"
                                                 class="mx-auto w-56 max-w-full rounded-xl sm:w-72"
                                             >
